@@ -82,6 +82,12 @@ public class Player : MonoBehaviour
     #endregion
 
     #region other Function
+    private void AnimationTrigger(){
+        StateMachine.CurrentState.AnimationTrigger();
+    }
+    private void AnimationFinishTrigger(){
+        StateMachine.CurrentState.AnimationFinishTrigger();
+    }
     private void flip(){
         FacingDirection *= -1 ;
         transform.Rotate(0.0f,180f,0.0f);
