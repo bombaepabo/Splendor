@@ -19,7 +19,6 @@ public override void DoChecks(){
 }
 public override void Enter(){
   base.Enter();
-  player.JumpState.resetAmountOfJumpsLeft();
 }
 public override void Exit(){
   base.Exit();
@@ -35,9 +34,9 @@ public override void LogicUpdate(){
   if(IsGrounded && player.CurrentVelocity.y < 0.01f){
     stateMachine.ChangeState(player.LandState);
   }
- // else if(JumpInput && player.JumpState.CanJump()){
-  //  stateMachine.ChangeState(player.JumpState);
-  //}
+  else if(JumpInput && player.JumpState.CanJump()){
+    stateMachine.ChangeState(player.JumpState);
+  }
   else{
     player.CheckIfShouldFlip(xinput);
     player.SetVelocityX(playerData.movementVelocity*xinput);

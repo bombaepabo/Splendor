@@ -17,9 +17,10 @@ public override void Enter(){
     isAbilityDone = true; 
     amountOfJumpsLeft--;
     player.InAirState.SetIsJumping();
-    Debug.Log(amountOfJumpsLeft);
+    //Debug.Log(amountOfJumpsLeft);
 
 }
+
 public bool CanJump(){
     Debug.Log(amountOfJumpsLeft);
     if(amountOfJumpsLeft>0){
