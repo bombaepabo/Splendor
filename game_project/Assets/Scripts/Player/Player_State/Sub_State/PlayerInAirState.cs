@@ -10,12 +10,15 @@ public class PlayerInAirState : PlayerAbilityState
   private bool coyoteTime ;
   private bool isJumping; 
   private bool JumpInputStop;
+  private bool isTouchingWall ; 
+  private bool GrabInput ; 
 public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName){
      
  }
 public override void DoChecks(){
   base.DoChecks();
   IsGrounded = player.CheckIfGrounded();
+  isTouchingWall = player.CheckIfTouchingWall();
 }
 public override void Enter(){
   base.Enter();
@@ -29,14 +32,25 @@ public override void LogicUpdate(){
   xinput = player.inputhandler.NormInputX;
   JumpInput = player.inputhandler.JumpInput;
   JumpInputStop = player.inputhandler.JumpInputStop;
+  GrabInput = player.inputhandler.GrabInput;
   CheckJumpMultiplier();
  
   if(IsGrounded && player.CurrentVelocity.y < 0.01f){
     stateMachine.ChangeState(player.LandState);
   }
   else if(JumpInput && player.JumpState.CanJump()){
+    player.inputhandler.UseJumpInput();
     stateMachine.ChangeState(player.JumpState);
   }
+  else if(isTouchingWall && GrabInput){
+    stateMachine.ChangeState(player.wallGrabState);
+
+    
+  }
+  else if(isTouchingWall && xinput == player.FacingDirection&&player.CurrentVelocity.y <=0){
+    stateMachine.ChangeState(player.wallSlideState);
+  }
+  
   else{
     player.CheckIfShouldFlip(xinput);
     player.SetVelocityX(playerData.movementVelocity*xinput);
@@ -45,6 +59,7 @@ public override void LogicUpdate(){
     player.Anim.SetFloat("xVelocity",Mathf.Abs(player.CurrentVelocity.x));
 
   }
+
       
 }
 private void CheckJumpMultiplier(){

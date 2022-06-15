@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     #region Check Transform
     [SerializeField]
     private Transform GroundCheck ; 
+    [SerializeField]
+    private Transform WallCheck ; 
     #endregion
     #region OtherVariable
     public Vector2 CurrentVelocity {get;private set;}
@@ -41,6 +43,9 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this,StateMachine,playerData,"inAir");
         InAirState = new PlayerInAirState(this,StateMachine,playerData,"inAir");
         LandState = new PlayerLandState(this,StateMachine,playerData,"land");
+        wallSlideState = new PlayerWallSlideState(this,StateMachine,playerData,"wallSlide");
+        wallClimbState = new PlayerWallClimbState(this,StateMachine,playerData,"wallClimb");
+        wallGrabState  = new PlayerWallGrabState(this,StateMachine,playerData,"wallGrab");
         
     }
     private void Start(){
@@ -81,6 +86,9 @@ public class Player : MonoBehaviour
         if(xinput !=0 && xinput !=FacingDirection){
             flip();
         }
+    }
+    public bool CheckIfTouchingWall(){
+        return Physics2D.Raycast(WallCheck.position,Vector2.right*FacingDirection,playerData.WallCheckDistance,playerData.whatisWall);
     }
     #endregion
 

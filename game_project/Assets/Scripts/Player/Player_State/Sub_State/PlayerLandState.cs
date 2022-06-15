@@ -10,6 +10,7 @@ public class PlayerLandState :PlayerGroundedState{
     public override void LogicUpdate(){
         base.LogicUpdate();
 
+        if(!isExitingState){
         if(xinput != 0 ){
             stateMachine.ChangeState(player.MoveState);
 
@@ -17,5 +18,7 @@ public class PlayerLandState :PlayerGroundedState{
         else if(isAnimationFinished){
             stateMachine.ChangeState(player.IdleState);
         }
+        }
+       
     }
 }
