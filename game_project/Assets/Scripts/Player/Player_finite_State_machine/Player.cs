@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public PlayerWallClimbState wallClimbState{get;private set;}
     public PlayerWallGrabState wallGrabState{get;private set;}
     public PlayerWallSlideState wallSlideState{get;private set;}
+    public PlayerWallJumpState wallJumpState{get;private set;}
     [SerializeField]
     private PlayerData playerData ; 
     #endregion
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         wallSlideState = new PlayerWallSlideState(this,StateMachine,playerData,"wallSlide");
         wallClimbState = new PlayerWallClimbState(this,StateMachine,playerData,"wallClimb");
         wallGrabState  = new PlayerWallGrabState(this,StateMachine,playerData,"wallGrab");
+        wallJumpState = new PlayerWallJumpState(this,StateMachine,playerData,"inAir");
         
     }
     private void Start(){
@@ -76,6 +78,12 @@ public class Player : MonoBehaviour
         RB.velocity = workspace; 
         CurrentVelocity = workspace ;
     }
+    public void SetVelocity(float velocity , Vector2 angle ,int direction){
+        angle.Normalize();
+        workspace.Set(angle.x * velocity *direction,angle.y *velocity);
+        RB.velocity = workspace ; 
+        CurrentVelocity = workspace ;
+    }
     #endregion
     
     #region CheckFunction
@@ -89,6 +97,9 @@ public class Player : MonoBehaviour
     }
     public bool CheckIfTouchingWall(){
         return Physics2D.Raycast(WallCheck.position,Vector2.right*FacingDirection,playerData.WallCheckDistance,playerData.whatisWall);
+    }
+    public bool CheckIfTouchingWallback(){
+        return Physics2D.Raycast(WallCheck.position,Vector2.right*-FacingDirection,playerData.WallCheckDistance,playerData.whatisWall);
     }
     #endregion
 

@@ -12,7 +12,7 @@ public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerDat
 }
 public override void Enter(){
     base.Enter();
-
+    player.inputhandler.UseJumpInput();
     player.SetVelocityY(playerData.jumpVelocity);
     isAbilityDone = true; 
     amountOfJumpsLeft--;
