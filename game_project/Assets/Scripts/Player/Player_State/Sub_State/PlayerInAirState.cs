@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerAbilityState
 {
-  private bool IsGrounded ;
   private int xinput ; 
   private bool JumpInput;
+  private bool GrabInput ; 
+  private bool JumpInputStop;
+  private bool IsGrounded ;
   private bool coyoteTime ;
   private bool isTouchingWallBack;
   private bool isJumping; 
-  private bool JumpInputStop;
   private bool isTouchingWall ; 
-  private bool GrabInput ; 
   private bool wallJumpCoyoteTime ;
   private float startWallJumpCoyoteTime ;
   private bool oldIsTouchingWall ; 
   private bool oldIsTouchingWallback; 
   private bool isTouchingLedge ;
+  private bool DashInput;
 public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName){
      
  }
@@ -55,11 +56,12 @@ public override void LogicUpdate(){
   JumpInput = player.inputhandler.JumpInput;
   JumpInputStop = player.inputhandler.JumpInputStop;
   GrabInput = player.inputhandler.GrabInput;
+  DashInput = player.inputhandler.DashInput;
   CheckJumpMultiplier();
   if(IsGrounded && player.CurrentVelocity.y < 0.01f){
     stateMachine.ChangeState(player.LandState);
   }
-  else if(isTouchingWall &&!isTouchingLedge){
+  else if(isTouchingWall &&!isTouchingLedge && !IsGrounded){
     stateMachine.ChangeState(player.LedgeClimbState);
   }
   else if(JumpInput&&(isTouchingWall ||isTouchingWallBack || wallJumpCoyoteTime))
@@ -73,13 +75,16 @@ public override void LogicUpdate(){
     player.inputhandler.UseJumpInput();
     stateMachine.ChangeState(player.JumpState);
   }
-  else if(isTouchingWall && GrabInput){
+  else if(isTouchingWall && GrabInput&& isTouchingLedge){
     stateMachine.ChangeState(player.wallGrabState);
 
     
   }
   else if(isTouchingWall && xinput == player.FacingDirection&&player.CurrentVelocity.y <=0){
     stateMachine.ChangeState(player.wallSlideState);
+  }
+  else if(DashInput && player.DashState.CheckIfCanDash()){
+    stateMachine.ChangeState(player.DashState);
   }
   
   else{

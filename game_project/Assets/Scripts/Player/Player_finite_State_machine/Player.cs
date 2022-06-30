@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public PlayerWallSlideState wallSlideState{get;private set;}
     public PlayerWallJumpState wallJumpState{get;private set;}
     public PlayerLedgeClimbState LedgeClimbState{get;private set;}
+    public PlayerDashState DashState{get;private set;}
     [SerializeField]
     private PlayerData playerData ; 
     #endregion
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
     public PlayerInputHandler inputhandler{get ;private set;}
     public Rigidbody2D RB {get; private set ;}
     public Animator Anim{get ;private set;}
+    public Transform DashDirectionIndicator {get;private set;}
     #endregion
     #region Check Transform
     [SerializeField]
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
         wallGrabState  = new PlayerWallGrabState(this,StateMachine,playerData,"wallGrab");
         wallJumpState = new PlayerWallJumpState(this,StateMachine,playerData,"inAir");
         LedgeClimbState = new PlayerLedgeClimbState(this,StateMachine,playerData,"ledgeClimbState");
+        DashState = new PlayerDashState(this,StateMachine,playerData,"inAir");
     }
     private void Start(){
         //init State machine 
@@ -60,6 +63,7 @@ public class Player : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
         StateMachine.Initialize(IdleState);
         FacingDirection = 1 ;
+        DashDirectionIndicator = transform.Find("DashDirectionIndicator");
     }
     private void Update(){
         CurrentVelocity = RB.velocity; 
@@ -91,6 +95,11 @@ public class Player : MonoBehaviour
         workspace.Set(angle.x * velocity *direction,angle.y *velocity);
         RB.velocity = workspace ; 
         CurrentVelocity = workspace ;
+    }
+    public void SetVelocity(float velocity,Vector2 direction){
+        workspace = direction * velocity ;
+        RB.velocity = workspace ;
+        CurrentVelocity = workspace  ;
     }
     #endregion
     
