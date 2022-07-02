@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     public PlayerWallJumpState wallJumpState{get;private set;}
     public PlayerLedgeClimbState LedgeClimbState{get;private set;}
     public PlayerDashState DashState{get;private set;}
+    public PlayerCrouchIdleState CrouchIdleState{get;private set;}
+    public PlayerCrouchMoveState CrouchMoveState{get;private set;}
+    
     [SerializeField]
     private PlayerData playerData ; 
     #endregion
@@ -26,6 +29,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D RB {get; private set ;}
     public Animator Anim{get ;private set;}
     public Transform DashDirectionIndicator {get;private set;}
+    public BoxCollider2D MoveMentCollider{get;private set;}
     #endregion
     #region Check Transform
     [SerializeField]
@@ -34,6 +38,8 @@ public class Player : MonoBehaviour
     private Transform WallCheck ; 
     [SerializeField]
     private Transform LedgeCheck;
+    [SerializeField]
+    private Transform CeilingCheck;
     #endregion
     #region OtherVariable
     public Vector2 CurrentVelocity {get;private set;}
@@ -55,6 +61,8 @@ public class Player : MonoBehaviour
         wallJumpState = new PlayerWallJumpState(this,StateMachine,playerData,"inAir");
         LedgeClimbState = new PlayerLedgeClimbState(this,StateMachine,playerData,"ledgeClimbState");
         DashState = new PlayerDashState(this,StateMachine,playerData,"inAir");
+        CrouchIdleState = new PlayerCrouchIdleState(this,StateMachine,playerData,"crouchIdle");
+        CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
     }
     private void Start(){
         //init State machine 
@@ -64,6 +72,7 @@ public class Player : MonoBehaviour
         StateMachine.Initialize(IdleState);
         FacingDirection = 1 ;
         DashDirectionIndicator = transform.Find("DashDirectionIndicator");
+        MoveMentCollider = GetComponent<BoxCollider2D>();
     }
     private void Update(){
         CurrentVelocity = RB.velocity; 
@@ -104,6 +113,9 @@ public class Player : MonoBehaviour
     #endregion
     
     #region CheckFunction
+    public bool CheckForCeiling(){
+        return Physics2D.OverlapCircle(CeilingCheck.position,playerData.GroundCheckRadius,playerData.whatisGround);
+    }
     public bool CheckIfGrounded(){
         return Physics2D.OverlapCircle(GroundCheck.position,playerData.GroundCheckRadius,playerData.whatisGround);
     }
@@ -124,11 +136,18 @@ public class Player : MonoBehaviour
     #endregion
 
     #region other Function
+    public void SetColliderHeight(float height){
+        Vector2 center = MoveMentCollider.offset;
+        workspace.Set(MoveMentCollider.size.x,height);
+        center.y +=(height -MoveMentCollider.size.y) /2 ; 
+        MoveMentCollider.size = workspace ;
+        MoveMentCollider.offset = center ;
+    }
     public Vector2 DetermineCornerPosition(){
         RaycastHit2D xhit =Physics2D.Raycast(WallCheck.position,Vector2.right*FacingDirection,playerData.WallCheckDistance,playerData.whatisGround);
         float xdistance = xhit.distance ;
-        workspace.Set(xdistance*FacingDirection,0f);
-        RaycastHit2D yhit = Physics2D.Raycast((LedgeCheck.position+(Vector3)(workspace)),Vector2.down,LedgeCheck.position.y - WallCheck.position.y,playerData.whatisGround);
+        workspace.Set((xdistance +0.015f)*FacingDirection,0f);
+        RaycastHit2D yhit = Physics2D.Raycast((LedgeCheck.position+(Vector3)(workspace)),Vector2.down,LedgeCheck.position.y - WallCheck.position.y +0.015f,playerData.whatisGround);
         float ydistance = yhit.distance ;
         workspace.Set(WallCheck.position.x + (xdistance *FacingDirection),LedgeCheck.position.y - ydistance);
         return workspace ; 

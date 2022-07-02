@@ -38,4 +38,8 @@ public float DistanceBetweenAfterImage =0.5f ;
 [Header("LedgeClimb State")]
 public Vector2 StartOffset ; 
 public Vector2 StopOffset;
+[Header("Crouch State")]
+public float CrouchMovementVelocity = 5f ; 
+public float CrouchColliderHeight  =0.12f;
+public float standColliderHeight = 0.12f *2 ;
 }

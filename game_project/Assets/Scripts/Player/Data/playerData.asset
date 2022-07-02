@@ -30,5 +30,16 @@ MonoBehaviour:
   WallJumpVelocity: 15
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}
+  dashCooldown: 0.5
+  maxHoldTime: 1
+  holdTimeScale: 0.25
+  dashTime: 0.2
+  dashVelocity: 30
+  drag: 10
+  dashEndYmultiplier: 0.2
+  DistanceBetweenAfterImage: 0.5
   StartOffset: {x: 0.3, y: 1}
   StopOffset: {x: 0.2, y: 0.75}
+  CrouchMovementVelocity: 5
+  CrouchColliderHeight: 0.12
+  standColliderHeight: 0.25

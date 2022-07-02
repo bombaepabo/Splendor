@@ -21,8 +21,14 @@ public class PlayerMoveState : PlayerGroundedState
         player.CheckIfShouldFlip(xinput);
         player.SetVelocityX(playerData.movementVelocity*xinput);
         
-        if(xinput == 0 && !isExitingState){
+        if(!isExitingState){
+        if(xinput == 0 ){
             stateMachine.ChangeState(player.IdleState);
+        }
+        else if(yinput == -1 ){
+            stateMachine.ChangeState(player.CrouchMoveState);
+        }
+
         }
     }
     public override void PhysicsUpdate(){
