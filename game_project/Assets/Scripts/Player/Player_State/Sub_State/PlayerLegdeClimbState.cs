@@ -49,10 +49,13 @@ public class PlayerLedgeClimbState : PlayerState
         base.LogicUpdate();
         if(isAnimationFinished){
             if(isTouchingCeiling){
+                Debug.Log("ledge climb later crouching");
                 stateMachine.ChangeState(player.CrouchIdleState);
             }
             else{
-            stateMachine.ChangeState(player.IdleState);
+                Debug.Log("ledge climb later crouching 2");
+
+            stateMachine.ChangeState(player.CrouchIdleState);
 
             }
         }

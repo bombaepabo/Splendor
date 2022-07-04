@@ -39,7 +39,7 @@ public class PlayerGroundedState : PlayerState
         JumpInput = player.inputhandler.JumpInput;
         GrabInput = player.inputhandler.GrabInput;
         DashInput = player.inputhandler.DashInput;
-        if(JumpInput && player.JumpState.CanJump()){
+        if(JumpInput && player.JumpState.CanJump()&&!isTouchingCeiling){
             stateMachine.ChangeState(player.JumpState);
         }
         else if(!isGrounded){
