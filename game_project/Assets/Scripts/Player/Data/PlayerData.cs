@@ -4,6 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newPlayerData",menuName = "Data/Player Data/Base Data")]
 public class PlayerData : ScriptableObject
 {
+ [Header("Player Stat")]
+ public int MaxHealth = 100 ;
+ public int CurrentHealth ;
  [Header("Move State")]
  public float movementVelocity = 5f ; 
  [Header("Jump State")]

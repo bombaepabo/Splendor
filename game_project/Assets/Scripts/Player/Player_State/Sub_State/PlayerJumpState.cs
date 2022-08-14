@@ -16,13 +16,15 @@ public override void Enter(){
     isAbilityDone = true; 
     amountOfJumpsLeft--;
     player.InAirState.SetIsJumping();
+    playerData.CurrentHealth -=20 ;
+    player.healthbar.SetHealth(playerData.CurrentHealth);
+   
 
     //Debug.Log(amountOfJumpsLeft);
 
 }
 
 public bool CanJump(){
-    Debug.Log(amountOfJumpsLeft);
     if(amountOfJumpsLeft>0){
         return true ;
     }
@@ -32,8 +34,6 @@ public bool CanJump(){
 }
 public void resetAmountOfJumpsLeft(){
     amountOfJumpsLeft = playerData.amountOfJumps;
-    Debug.Log("true");
-
 
 }
 public void DecreaseAmountofJumpLeft(){

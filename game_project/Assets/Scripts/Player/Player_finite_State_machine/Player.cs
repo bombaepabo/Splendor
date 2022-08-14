@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public PlayerCrouchMoveState CrouchMoveState{get;private set;}
     
     [SerializeField]
-    private PlayerData playerData ; 
+    public PlayerData playerData ; 
     #endregion
 
     #region Component
@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
     public Vector2 CurrentVelocity {get;private set;}
     public int FacingDirection{get;private set ; }
     private Vector2 workspace;
+    public HealthBar healthbar ;
+    private GameObject obj ; 
     #endregion
    
     #region UnityCallBack Func
@@ -73,10 +75,16 @@ public class Player : MonoBehaviour
         FacingDirection = 1 ;
         DashDirectionIndicator = transform.Find("DashDirectionIndicator");
         MoveMentCollider = GetComponent<BoxCollider2D>();
+        playerData.CurrentHealth = playerData.MaxHealth ;
+        obj = GameObject.Find("Player");
     }
     private void Update(){
         CurrentVelocity = RB.velocity; 
+        if(playerData.CurrentHealth <=0){
+            obj.SetActive(false);
+        }
         StateMachine.CurrentState.LogicUpdate();
+        
     }
     private void FixedUpdate(){
        StateMachine.CurrentState.PhysicsUpdate();
@@ -163,6 +171,13 @@ public class Player : MonoBehaviour
     private void flip(){
         FacingDirection *= -1 ;
         transform.Rotate(0.0f,180f,0.0f);
+    }
+    private void OnCollisionEnter2D(Collision2D Collision){
+        if(Collision.gameObject.tag =="Damagable"){
+            playerData.CurrentHealth -= 100 ;
+            healthbar.SetHealth(playerData.CurrentHealth);
+
+        }
     }
     
     #endregion
