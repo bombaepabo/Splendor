@@ -133,6 +133,8 @@ public class Player : MonoBehaviour
     public bool CheckIfTouchingLedge(){
         return Physics2D.Raycast(LedgeCheck.position,Vector2.right*FacingDirection,playerData.WallCheckDistance,playerData.whatisGround);
     }
+   
+
     #endregion
 
     #region other Function

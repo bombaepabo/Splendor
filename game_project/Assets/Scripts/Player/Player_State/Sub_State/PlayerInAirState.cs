@@ -61,9 +61,9 @@ public override void LogicUpdate(){
   if(IsGrounded && player.CurrentVelocity.y < 0.01f){
     stateMachine.ChangeState(player.LandState);
   }
-  else if(isTouchingWall &&!isTouchingLedge && !IsGrounded){
-    stateMachine.ChangeState(player.LedgeClimbState);
-  }
+  //else if(isTouchingWall &&!isTouchingLedge && !IsGrounded){
+  //  stateMachine.ChangeState(player.LedgeClimbState);
+ // }
   else if(JumpInput&&(isTouchingWall ||isTouchingWallBack || wallJumpCoyoteTime))
   {
     StopWallJumpCoyoteTime();

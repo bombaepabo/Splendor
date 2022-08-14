@@ -56,6 +56,7 @@ public class PlayerLedgeClimbState : PlayerState
                 Debug.Log("ledge climb later crouching 2");
 
             stateMachine.ChangeState(player.CrouchIdleState);
+            
 
             }
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2045d0123d5774abbbd6976e061de5, type: 3}
   m_Name: playerData
   m_EditorClassIdentifier: 
-  movementVelocity: 10
+  movementVelocity: 8
   jumpVelocity: 15
   amountOfJumps: 2
   coyoteTime: 0.2
@@ -22,9 +22,6 @@ MonoBehaviour:
   whatisGround:
     serializedVersion: 2
     m_Bits: 64
-  whatisWall:
-    serializedVersion: 2
-    m_Bits: 128
   WallSlideVelocity: -1
   WallClimbVelocity: 3
   WallJumpVelocity: 15
@@ -39,7 +36,10 @@ MonoBehaviour:
   dashEndYmultiplier: 0.2
   DistanceBetweenAfterImage: 0.5
   StartOffset: {x: 0.3, y: 1}
-  StopOffset: {x: 0.4, y: 0.75}
-  CrouchMovementVelocity: 5
+  StopOffset: {x: 0.4, y: 0.8}
+  CrouchMovementVelocity: 3
   CrouchColliderHeight: 0.12
   standColliderHeight: 0.25
+  whatisPlatform:
+    serializedVersion: 2
+    m_Bits: 512

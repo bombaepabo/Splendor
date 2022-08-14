@@ -17,7 +17,6 @@ public class PlayerData : ScriptableObject
  public float GroundCheckRadius = 0.3f;
  public float WallCheckDistance = 0.6f;
  public LayerMask whatisGround;
- public LayerMask whatisWall ; 
 [Header("WallSlide State")]
 public float WallSlideVelocity = -3f ;
 [Header("WallClimb State")]
@@ -42,4 +41,6 @@ public Vector2 StopOffset;
 public float CrouchMovementVelocity = 5f ; 
 public float CrouchColliderHeight  =0.12f;
 public float standColliderHeight = 0.12f *2 ;
+
+
 }
