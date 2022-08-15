@@ -16,8 +16,6 @@ public override void Enter(){
     isAbilityDone = true; 
     amountOfJumpsLeft--;
     player.InAirState.SetIsJumping();
-    playerData.CurrentHealth -=20 ;
-    player.healthbar.SetHealth(playerData.CurrentHealth);
    
 
     //Debug.Log(amountOfJumpsLeft);
