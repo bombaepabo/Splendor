@@ -40,6 +40,9 @@ public class Player : MonoBehaviour
     private Transform LedgeCheck;
     [SerializeField]
     private Transform CeilingCheck;
+    [SerializeField]
+    private Transform SpawnPoint ; 
+
     #endregion
     #region OtherVariable
     public Vector2 CurrentVelocity {get;private set;}
@@ -81,8 +84,12 @@ public class Player : MonoBehaviour
     private void Update(){
         CurrentVelocity = RB.velocity; 
         if(playerData.CurrentHealth <=0){
-            obj.SetActive(false);
+            obj.transform.position = SpawnPoint.position + new Vector3 (1f,0,0); //+ new Vector3(0.5,0.5,0);
+
+            Debug.Log(obj.transform);
+
         }
+        playerData.CurrentHealth = 100 ; 
         StateMachine.CurrentState.LogicUpdate();
         
     }
