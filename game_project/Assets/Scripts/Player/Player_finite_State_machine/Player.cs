@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform CeilingCheck;
     [SerializeField]
-    private Transform SpawnPoint ; 
+    private Vector3 SpawnPoint ; 
 
     #endregion
     #region OtherVariable
@@ -80,11 +80,12 @@ public class Player : MonoBehaviour
         MoveMentCollider = GetComponent<BoxCollider2D>();
         playerData.CurrentHealth = playerData.MaxHealth ;
         obj = GameObject.Find("Player");
+        SpawnPoint = transform.position;
     }
     private void Update(){
         CurrentVelocity = RB.velocity; 
         if(playerData.CurrentHealth <=0){
-            obj.transform.position = SpawnPoint.position + new Vector3 (1f,0,0); //+ new Vector3(0.5,0.5,0);
+            obj.transform.position = SpawnPoint + new Vector3 (1f,0,0); 
 
             Debug.Log(obj.transform);
 
@@ -184,6 +185,11 @@ public class Player : MonoBehaviour
             playerData.CurrentHealth -= 100 ;
             healthbar.SetHealth(playerData.CurrentHealth);
 
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D Collision){
+        if(Collision.tag == "Respawn"){
+            SpawnPoint = transform.position ;
         }
     }
     

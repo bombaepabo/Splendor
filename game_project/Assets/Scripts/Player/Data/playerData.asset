@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2045d0123d5774abbbd6976e061de5, type: 3}
   m_Name: playerData
   m_EditorClassIdentifier: 
+  MaxHealth: 100
+  CurrentHealth: 100
   movementVelocity: 8
   jumpVelocity: 15
   amountOfJumps: 2
@@ -25,7 +27,7 @@ MonoBehaviour:
   WallSlideVelocity: -1
   WallClimbVelocity: 3
   WallJumpVelocity: 15
-  wallJumpTime: 0.4
+  wallJumpTime: 0.3
   wallJumpAngle: {x: 1, y: 2}
   dashCooldown: 0.5
   maxHoldTime: 1
@@ -40,6 +42,3 @@ MonoBehaviour:
   CrouchMovementVelocity: 3
   CrouchColliderHeight: 0.12
   standColliderHeight: 0.25
-  whatisPlatform:
-    serializedVersion: 2
-    m_Bits: 512
