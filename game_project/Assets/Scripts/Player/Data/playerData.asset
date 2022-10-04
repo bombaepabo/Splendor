@@ -16,7 +16,7 @@ MonoBehaviour:
   CurrentHealth: 100
   movementVelocity: 8
   jumpVelocity: 15
-  amountOfJumps: 2
+  amountOfJumps: 1
   coyoteTime: 0.2
   JumpHeightMultiplier: 0.5
   GroundCheckRadius: 0.3

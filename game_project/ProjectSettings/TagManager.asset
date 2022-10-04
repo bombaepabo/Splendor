@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Damagable
+  - Collectable
   layers:
   - Default
   - TransparentFX
