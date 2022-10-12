@@ -77,7 +77,7 @@
                 {
                     "name": "up",
                     "id": "dba00b31-6f2a-4e0f-8d93-2ff6bb1ce541",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -88,7 +88,7 @@
                 {
                     "name": "down",
                     "id": "e467d33d-75f6-4c4e-9f23-22056cd2758f",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -99,7 +99,7 @@
                 {
                     "name": "left",
                     "id": "f607b802-bb81-44fc-97a5-c03b345e53fa",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -110,7 +110,7 @@
                 {
                     "name": "right",
                     "id": "6e577a2c-87e9-4e35-ab2f-271327ddb720",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -185,26 +185,59 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "e3882881-2381-4349-bd5b-e0684e2d02f0",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "GamePad",
-                    "action": "DashDirection",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "43df013d-5e02-4e1e-a800-1d2038f14fa8",
-                    "path": "<Mouse>/position",
+                    "name": "2D Vector",
+                    "id": "340cd064-c3bf-468b-8997-7f408ff34325",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "DashDirection",
-                    "isComposite": false,
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "efdef678-d67a-43af-a577-7076c571d780",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "DashDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "5b09c3a7-36d5-46d7-8c22-6ef1ff024d43",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "DashDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "d7e558ed-efc0-46ad-9737-b48ad3224a18",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "DashDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "5b3fc870-8f91-482f-a48b-0e5170ad033c",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "DashDirection",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

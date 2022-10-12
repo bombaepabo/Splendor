@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   CurrentHealth: 100
-  movementVelocity: 8
+  movementVelocity: 7
   jumpVelocity: 15
   amountOfJumps: 1
   coyoteTime: 0.2
@@ -33,7 +33,7 @@ MonoBehaviour:
   maxHoldTime: 1
   holdTimeScale: 0.25
   dashTime: 0.2
-  dashVelocity: 30
+  dashVelocity: 25
   drag: 10
   dashEndYmultiplier: 0.2
   DistanceBetweenAfterImage: 0.5

@@ -245,7 +245,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.070133, y: 1}
+    m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -262,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91461405}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3549833, y: -1.235, z: -10}
+  m_LocalPosition: {x: -1.8393335, y: -1.235, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17879,7 +17879,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639684936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3549833, y: -1.235, z: -10}
+  m_LocalPosition: {x: -1.8393335, y: -1.235, z: -10}
   m_LocalScale: {x: 0.9843603, y: 1.206714, z: 1.0088}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18396,6 +18396,7 @@ MonoBehaviour:
   WallCheck: {fileID: 619405700}
   LedgeCheck: {fileID: 390666336}
   CeilingCheck: {fileID: 850007561}
+  SpawnPoint: {x: 0, y: 0, z: 0}
   healthbar: {fileID: 0}
 --- !u!114 &2080438648
 MonoBehaviour:

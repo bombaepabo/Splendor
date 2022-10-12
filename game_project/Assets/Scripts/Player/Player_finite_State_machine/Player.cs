@@ -50,6 +50,8 @@ public class Player : MonoBehaviour
     private Vector2 workspace;
     public HealthBar healthbar ;
     private GameObject obj ; 
+    private float velPower ;
+   
     #endregion
    
     #region UnityCallBack Func
@@ -95,7 +97,9 @@ public class Player : MonoBehaviour
         
     }
     private void FixedUpdate(){
+       
        StateMachine.CurrentState.PhysicsUpdate();
+        
     }
     #endregion
     
@@ -109,6 +113,7 @@ public class Player : MonoBehaviour
         workspace.Set(velocity,CurrentVelocity.y);
         RB.velocity = workspace; 
         CurrentVelocity = workspace ;
+
     }
     public void SetVelocityY(float velocity){
         workspace.Set(CurrentVelocity.x,velocity);
@@ -125,7 +130,8 @@ public class Player : MonoBehaviour
         workspace = direction * velocity ;
         RB.velocity = workspace ;
         CurrentVelocity = workspace  ;
-    }
+        Debug.Log(direction);
+    }   
     #endregion
     
     #region CheckFunction
