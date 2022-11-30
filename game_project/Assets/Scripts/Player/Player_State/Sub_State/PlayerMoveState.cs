@@ -28,6 +28,9 @@ public class PlayerMoveState : PlayerGroundedState
         else if(yinput == -1 ){
             stateMachine.ChangeState(player.CrouchMoveState);
         }
+        else if(player.DeathState.CheckIfisDead()){
+        stateMachine.ChangeState(player.DeathState);
+        }
 
         }
     }

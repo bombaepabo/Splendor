@@ -25,12 +25,14 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     }
     public override void Exit(){
         base.Exit();
+
     }
     public override void LogicUpdate(){
         base.LogicUpdate();
         
         if(!isExitingState){
         HoldPosition();
+        playerData.PlayerCurrentClimbStamina -= 15 *Time.deltaTime ; 
 
          if(yinput > 0){
             stateMachine.ChangeState(player.wallClimbState);
@@ -38,6 +40,11 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         else if(yinput <0 ||!GrabInput){
             stateMachine.ChangeState(player.wallSlideState);
         }
+        else if(playerData.PlayerCurrentClimbStamina <= 0){
+                Exit();
+        }
+        Debug.Log("stamina" + playerData.PlayerCurrentClimbStamina);
+
         }
     }
     private void HoldPosition(){

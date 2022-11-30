@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public PlayerDashState DashState{get;private set;}
     public PlayerCrouchIdleState CrouchIdleState{get;private set;}
     public PlayerCrouchMoveState CrouchMoveState{get;private set;}
+    public PlayerDeathState DeathState{get; private set;}
     
     [SerializeField]
     public PlayerData playerData ; 
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform CeilingCheck;
     [SerializeField]
-    private Vector3 SpawnPoint ; 
+    public Vector3 SpawnPoint ; 
 
     #endregion
     #region OtherVariable
@@ -49,10 +50,8 @@ public class Player : MonoBehaviour
     public int FacingDirection{get;private set ; }
     private Vector2 workspace;
     public HealthBar healthbar ;
-    private GameObject obj ; 
-    private float velPower ;
-   
-    #endregion
+    public GameObject obj ; 
+        #endregion
    
     #region UnityCallBack Func
     private void Awake(){
@@ -70,6 +69,7 @@ public class Player : MonoBehaviour
         DashState = new PlayerDashState(this,StateMachine,playerData,"inAir");
         CrouchIdleState = new PlayerCrouchIdleState(this,StateMachine,playerData,"crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
+        DeathState = new PlayerDeathState(this,StateMachine,playerData,"Dead");
     }
     private void Start(){
         //init State machine 
@@ -86,19 +86,14 @@ public class Player : MonoBehaviour
     }
     private void Update(){
         CurrentVelocity = RB.velocity; 
-        if(playerData.CurrentHealth <=0){
-            obj.transform.position = SpawnPoint + new Vector3 (1f,0,0); 
-
-            Debug.Log(obj.transform);
+        if(playerData.CurrentHealth <=0 ){
+            StartCoroutine("respawn",.5f);
 
         }
-        playerData.CurrentHealth = 100 ; 
         StateMachine.CurrentState.LogicUpdate();
-        
     }
     private void FixedUpdate(){
-       
-       StateMachine.CurrentState.PhysicsUpdate();
+        StateMachine.CurrentState.PhysicsUpdate();
         
     }
     #endregion
@@ -198,6 +193,14 @@ public class Player : MonoBehaviour
             SpawnPoint = transform.position ;
         }
     }
-    
+    public IEnumerator respawn(float spawndelay){
+    yield return new WaitForSeconds(spawndelay);
+    playerData.CurrentHealth = 100 ; 
+    obj.transform.position = SpawnPoint + new Vector3 (1f,0,0); 
+    DeathState.isDead = false ;
+    RB.bodyType = RigidbodyType2D.Dynamic ;
+    obj.GetComponent<SpriteRenderer>().enabled = true ;
+
+  }
     #endregion
 }

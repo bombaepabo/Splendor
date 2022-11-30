@@ -31,6 +31,9 @@ public class PlayerCrouchMoveState : PlayerGroundedState
             else if(yinput != -1 && !isTouchingCeiling){
                 stateMachine.ChangeState(player.MoveState);
             }
+             else if(player.DeathState.CheckIfisDead()){
+                stateMachine.ChangeState(player.DeathState);
+            }
         }
     }
 }

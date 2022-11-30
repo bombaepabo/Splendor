@@ -86,6 +86,9 @@ public override void LogicUpdate(){
   else if(DashInput && player.DashState.CheckIfCanDash()){
     stateMachine.ChangeState(player.DashState);
   }
+  else if(player.DeathState.CheckIfisDead()){
+    stateMachine.ChangeState(player.DeathState);
+  }
   
   else{
     player.CheckIfShouldFlip(xinput);
