@@ -52,7 +52,7 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.wallGrabState);
         }
         else if(DashInput && player.DashState.CheckIfCanDash()&&!isTouchingCeiling){
-    stateMachine.ChangeState(player.DashState);}
+        stateMachine.ChangeState(player.DashState);}
   
     }
     public override void PhysicsUpdate(){

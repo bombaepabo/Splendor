@@ -60,7 +60,7 @@ public class PlayerDashState : PlayerAbilityState
                     player.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
                     player.RB.drag = playerData.drag;
                     player.SetVelocity(playerData.dashVelocity,dashDirection);
-                    player.DashDirectionIndicator.gameObject.SetActive(false);
+                   // player.DashDirectionIndicator.gameObject.SetActive(false);
                     PlaceAfterImage();
                 }
                 }

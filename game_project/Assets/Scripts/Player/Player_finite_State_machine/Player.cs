@@ -125,7 +125,6 @@ public class Player : MonoBehaviour
         workspace = direction * velocity ;
         RB.velocity = workspace ;
         CurrentVelocity = workspace  ;
-        Debug.Log(direction);
     }   
     #endregion
     
@@ -191,6 +190,12 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D Collision){
         if(Collision.tag == "Respawn"){
             SpawnPoint = transform.position ;
+        }
+        else if(Collision.tag == "DashReset")
+        {
+            DashState.ResetCanDash();
+            Destroy(Collision.gameObject);
+
         }
     }
     public IEnumerator respawn(float spawndelay){

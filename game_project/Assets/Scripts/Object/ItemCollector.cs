@@ -10,6 +10,7 @@ public class ItemCollector : MonoBehaviour
     private int collectedCount = 0 ; 
     [SerializeField]
     private TMP_Text collectedtext ; 
+    public GameObject obj ; 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Collectable"))
