@@ -7,7 +7,7 @@ public class PlayerData : ScriptableObject
  [Header("Player Stat")]
  public int MaxHealth = 100 ;
  public int CurrentHealth ;
- public float PlayerMaxclimbStamina  = 100 ;
+ public float ClimbStaminaDrainRate  = 15 ;
  public float PlayerCurrentClimbStamina =100; 
  [Header("Move State")]
  public float movementVelocity = 5f ; 

@@ -32,12 +32,15 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         
         if(!isExitingState){
         HoldPosition();
-        playerData.PlayerCurrentClimbStamina -= 15 *Time.deltaTime ; 
+        playerData.PlayerCurrentClimbStamina -= playerData.ClimbStaminaDrainRate *Time.deltaTime ; 
 
          if(yinput > 0){
             stateMachine.ChangeState(player.wallClimbState);
         }
         else if(yinput <0 ||!GrabInput){
+            stateMachine.ChangeState(player.wallSlideState);
+        }
+        else if(playerData.PlayerCurrentClimbStamina <= 30){
             stateMachine.ChangeState(player.wallSlideState);
         }
         else if(playerData.PlayerCurrentClimbStamina <= 0){

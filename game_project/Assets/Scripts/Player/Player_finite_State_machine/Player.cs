@@ -195,12 +195,15 @@ public class Player : MonoBehaviour
     }
     public IEnumerator respawn(float spawndelay){
     yield return new WaitForSeconds(spawndelay);
+    
     playerData.CurrentHealth = 100 ; 
     obj.transform.position = SpawnPoint + new Vector3 (1f,0,0); 
+    JumpState.DecreaseAmountofJumpLeft();
     DeathState.isDead = false ;
     RB.bodyType = RigidbodyType2D.Dynamic ;
+    RB.velocity = new Vector2(0,0);
     obj.GetComponent<SpriteRenderer>().enabled = true ;
-
+    
   }
     #endregion
 }

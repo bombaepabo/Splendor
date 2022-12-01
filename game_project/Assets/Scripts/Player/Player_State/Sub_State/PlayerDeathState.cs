@@ -17,6 +17,7 @@ public class PlayerDeathState : PlayerAbilityState
   public override void LogicUpdate(){
         base.LogicUpdate();
         if(isDead == true){
+            player.JumpState.DecreaseAmountofJumpLeft();
             player.RB.bodyType = RigidbodyType2D.Static ;
             player.obj.GetComponent<SpriteRenderer>().enabled = false ;
 

@@ -12,7 +12,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
     if(!isExitingState){
        player.SetVelocityY(playerData.WallSlideVelocity);
 
-        if(GrabInput && yinput ==0){
+        if(GrabInput && yinput ==0&& playerData.PlayerCurrentClimbStamina >30){
             stateMachine.ChangeState(player.wallGrabState);
     } 
     }

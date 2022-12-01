@@ -11,13 +11,16 @@ public class PlayerWallClimbState : PlayerTouchingWallState
         base.LogicUpdate();
         if(!isExitingState){
         player.SetVelocityY(playerData.WallClimbVelocity);
-        playerData.PlayerCurrentClimbStamina -= 15 *Time.deltaTime ; 
+        playerData.PlayerCurrentClimbStamina -= playerData.ClimbStaminaDrainRate *Time.deltaTime ; 
         Debug.Log("wall climb state");
         Debug.Log("stamina" + playerData.PlayerCurrentClimbStamina);
 
        if(yinput != 1){
         stateMachine.ChangeState(player.wallGrabState);
        }
+        else if(playerData.PlayerCurrentClimbStamina <= 30){
+            stateMachine.ChangeState(player.wallSlideState);
+        }
        else if(playerData.PlayerCurrentClimbStamina <= 0){
                 Exit();
         }
