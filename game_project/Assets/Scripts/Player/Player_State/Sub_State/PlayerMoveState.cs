@@ -22,6 +22,7 @@ public class PlayerMoveState : PlayerGroundedState
         player.SetVelocityX(playerData.movementVelocity*xinput);
         
         if(!isExitingState){
+            if(!player.DeathState.CheckIfisDead()){
         if(xinput == 0 ){
             stateMachine.ChangeState(player.IdleState);
         }
@@ -31,7 +32,7 @@ public class PlayerMoveState : PlayerGroundedState
         else if(player.DeathState.CheckIfisDead()){
         stateMachine.ChangeState(player.DeathState);
         }
-
+            }
         }
     }
     public override void PhysicsUpdate(){

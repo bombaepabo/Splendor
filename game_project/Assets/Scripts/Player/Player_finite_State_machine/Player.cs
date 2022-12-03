@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     private Transform CeilingCheck;
     [SerializeField]
     public Vector3 SpawnPoint ; 
+    public Vector3 SpawnPointTemp;
 
     #endregion
     #region OtherVariable
@@ -51,6 +52,8 @@ public class Player : MonoBehaviour
     private Vector2 workspace;
     public HealthBar healthbar ;
     public GameObject obj ; 
+    public float LastOnGroundTime { get; private set; }
+
         #endregion
    
     #region UnityCallBack Func
@@ -73,6 +76,7 @@ public class Player : MonoBehaviour
     }
     private void Start(){
         //init State machine 
+        SpawnPoint = transform.position;
         Anim = GetComponent<Animator>();
         inputhandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
@@ -82,14 +86,17 @@ public class Player : MonoBehaviour
         MoveMentCollider = GetComponent<BoxCollider2D>();
         playerData.CurrentHealth = playerData.MaxHealth ;
         obj = GameObject.Find("Player");
-        SpawnPoint = transform.position;
+        obj.transform.position = SpawnPoint;
+
     }
     private void Update(){
+        SpawnPoint = SpawnPointTemp;
         CurrentVelocity = RB.velocity; 
-        if(playerData.CurrentHealth <=0 ){
-            StartCoroutine("respawn",.5f);
+        LastOnGroundTime -= Time.deltaTime;
 
-        }
+        if(DeathState.CheckIfisDead()){
+            GameManager.PlayerDied();
+            }
         StateMachine.CurrentState.LogicUpdate();
     }
     private void FixedUpdate(){
@@ -105,6 +112,7 @@ public class Player : MonoBehaviour
         
     }
     public void SetVelocityX(float velocity){
+        
         workspace.Set(velocity,CurrentVelocity.y);
         RB.velocity = workspace; 
         CurrentVelocity = workspace ;
@@ -126,6 +134,51 @@ public class Player : MonoBehaviour
         RB.velocity = workspace ;
         CurrentVelocity = workspace  ;
     }   
+    public void run(float velocity){
+        //Calculate the direction we want to move in and our desired velocity
+		float targetSpeed = velocity;
+        float lerpAmount = 1 ;
+		//We can reduce are control using Lerp() this smooths changes to are direction and speed
+		targetSpeed = Mathf.Lerp(RB.velocity.x, targetSpeed, lerpAmount);
+		float accelRate;
+
+		#region Calculate AccelRate
+		if (LastOnGroundTime > 0)
+			accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? playerData.runAccelAmount : playerData.runDeccelAmount;
+		else
+			accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? playerData.runAccelAmount * playerData.accelInAir : playerData.runDeccelAmount * playerData.deccelInAir;
+		#endregion
+
+		#region Add Bonus Jump Apex Acceleration
+		if ((JumpState.isitJumping() || wallJumpState.IsitWallJumping() || RB.velocity.y<0) && Mathf.Abs(RB.velocity.y) < playerData.jumpHangTimeThreshold)
+		{
+			accelRate *= playerData.jumpHangAccelerationMult;
+			targetSpeed *= playerData.jumpHangMaxSpeedMult;
+		}
+
+		#endregion
+
+
+		#region Conserve Momentum
+		if(playerData.doConserveMomentum && Mathf.Abs(RB.velocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(RB.velocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && LastOnGroundTime < 0)
+		{
+			//Prevent any deceleration from happening, or in other words conserve are current momentum
+			//You could experiment with allowing for the player to slightly increae their speed whilst in this "state"
+			accelRate = 0; 
+		}
+
+		#endregion
+
+		//Calculate difference between current velocity and desired velocity
+		float speedDif = targetSpeed - RB.velocity.x;
+		//Calculate force along x-axis to apply to thr player
+
+		float movement = speedDif * accelRate;
+        Debug.Log("Rb velocity x  = "+RB.velocity.x+ " speed dif"+speedDif+ " accelRate"+accelRate+" RB velocity y"+RB.velocity.y);
+		//Convert this to a vector and apply to rigidbody
+        RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
+
+    }
     #endregion
     
     #region CheckFunction
@@ -154,6 +207,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region other Function
+   
     public void SetColliderHeight(float height){
         Vector2 center = MoveMentCollider.offset;
         workspace.Set(MoveMentCollider.size.x,height);
@@ -189,7 +243,8 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D Collision){
         if(Collision.tag == "Respawn"){
-            SpawnPoint = transform.position ;
+            SpawnPointTemp = transform.position ;
+            Debug.Log(SpawnPointTemp);
         }
         else if(Collision.tag == "DashReset")
         {
@@ -199,15 +254,12 @@ public class Player : MonoBehaviour
         }
     }
     public IEnumerator respawn(float spawndelay){
-    yield return new WaitForSeconds(spawndelay);
-    
-    playerData.CurrentHealth = 100 ; 
-    obj.transform.position = SpawnPoint + new Vector3 (1f,0,0); 
-    JumpState.DecreaseAmountofJumpLeft();
-    DeathState.isDead = false ;
-    RB.bodyType = RigidbodyType2D.Dynamic ;
-    RB.velocity = new Vector2(0,0);
-    obj.GetComponent<SpriteRenderer>().enabled = true ;
+        yield return new WaitForSeconds(spawndelay);
+        playerData.CurrentHealth = 100 ; 
+        DeathState.isDead = false ;
+        obj.SetActive(true);
+        obj.transform.position = SpawnPoint + new Vector3 (1f,0,0); 
+        Debug.Log("ssss");
     
   }
     #endregion

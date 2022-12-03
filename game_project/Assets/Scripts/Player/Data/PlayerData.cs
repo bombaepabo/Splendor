@@ -47,5 +47,23 @@ public float CrouchMovementVelocity = 5f ;
 public float CrouchColliderHeight  =0.12f;
 public float standColliderHeight = 0.12f *2 ;
 
+[Header("Player Acc/DeAcc")]
+public float runMaxSpeed; //Target speed we want the player to reach.
+public float runAcceleration; //The speed at which our player accelerates to max speed, can be set to runMaxSpeed for instant acceleration down to 0 for none at all
+[HideInInspector] public float runAccelAmount; //The actual force (multiplied with speedDiff) applied to the player.
+public float runDecceleration; //The speed at which our player decelerates from their current speed, can be set to runMaxSpeed for instant deceleration down to 0 for none at all
+[HideInInspector] public float runDeccelAmount; //Actual force (multiplied with speedDiff) applied to the player .
+[Space(5)]
+[Range(0f, 1)] public float accelInAir; //Multipliers applied to acceleration rate when airborne.
+[Range(0f, 1)] public float deccelInAir;
+[Space(5)]
+public bool doConserveMomentum = true;
 
+[Header("Player Jump grav")]
+public float jumpCutGravityMult; //Multiplier to increase gravity if the player releases thje jump button while still jumping
+[Range(0f, 1)] public float jumpHangGravityMult; //Reduces gravity while close to the apex (desired max height) of the jump
+public float jumpHangTimeThreshold; //Speeds (close to 0) where the player will experience extra "jump hang". The player's velocity.y is closest to 0 at the jump's apex (think of the gradient of a parabola or quadratic function)
+[Space(0.5f)]
+public float jumpHangAccelerationMult; 
+public float jumpHangMaxSpeedMult; 		
 }
