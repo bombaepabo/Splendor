@@ -31,7 +31,7 @@ public override void DoChecks(){
   isTouchingWallBack = player.CheckIfTouchingWallback();
   isTouchingLedge = player.CheckIfTouchingLedge();
   if(isTouchingWall && !isTouchingLedge){
-    player.LedgeClimbState.SetDetectedPosition(player.transform.position);
+    //player.LedgeClimbState.SetDetectedPosition(player.transform.position);
   }
   if(!wallJumpCoyoteTime && !isTouchingWall && !isTouchingWallBack && (oldIsTouchingWall || oldIsTouchingWallback)){
     StartWallJumpCoyoteTime();

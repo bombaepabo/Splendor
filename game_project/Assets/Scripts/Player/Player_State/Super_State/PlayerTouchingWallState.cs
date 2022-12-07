@@ -26,9 +26,9 @@ public class PlayerTouchingWallState : PlayerState
         IsGrounded = player.CheckIfGrounded();
         isTouchingWall = player.CheckIfTouchingWall();
         isTouchingLedge= player.CheckIfTouchingLedge();
-        if(isTouchingWall &&!isTouchingLedge){
-            player.LedgeClimbState.SetDetectedPosition(player.transform.position);
-        }
+       // if(isTouchingWall &&!isTouchingLedge){
+         //   player.LedgeClimbState.SetDetectedPosition(player.transform.position);
+        //}
     }
     public override void Enter(){
         base.Enter();
@@ -55,7 +55,7 @@ public class PlayerTouchingWallState : PlayerState
             stateMachine.ChangeState(player.InAirState);
         }
         else if(isTouchingWall &&! isTouchingLedge){
-            stateMachine.ChangeState(player.LedgeClimbState);
+          //  stateMachine.ChangeState(player.LedgeClimbState);
         }
     }
     public override void PhysicsUpdate(){

@@ -51,8 +51,8 @@ public class Player : MonoBehaviour
     public int FacingDirection{get;private set ; }
     private Vector2 workspace;
     public HealthBar healthbar ;
-    public GameObject obj ; 
     public float LastOnGroundTime { get; private set; }
+    public GameObject obj ; 
 
         #endregion
    
@@ -68,38 +68,43 @@ public class Player : MonoBehaviour
         wallClimbState = new PlayerWallClimbState(this,StateMachine,playerData,"wallClimb");
         wallGrabState  = new PlayerWallGrabState(this,StateMachine,playerData,"wallGrab");
         wallJumpState = new PlayerWallJumpState(this,StateMachine,playerData,"inAir");
-        LedgeClimbState = new PlayerLedgeClimbState(this,StateMachine,playerData,"ledgeClimbState");
-        DashState = new PlayerDashState(this,StateMachine,playerData,"inAir");
+       // LedgeClimbState = new PlayerLedgeClimbState(this,StateMachine,playerData);
+        DashState = new PlayerDashState(this,StateMachine,playerData,"Dash");
         CrouchIdleState = new PlayerCrouchIdleState(this,StateMachine,playerData,"crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
         DeathState = new PlayerDeathState(this,StateMachine,playerData,"Dead");
+        obj = GameObject.Find("Player");
+        GameManager.RegisterPlayer(this);
+
+        GameManager.RespawnPlayer();
+
     }
     private void Start(){
         //init State machine 
-        SpawnPoint = transform.position;
         Anim = GetComponent<Animator>();
         inputhandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
         StateMachine.Initialize(IdleState);
         FacingDirection = 1 ;
-        DashDirectionIndicator = transform.Find("DashDirectionIndicator");
         MoveMentCollider = GetComponent<BoxCollider2D>();
         playerData.CurrentHealth = playerData.MaxHealth ;
-        obj = GameObject.Find("Player");
-        obj.transform.position = SpawnPoint;
 
+
+        
     }
     private void Update(){
         SpawnPoint = SpawnPointTemp;
         CurrentVelocity = RB.velocity; 
         LastOnGroundTime -= Time.deltaTime;
-
         if(DeathState.CheckIfisDead()){
             GameManager.PlayerDied();
+            //StartCoroutine("respawn",.5f);
+
             }
         StateMachine.CurrentState.LogicUpdate();
     }
     private void FixedUpdate(){
+
         StateMachine.CurrentState.PhysicsUpdate();
         
     }
@@ -244,7 +249,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D Collision){
         if(Collision.tag == "Respawn"){
             SpawnPointTemp = transform.position ;
-            Debug.Log(SpawnPointTemp);
+            GameManager.RegisterSpawnPoint(SpawnPointTemp);
         }
         else if(Collision.tag == "DashReset")
         {
@@ -257,9 +262,10 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(spawndelay);
         playerData.CurrentHealth = 100 ; 
         DeathState.isDead = false ;
-        obj.SetActive(true);
-        obj.transform.position = SpawnPoint + new Vector3 (1f,0,0); 
-        Debug.Log("ssss");
+        //obj.SetActive(true);
+        transform.position = SpawnPoint + new Vector3 (1f,0,0);
+        RB.bodyType = RigidbodyType2D.Dynamic ;
+        GetComponent<SpriteRenderer>().enabled = true ;
     
   }
     #endregion
