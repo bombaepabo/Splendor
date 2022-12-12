@@ -3587,6 +3587,7 @@ MonoBehaviour:
   WallCheck: {fileID: 890393703}
   LedgeCheck: {fileID: 1230814119}
   CeilingCheck: {fileID: 1907276468}
+  Keyfollowpoint: {fileID: 0}
   SpawnPoint: {x: 0, y: 0, z: 0}
   SpawnPointTemp: {x: 0, y: 0, z: 0}
   healthbar: {fileID: 0}

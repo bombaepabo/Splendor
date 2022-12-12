@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,16 +100,40 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_0
+      name: Move_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 16
+        width: 12
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,20 +142,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f9a6662fb034b046a7d34ed101a9ca2
-      internalID: 42831008
+      spriteID: 0798962f299a0ef4596d3acb7bc380a7
+      internalID: -853875372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_1
+      name: Move_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 18
         y: 0
-        width: 16
-        height: 16
+        width: 13
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19117bef7724488408f8a61b9f048dba
-      internalID: 1021240643
+      spriteID: 962a377ed2c62c844ae60af2bd9b1a53
+      internalID: -1347855657
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_2
+      name: Move_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 34
         y: 0
-        width: 16
-        height: 16
+        width: 13
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,19 +184,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a00a5f70de53fc4f8046ad16d03547c
-      internalID: -63494231
+      spriteID: aea915d959bb9e94da73c25dd42043ce
+      internalID: 1364069539
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_3
+      name: Move_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 50
         y: 0
-        width: 16
+        width: 12
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -181,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7427df56e29253459ed9189e448f8c2
-      internalID: -1101486306
+      spriteID: d713aa614acbbf84eb14394ee9aceae1
+      internalID: -362497243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_4
+      name: Move_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 65
         y: 0
-        width: 16
-        height: 16
+        width: 13
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,20 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8baf21b422962d40b01a5acd1cbe713
-      internalID: -563148840
+      spriteID: 8e1785712ef20a54cb73e51e761ac269
+      internalID: -1921478303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_5
+      name: Move_5
       rect:
         serializedVersion: 2
-        x: 80
+        x: 81
         y: 0
-        width: 16
-        height: 16
+        width: 13
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,20 +247,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d82389fde172b4f409ff020ba2a2b22a
-      internalID: -2114335691
+      spriteID: 742586a681544c54f83af5fb23098667
+      internalID: 1090540602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_6
+      name: Move_6
       rect:
         serializedVersion: 2
-        x: 96
+        x: 97
         y: 0
-        width: 16
-        height: 16
+        width: 13
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +268,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fb804483b9834445a3e85f2c4aa34b0
-      internalID: -196135375
+      spriteID: 5e4505ba3433f1b44926348ac0368b87
+      internalID: -1221514086
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_7
+      name: Move_7
       rect:
         serializedVersion: 2
-        x: 112
+        x: 113
         y: 0
-        width: 16
-        height: 16
+        width: 13
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,19 +289,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ebbbd47a4d8e0c49a5084a29bbc9ff6
-      internalID: -1892999625
+      spriteID: e064335fa9f1f424c928e0bb6edde2e8
+      internalID: 630456262
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Run-Shee2_8
+      name: Move_8
       rect:
         serializedVersion: 2
-        x: 128
+        x: 130
         y: 0
-        width: 16
+        width: 12
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -286,8 +310,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d887a4bf3798e549ae3e07621c84d69
-      internalID: 1236525197
+      spriteID: 17ebe80ffbc22e643a9d5fb08b60aa6d
+      internalID: -1547426339
       vertices: []
       indices: 
       edges: []
@@ -303,15 +327,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sprite-0001_Run-Shee2_0: 42831008
-      Sprite-0001_Run-Shee2_6: -196135375
-      Sprite-0001_Run-Shee2_4: -563148840
-      Sprite-0001_Run-Shee2_3: -1101486306
-      Sprite-0001_Run-Shee2_1: 1021240643
-      Sprite-0001_Run-Shee2_7: -1892999625
-      Sprite-0001_Run-Shee2_2: -63494231
-      Sprite-0001_Run-Shee2_8: 1236525197
-      Sprite-0001_Run-Shee2_5: -2114335691
+      Move_4: -1921478303
+      Move_8: -1547426339
+      Move_5: 1090540602
+      Move_6: -1221514086
+      Move_2: 1364069539
+      Move_3: -362497243
+      Move_1: -1347855657
+      Move_0: -853875372
+      Move_7: 630456262
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

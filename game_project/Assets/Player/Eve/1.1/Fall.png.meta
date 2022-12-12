@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,16 +100,40 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-0001_Fall-Sheet_0
+      name: Fall_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 16
+        width: 12
         height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,19 +142,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e07f95c2e9cfaeb4fbd7da528ece4ab5
-      internalID: -1122620893
+      spriteID: 7eed0e98bb33eeb46acbd3ebb6e93dd2
+      internalID: -1142569595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Fall-Sheet_1
+      name: Fall_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 17
         y: 0
-        width: 16
+        width: 12
         height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -139,19 +163,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b434c0d194896724aa104993f8cb4c4b
-      internalID: 451420699
+      spriteID: b73d2086945d8a8498dc0dabac18db91
+      internalID: 1822527169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Fall-Sheet_2
+      name: Fall_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 33
         y: 0
-        width: 16
+        width: 12
         height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -160,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95a9791f904ac8548b5852dc05ca8c22
-      internalID: 587249284
+      spriteID: dbcae96746d8640439878cf40d2003e7
+      internalID: 1606054162
       vertices: []
       indices: 
       edges: []
@@ -177,9 +201,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sprite-0001_Fall-Sheet_1: 451420699
-      Sprite-0001_Fall-Sheet_2: 587249284
-      Sprite-0001_Fall-Sheet_0: -1122620893
+      Fall_1: 1822527169
+      Fall_0: -1142569595
+      Fall_2: 1606054162
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

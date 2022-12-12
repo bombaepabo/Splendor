@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,16 +100,40 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-0001_Jump-Sheet_0
+      name: Jump_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 16
+        width: 10
         height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,20 +142,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10a0261fb497228468003f55a23ef80b
-      internalID: -1012133694
+      spriteID: ff015bdcbfd3c524d99c7f01952bd782
+      internalID: -2069047256
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Jump-Sheet_1
+      name: Jump_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 18
         y: 0
-        width: 16
-        height: 20
+        width: 10
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ffd4c68cc6769841919c5d1dde0541b
-      internalID: 472013407
+      spriteID: ec66f3726aed89f48bd1884dddb40fb4
+      internalID: -1204782635
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Jump-Sheet_2
+      name: Jump_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 34
         y: 0
-        width: 16
-        height: 20
+        width: 11
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1fb1f04627bbf58409bcf8172a9a5299
-      internalID: -174493867
+      spriteID: 99ba6f9cc9a3c124ab3f4de036906e9e
+      internalID: -1247525936
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Jump-Sheet_3
+      name: Jump_3
       rect:
         serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 20
+        x: 50
+        y: 1
+        width: 11
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,8 +205,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31c63d3fe36bbfd4fb22d50f9e8dfc1c
-      internalID: -1106440981
+      spriteID: 4278484f70408544a8966e2ec64e8c27
+      internalID: -24730251
       vertices: []
       indices: 
       edges: []
@@ -198,10 +222,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sprite-0001_Jump-Sheet_3: -1106440981
-      Sprite-0001_Jump-Sheet_1: 472013407
-      Sprite-0001_Jump-Sheet_0: -1012133694
-      Sprite-0001_Jump-Sheet_2: -174493867
+      Jump_3: -24730251
+      Jump_1: -1204782635
+      Jump_2: -1247525936
+      Jump_0: -2069047256
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

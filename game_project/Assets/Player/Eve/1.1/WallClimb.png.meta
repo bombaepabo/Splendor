@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,17 +100,41 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-0001_Climb-Sheet2_0
+      name: WallClimb_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
-        height: 16
+        x: 2
+        y: 2
+        width: 10
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +142,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e53c2975578c75e47a0382fa183121a7
-      internalID: 1330964721
+      spriteID: ce411db4222c15242944dc82e11150e5
+      internalID: 1129866970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Climb-Sheet2_1
+      name: WallClimb_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
+        x: 18
+        y: 1
+        width: 10
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,19 +163,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64730dde8c58dca43afd5c5ceceb9a62
-      internalID: 858153991
+      spriteID: 730e8ede9822f3343ac4043559d84ec5
+      internalID: -1993271504
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite-0001_Climb-Sheet2_2
+      name: WallClimb_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 34
         y: 0
-        width: 16
+        width: 10
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -160,8 +184,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: acd1d8853f10b524ca7cd906ef02ac68
-      internalID: -1427801373
+      spriteID: 941673c91560b614d947333de2648e4d
+      internalID: 428427611
       vertices: []
       indices: 
       edges: []
@@ -177,9 +201,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Sprite-0001_Climb-Sheet2_0: 1330964721
-      Sprite-0001_Climb-Sheet2_2: -1427801373
-      Sprite-0001_Climb-Sheet2_1: 858153991
+      WallClimb_2: 428427611
+      WallClimb_0: 1129866970
+      WallClimb_1: -1993271504
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
