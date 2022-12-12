@@ -34,7 +34,7 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         HoldPosition();
         playerData.PlayerCurrentClimbStamina -= playerData.ClimbStaminaDrainRate *Time.deltaTime ; 
 
-         if(yinput > 0){
+         if(yinput > 0 && playerData.PlayerCurrentClimbStamina >30){
             stateMachine.ChangeState(player.wallClimbState);
         }
         else if(yinput <0 ||!GrabInput){
@@ -46,7 +46,8 @@ public class PlayerWallGrabState : PlayerTouchingWallState
         else if(playerData.PlayerCurrentClimbStamina <= 0){
                 Exit();
         }
-        Debug.Log("stamina" + playerData.PlayerCurrentClimbStamina);
+       
+      //  Debug.Log("stamina" + playerData.PlayerCurrentClimbStamina);
 
         }
     }

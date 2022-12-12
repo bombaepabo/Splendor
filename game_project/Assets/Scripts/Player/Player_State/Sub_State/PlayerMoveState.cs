@@ -14,12 +14,13 @@ public class PlayerMoveState : PlayerGroundedState
         base.Enter();
     }
     public override void Exit(){
+        player.SetVelocityX(0);
         base.Exit();
     }
     public override void LogicUpdate(){
         base.LogicUpdate();
         player.CheckIfShouldFlip(xinput);
-        player.SetVelocityX(playerData.movementVelocity*xinput);
+        player.run(playerData.movementVelocity*xinput,1);
         
         if(!isExitingState){
             if(!player.DeathState.CheckIfisDead()){
