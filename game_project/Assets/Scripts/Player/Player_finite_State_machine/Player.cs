@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform CeilingCheck;
     [SerializeField]
+    public Transform Keyfollowpoint ; 
+    [SerializeField]
     public Vector3 SpawnPoint ; 
     public Vector3 SpawnPointTemp;
 
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
         wallClimbState = new PlayerWallClimbState(this,StateMachine,playerData,"wallClimb");
         wallGrabState  = new PlayerWallGrabState(this,StateMachine,playerData,"wallGrab");
         wallJumpState = new PlayerWallJumpState(this,StateMachine,playerData,"inAir");
-       // LedgeClimbState = new PlayerLedgeClimbState(this,StateMachine,playerData);
+       // LedgeClimbState = new PlayerLedgeClimbState(this,StateMachine,playerData,"ledgeClimbState");
         DashState = new PlayerDashState(this,StateMachine,playerData,"Dash");
         CrouchIdleState = new PlayerCrouchIdleState(this,StateMachine,playerData,"crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
@@ -127,6 +129,7 @@ public class Player : MonoBehaviour
         workspace.Set(CurrentVelocity.x,velocity);
         RB.velocity = workspace; 
         CurrentVelocity = workspace ;
+        LastOnGroundTime = 0 ; 
     }
     public void SetVelocity(float velocity , Vector2 angle ,int direction){
         angle.Normalize();
@@ -139,10 +142,9 @@ public class Player : MonoBehaviour
         RB.velocity = workspace ;
         CurrentVelocity = workspace  ;
     }   
-    public void run(float velocity){
+    public void run(float velocity,float lerpAmount){
         //Calculate the direction we want to move in and our desired velocity
 		float targetSpeed = velocity;
-        float lerpAmount = 1 ;
 		//We can reduce are control using Lerp() this smooths changes to are direction and speed
 		targetSpeed = Mathf.Lerp(RB.velocity.x, targetSpeed, lerpAmount);
 		float accelRate;
@@ -154,21 +156,12 @@ public class Player : MonoBehaviour
 			accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? playerData.runAccelAmount * playerData.accelInAir : playerData.runDeccelAmount * playerData.deccelInAir;
 		#endregion
 
-		#region Add Bonus Jump Apex Acceleration
-		if ((JumpState.isitJumping() || wallJumpState.IsitWallJumping() || RB.velocity.y<0) && Mathf.Abs(RB.velocity.y) < playerData.jumpHangTimeThreshold)
-		{
-			accelRate *= playerData.jumpHangAccelerationMult;
-			targetSpeed *= playerData.jumpHangMaxSpeedMult;
-		}
-
-		#endregion
-
 
 		#region Conserve Momentum
 		if(playerData.doConserveMomentum && Mathf.Abs(RB.velocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(RB.velocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && LastOnGroundTime < 0)
 		{
 			//Prevent any deceleration from happening, or in other words conserve are current momentum
-			//You could experiment with allowing for the player to slightly increae their speed whilst in this "state"
+		    //You could experiment with allowing for the player to slightly increae their speed whilst in this "state"
 			accelRate = 0; 
 		}
 
@@ -179,10 +172,8 @@ public class Player : MonoBehaviour
 		//Calculate force along x-axis to apply to thr player
 
 		float movement = speedDif * accelRate;
-        Debug.Log("Rb velocity x  = "+RB.velocity.x+ " speed dif"+speedDif+ " accelRate"+accelRate+" RB velocity y"+RB.velocity.y);
 		//Convert this to a vector and apply to rigidbody
         RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
-
     }
     #endregion
     
@@ -223,7 +214,7 @@ public class Player : MonoBehaviour
     public Vector2 DetermineCornerPosition(){
         RaycastHit2D xhit =Physics2D.Raycast(WallCheck.position,Vector2.right*FacingDirection,playerData.WallCheckDistance,playerData.whatisGround);
         float xdistance = xhit.distance ;
-        workspace.Set((xdistance +0.015f)*FacingDirection,0f);
+        workspace.Set((xdistance)*FacingDirection,0f);
         RaycastHit2D yhit = Physics2D.Raycast((LedgeCheck.position+(Vector3)(workspace)),Vector2.down,LedgeCheck.position.y - WallCheck.position.y +0.015f,playerData.whatisGround);
         float ydistance = yhit.distance ;
         workspace.Set(WallCheck.position.x + (xdistance *FacingDirection),LedgeCheck.position.y - ydistance);

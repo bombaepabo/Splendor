@@ -66,4 +66,15 @@ public float jumpHangTimeThreshold; //Speeds (close to 0) where the player will 
 [Space(0.5f)]
 public float jumpHangAccelerationMult; 
 public float jumpHangMaxSpeedMult; 		
+private void OnValidate()
+    {
+
+    runAccelAmount = (50 * runAcceleration) / runMaxSpeed;
+	runDeccelAmount = (50 * runDecceleration) / runMaxSpeed;
+	runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
+	runDecceleration = Mathf.Clamp(runDecceleration, 0.01f, runMaxSpeed);
+
+
+
+    }
 }

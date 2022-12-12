@@ -29,7 +29,7 @@ public class PlayerLedgeClimbState : PlayerState
     public override void Enter(){
         base.Enter();
         player.SetVelocityZero();
-        player.transform.position =detectedPos;
+        player.transform.position=detectedPos;
         cornerPos = player.DetermineCornerPosition();
         startPos.Set(cornerPos.x -(player.FacingDirection *playerData.StartOffset.x),cornerPos.y -(playerData.StartOffset.y));
         stopPos.Set(cornerPos.x + (player.FacingDirection * playerData.StopOffset.x),cornerPos.y +(playerData.StopOffset.y));

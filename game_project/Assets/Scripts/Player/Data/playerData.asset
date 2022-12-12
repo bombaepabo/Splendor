@@ -18,7 +18,7 @@ MonoBehaviour:
   PlayerCurrentClimbStamina: 100
   movementVelocity: 7
   jumpVelocity: 15
-  amountOfJumps: 1
+  amountOfJumps: 3
   coyoteTime: 0.2
   JumpHeightMultiplier: 0.3
   GroundCheckRadius: 0.3
@@ -40,15 +40,15 @@ MonoBehaviour:
   dashEndYmultiplier: 0.2
   DistanceBetweenAfterImage: 0.5
   StartOffset: {x: 0.3, y: 1}
-  StopOffset: {x: 0.4, y: 0.8}
+  StopOffset: {x: 0.45, y: 1}
   CrouchMovementVelocity: 3
-  CrouchColliderHeight: 0.12
-  standColliderHeight: 0.25
+  CrouchColliderHeight: 0.5
+  standColliderHeight: 0.5
   runMaxSpeed: 5
   runAcceleration: 2.5
-  runAccelAmount: 0
+  runAccelAmount: 25
   runDecceleration: 5
-  runDeccelAmount: 0
+  runDeccelAmount: 50
   accelInAir: 0.65
   deccelInAir: 0.65
   doConserveMomentum: 1
