@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour,IDataPersistent
 {
     #region State Variables
     public PlayerStateMachine StateMachine{get; private set;}
@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     public Transform Keyfollowpoint ; 
     [SerializeField]
+    public Transform ItemCollectorfollowpoint ; 
+    [SerializeField]
     public Vector3 SpawnPoint ; 
     public Vector3 SpawnPointTemp;
 
@@ -55,6 +57,8 @@ public class Player : MonoBehaviour
     public HealthBar healthbar ;
     public float LastOnGroundTime { get; private set; }
     public GameObject obj ; 
+    private bool disablemovement ; 
+    private BoxCollider2D coll;
 
         #endregion
    
@@ -79,6 +83,7 @@ public class Player : MonoBehaviour
         GameManager.RegisterPlayer(this);
 
         GameManager.RespawnPlayer();
+        coll = GetComponent<BoxCollider2D>();
 
     }
     private void Start(){
@@ -99,14 +104,17 @@ public class Player : MonoBehaviour
         CurrentVelocity = RB.velocity; 
         LastOnGroundTime -= Time.deltaTime;
         if(DeathState.CheckIfisDead()){
-            GameManager.PlayerDied();
+            StartCoroutine("handledrespawn",0.3f);
+            //GameManager.PlayerDied();
             //StartCoroutine("respawn",.5f);
 
             }
         StateMachine.CurrentState.LogicUpdate();
     }
     private void FixedUpdate(){
-
+        if(disablemovement){
+            return ;
+        }
         StateMachine.CurrentState.PhysicsUpdate();
         
     }
@@ -233,7 +241,7 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D Collision){
         if(Collision.gameObject.tag =="Damagable"){
             playerData.CurrentHealth -= 100 ;
-            healthbar.SetHealth(playerData.CurrentHealth);
+            GameEventsManager.instance.PlayerDeath();
 
         }
     }
@@ -249,15 +257,29 @@ public class Player : MonoBehaviour
 
         }
     }
-    public IEnumerator respawn(float spawndelay){
-        yield return new WaitForSeconds(spawndelay);
+    public IEnumerator handledrespawn(float spawndelay){
+            disablemovement = true ;
+            coll.enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false ;
+            RB.gravityScale = 0;
+            RB.velocity = Vector3.zero;
+            yield return new WaitForSeconds(spawndelay);
+            respawn();
+  }
+  public void respawn(){
+        RB.gravityScale = 5;
         playerData.CurrentHealth = 100 ; 
         DeathState.isDead = false ;
-        //obj.SetActive(true);
+        disablemovement = false ;
+        coll.enabled = true;
         transform.position = SpawnPoint + new Vector3 (1f,0,0);
-        RB.bodyType = RigidbodyType2D.Dynamic ;
         GetComponent<SpriteRenderer>().enabled = true ;
-    
+  }
+  public void LoadData(GameData data){
+        this.transform.position = data.playerPosition ;
+  }
+  public void SaveData(ref GameData data){
+        data.playerPosition = SpawnPoint; 
   }
     #endregion
 }

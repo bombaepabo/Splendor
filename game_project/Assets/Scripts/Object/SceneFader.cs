@@ -17,7 +17,7 @@ public class SceneFader : MonoBehaviour
 		fadeParamID = Animator.StringToHash("Fade");
 
 		//Register this Scene Fader with the Game Manager
-		GameManager.RegisterSceneFader(this);
+		//GameManager.RegisterSceneFader(this);
 			
 	
 	}

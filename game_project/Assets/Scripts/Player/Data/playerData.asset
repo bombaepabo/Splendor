@@ -22,7 +22,7 @@ MonoBehaviour:
   coyoteTime: 0.2
   JumpHeightMultiplier: 0.3
   GroundCheckRadius: 0.259
-  WallCheckDistance: 0.5
+  WallCheckDistance: 0.3
   whatisGround:
     serializedVersion: 2
     m_Bits: 64
@@ -42,8 +42,8 @@ MonoBehaviour:
   StartOffset: {x: 0.3, y: 1}
   StopOffset: {x: 0.45, y: 1}
   CrouchMovementVelocity: 3
-  CrouchColliderHeight: 0.1
-  standColliderHeight: 0.15
+  CrouchColliderHeight: 0.25
+  standColliderHeight: 0.45
   runMaxSpeed: 5
   runAcceleration: 2.5
   runAccelAmount: 25

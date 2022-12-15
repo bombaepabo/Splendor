@@ -13,7 +13,6 @@ public class PlayerDeathState : PlayerAbilityState
 }
   public override void Enter(){
     isDead = true;
-    Debug.Log("Death State");
 
   }
   public override void LogicUpdate(){
@@ -23,7 +22,7 @@ public class PlayerDeathState : PlayerAbilityState
            //player.RB.bodyType = RigidbodyType2D.Static ;
            //player.RB.velocity = new Vector2(0,0);
            //player.GetComponent<SpriteRenderer>().enabled = false ;
-            player.obj.SetActive(false);
+            //player.obj.SetActive(false);
 
         }
         stateMachine.ChangeState(player.IdleState);
