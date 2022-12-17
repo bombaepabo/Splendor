@@ -12,11 +12,14 @@ public class DataPersistentManager : MonoBehaviour
     [SerializeField] private string testSelectedProfileId = "test";
     [Header("File storage config")]
     [SerializeField] private string filename ;
+    [Header("Auto Saving Configuration")]
+    [SerializeField] private float AutoSaveTimeSeconds =60f ; 
     public static DataPersistentManager instance {get;private set;}
     private GameData gameData ;
     private List<IDataPersistent> dataPersistentObject ;
     private FileDataHandler dataHandler ;
     private string selectedProfileId = "";
+    private Coroutine autoSaveCoroutine;
     [SerializeField] private bool useEncryption ;
     private void Awake()
     {
@@ -32,33 +35,40 @@ public class DataPersistentManager : MonoBehaviour
     }
     DontDestroyOnLoad(this.gameObject);
     this.dataHandler = new FileDataHandler(Application.persistentDataPath,filename,useEncryption);
-    this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
-    if(overrideSelectedProfileId == true){
-        this.selectedProfileId = testSelectedProfileId ; 
-        Debug.LogWarning("Override selected profile id with test id: " + testSelectedProfileId);
-    }
+    InitializeSelectedProfileId();
     }
     private void OnEnable(){
         SceneManager.sceneLoaded += OnSceneLoaded ; 
-        SceneManager.sceneUnloaded += OnSceneUnloaded ;
     }
     private void OnDisable(){
         SceneManager.sceneLoaded -= OnSceneLoaded ; 
-        SceneManager.sceneUnloaded -= OnSceneUnloaded ;
     }
     public void OnSceneLoaded(Scene scene,LoadSceneMode mode){
         Debug.Log("OnSceneLoaded Called");
         this.dataPersistentObject = FindAllDataPersistentObject();
         LoadGame();
-    }
-    public void OnSceneUnloaded(Scene scene){
-        Debug.Log("OnSceneUnLoaded Called");
 
-        SaveGame();
+        if(autoSaveCoroutine != null){
+            StopCoroutine(autoSaveCoroutine);
+
+        }
+        autoSaveCoroutine = StartCoroutine(AutoSave());
     }
     public void ChangedSelectedProfileId(string newProfileId){
         this.selectedProfileId = newProfileId ; 
         LoadGame();
+    }
+    public void DeleteProfileData(string profileId){
+        dataHandler.Delete(profileId);
+        InitializeSelectedProfileId();
+        LoadGame();
+    }
+    private void InitializeSelectedProfileId(){
+    this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
+    if(overrideSelectedProfileId == true){
+        this.selectedProfileId = testSelectedProfileId ; 
+        Debug.LogWarning("Override selected profile id with test id: " + testSelectedProfileId);
+    }
     }
     public void NewGame(){
         this.gameData = new GameData();
@@ -93,7 +103,7 @@ public class DataPersistentManager : MonoBehaviour
             return ; 
         }
         foreach(IDataPersistent dataPersistentObj in dataPersistentObject){
-            dataPersistentObj.SaveData(ref gameData);
+            dataPersistentObj.SaveData(gameData);
         }
         gameData.lastUpdated = System.DateTime.Now.ToBinary();
         dataHandler.Save(gameData,selectedProfileId);
@@ -112,5 +122,13 @@ public class DataPersistentManager : MonoBehaviour
     public Dictionary<string,GameData> GetAllProfilesGameData()
     {
         return dataHandler.LoadAllProfiles();
+    }
+    private IEnumerator AutoSave()
+    {
+        while (true){
+            yield return new WaitForSeconds(AutoSaveTimeSeconds);
+            SaveGame();
+            Debug.Log("Auto Saved Games");
+        }
     }
 }

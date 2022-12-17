@@ -25,7 +25,7 @@ public class ItemCollect : MonoBehaviour,IDataPersistent
 
         }
     }
-    public void SaveData(ref GameData data){
+    public void SaveData(GameData data){
         if(data.ItemCollected.ContainsKey(id)){
             data.ItemCollected.Remove(id);
         }
