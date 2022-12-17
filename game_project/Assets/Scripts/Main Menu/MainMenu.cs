@@ -13,6 +13,9 @@ public class MainMenu : Menu
     [SerializeField] private Button continueGameButton;
     [SerializeField] private Button loadGameButton ;
   public void Start(){
+    DisableButtonDependingOnData();
+  }
+  private void DisableButtonDependingOnData(){
     if(!DataPersistentManager.instance.HasGameData()){
         continueGameButton.interactable = false ;
         loadGameButton.interactable = false ;
@@ -31,6 +34,7 @@ public class MainMenu : Menu
   public void OnContinueGameClicked()
   {
     DisableMenuButtons();
+    DataPersistentManager.instance.SaveGame();
     SceneManager.LoadSceneAsync("Test Scene3");
   }
   private void DisableMenuButtons(){
@@ -39,6 +43,8 @@ public class MainMenu : Menu
   }
   public void ActivateMenu(){
     this.gameObject.SetActive(true);
+    DisableButtonDependingOnData();
+
   }
   public void DeactivateMenu(){
     this.gameObject.SetActive(false);

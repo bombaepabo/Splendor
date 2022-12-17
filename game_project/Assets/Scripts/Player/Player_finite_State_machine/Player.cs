@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour,IDataPersistent
 {
     #region State Variables
@@ -109,6 +109,10 @@ public class Player : MonoBehaviour,IDataPersistent
             //StartCoroutine("respawn",.5f);
 
             }
+        if(inputhandler.ExitInput == true ){
+            DataPersistentManager.instance.SaveGame();
+            SceneManager.LoadSceneAsync("MainMenu");
+        }
         StateMachine.CurrentState.LogicUpdate();
     }
     private void FixedUpdate(){
@@ -278,7 +282,7 @@ public class Player : MonoBehaviour,IDataPersistent
   public void LoadData(GameData data){
         this.transform.position = data.playerPosition ;
   }
-  public void SaveData(ref GameData data){
+  public void SaveData(GameData data){
         data.playerPosition = SpawnPoint; 
   }
     #endregion

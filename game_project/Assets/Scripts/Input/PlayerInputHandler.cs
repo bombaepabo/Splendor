@@ -16,6 +16,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool JumpInputStop{get;private set ;}
     public bool DashInput{get;private set;}
     public bool DashInputStop{get;private set;}
+    public bool ExitInput{get;private set;}
+    public bool ExitInputStop{get;private set;}
     [SerializeField]
     private float inputHoldTime = 0.2f ; 
     private float JumpInputStartTime ;
@@ -81,6 +83,18 @@ public class PlayerInputHandler : MonoBehaviour
         }
         else if(context.canceled){
             DashInputStop = true ; 
+        }
+    }
+    public void OnExitInput(InputAction.CallbackContext context){
+          if(context.started){
+            ExitInput = true ;
+            ExitInputStop = false ;
+            Debug.Log("Pressed");
+        }
+        else if(context.canceled){
+            ExitInputStop = true ; 
+            Debug.Log("UnPressed");
+
         }
     }
     public void UseJumpInput(){
