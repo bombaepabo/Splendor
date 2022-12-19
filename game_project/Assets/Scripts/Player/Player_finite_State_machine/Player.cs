@@ -30,7 +30,7 @@ public class Player : MonoBehaviour,IDataPersistent
     public Rigidbody2D RB {get; private set ;}
     public Animator Anim{get ;private set;}
     public Transform DashDirectionIndicator {get;private set;}
-    public BoxCollider2D MoveMentCollider{get;private set;}
+    public CapsuleCollider2D MoveMentCollider{get;private set;}
     #endregion
     #region Check Transform
     [SerializeField]
@@ -58,8 +58,6 @@ public class Player : MonoBehaviour,IDataPersistent
     public float LastOnGroundTime { get; private set; }
     public GameObject obj ; 
     private bool disablemovement ; 
-    private BoxCollider2D coll;
-
         #endregion
    
     #region UnityCallBack Func
@@ -80,11 +78,6 @@ public class Player : MonoBehaviour,IDataPersistent
         CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
         DeathState = new PlayerDeathState(this,StateMachine,playerData,"Dead");
         obj = GameObject.Find("Player");
-        GameManager.RegisterPlayer(this);
-
-        GameManager.RespawnPlayer();
-        coll = GetComponent<BoxCollider2D>();
-
     }
     private void Start(){
         //init State machine 
@@ -93,7 +86,7 @@ public class Player : MonoBehaviour,IDataPersistent
         RB = GetComponent<Rigidbody2D>();
         StateMachine.Initialize(IdleState);
         FacingDirection = 1 ;
-        MoveMentCollider = GetComponent<BoxCollider2D>();
+        MoveMentCollider = GetComponent<CapsuleCollider2D>();
         playerData.CurrentHealth = playerData.MaxHealth ;
 
 
@@ -263,7 +256,7 @@ public class Player : MonoBehaviour,IDataPersistent
     }
     public IEnumerator handledrespawn(float spawndelay){
             disablemovement = true ;
-            coll.enabled = false;
+            MoveMentCollider.enabled = false;
             GetComponent<SpriteRenderer>().enabled = false ;
             RB.gravityScale = 0;
             RB.velocity = Vector3.zero;
@@ -276,7 +269,7 @@ public class Player : MonoBehaviour,IDataPersistent
         playerData.CurrentHealth = 100 ; 
         DeathState.isDead = false ;
         disablemovement = false ;
-        coll.enabled = true;
+        MoveMentCollider.enabled = true;
         transform.position = SpawnPoint + new Vector3 (1f,0,0);
         GetComponent<SpriteRenderer>().enabled = true ;
   }

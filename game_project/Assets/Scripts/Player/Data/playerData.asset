@@ -42,7 +42,7 @@ MonoBehaviour:
   StartOffset: {x: 0.3, y: 1}
   StopOffset: {x: 0.45, y: 1}
   CrouchMovementVelocity: 3
-  CrouchColliderHeight: 0.25
+  CrouchColliderHeight: 0.2
   standColliderHeight: 0.45
   runMaxSpeed: 5
   runAcceleration: 2.5
