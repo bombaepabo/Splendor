@@ -267,6 +267,7 @@ public class Player : MonoBehaviour,IDataPersistent
             GetComponent<SpriteRenderer>().enabled = false ;
             RB.gravityScale = 0;
             RB.velocity = Vector3.zero;
+            DashState.CanDash = false ;
             yield return new WaitForSeconds(spawndelay);
             respawn();
   }

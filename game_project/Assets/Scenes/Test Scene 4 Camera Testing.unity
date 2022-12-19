@@ -2532,6 +2532,7 @@ MonoBehaviour:
   LedgeCheck: {fileID: 1826275314}
   CeilingCheck: {fileID: 2140890272}
   Keyfollowpoint: {fileID: 0}
+  ItemCollectorfollowpoint: {fileID: 0}
   SpawnPoint: {x: 0, y: 0, z: 0}
   SpawnPointTemp: {x: 0, y: 0, z: 0}
   healthbar: {fileID: 0}
