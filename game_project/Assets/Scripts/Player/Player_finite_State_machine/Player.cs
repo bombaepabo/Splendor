@@ -245,7 +245,6 @@ public class Player : MonoBehaviour,IDataPersistent
     private void OnTriggerEnter2D(Collider2D Collision){
         if(Collision.tag == "Respawn"){
             SpawnPointTemp = transform.position ;
-            GameManager.RegisterSpawnPoint(SpawnPointTemp);
         }
         else if(Collision.tag == "DashReset")
         {

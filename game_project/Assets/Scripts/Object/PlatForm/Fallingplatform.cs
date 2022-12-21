@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Fallingplatform : MonoBehaviour
 {
-    private float fallDelay =0.5f; 
+    private float fallDelay =0.2f; 
     private float destroyDelay = 2f; 
     [SerializeField] private Rigidbody2D rb;
-   
+   private void Awake(){
+    rb = GetComponent<Rigidbody2D>();
+
+   }
    private void OnCollisionEnter2D(Collision2D collision){
     if(collision.gameObject.CompareTag("Player")){
         StartCoroutine(Fall());
