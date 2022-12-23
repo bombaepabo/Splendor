@@ -180,6 +180,11 @@ public class Player : MonoBehaviour,IDataPersistent
 		//Convert this to a vector and apply to rigidbody
         RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
     }
+    public void Jump(float velocityY){
+        Debug.Log(velocityY);
+        RB.AddForce(new Vector2(CurrentVelocity.x, velocityY), ForceMode2D.Impulse);
+
+    }
     #endregion
     
     #region CheckFunction

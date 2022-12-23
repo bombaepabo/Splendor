@@ -36,6 +36,7 @@ public class FallingAboveobstacle : MonoBehaviour
 	void OnCollisionEnter2D (Collision2D col)
 	{
 		if (col.gameObject.name.Equals("Player")){
+			
 		}
 	}
 	void DropPlatform()

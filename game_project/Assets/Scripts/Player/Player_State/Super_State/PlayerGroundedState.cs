@@ -26,6 +26,7 @@ public class PlayerGroundedState : PlayerState
     }
     public override void Enter(){
         base.Enter();
+        player.SetVelocityX(0);
         player.JumpState.resetAmountOfJumpsLeft();
         player.DashState.ResetCanDash();
         playerData.PlayerCurrentClimbStamina =100 ; 

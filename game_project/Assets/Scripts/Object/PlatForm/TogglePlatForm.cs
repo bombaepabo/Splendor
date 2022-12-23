@@ -4,34 +4,33 @@ using UnityEngine;
 
 public class TogglePlatForm : MonoBehaviour
 {
-    public float TimeToTogglePlatform =2 ;
-    public float currentTime = 0 ; 
-    public bool enabled = true ; 
+    public float timetoEnabled = 3f ; 
+    public float TimetoDisabled = 0.5f ;
     // Start is called before the first frame update
     void Start()
-    {
-        enabled = true ; 
+    { 
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime ;
-        if(currentTime >= TimeToTogglePlatform)
-        {
-            currentTime = 0 ;
-            TogglingPlatForm();
-        }
+
+    }
+    void OnCollisionEnter2D (Collision2D col)
+	{
+		if (col.gameObject.name.Equals ("Player")) {
+			Invoke ("OnDisablePlatform", TimetoDisabled);
+		}
+	}
+    void OnDisablePlatform(){
+        this.gameObject.SetActive(false);
+        Invoke("OnEnablePlatform", timetoEnabled);
+
+    }
+    void OnEnablePlatform(){
+        this.gameObject.SetActive(true);
     }
 
-    void TogglingPlatForm(){
-        enabled = !enabled ; 
-        foreach(Transform child in gameObject.transform)
-        {
-            if(child.tag !="Player")
-            {
-            child.gameObject.SetActive(enabled);
-            }
-        }
-    }
+   
+    
 }
