@@ -12,18 +12,18 @@ public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerDat
 }
 public override void Enter(){
     base.Enter();
-    Debug.Log("Enter Jump");
     isJumping = true;
     player.inputhandler.UseJumpInput();
     if(!player.DeathState.CheckIfisDead()){
+    //player.Jump(playerData.jumpVelocity);
     player.SetVelocityY(playerData.jumpVelocity);
+
     }
     isAbilityDone = true; 
     amountOfJumpsLeft--;
     player.InAirState.SetIsJumping();
    
 
-    //Debug.Log(amountOfJumpsLeft);
 
 }
 public override void Exit(){
