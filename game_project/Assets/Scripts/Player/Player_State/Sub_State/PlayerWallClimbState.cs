@@ -8,13 +8,25 @@ public class PlayerWallClimbState : PlayerTouchingWallState
     private Vector2 stopPos ; 
     private Vector2 cornerPos ; 
     private Vector2 startPos ; 
-
+    public bool IsWallClimb  = false ;
     public PlayerWallClimbState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName){
      
  }
+  public override void Enter(){
+        base.Enter();
+        if(player.isOnPlatform){
+            IsWallClimb = true ;
+        }
+    }
+    public override void Exit(){
+        base.Exit();
+        IsWallClimb = false ;
+
+    }
   public override void LogicUpdate(){
         base.LogicUpdate();
         if(!isExitingState){
+
         player.SetVelocityY(playerData.WallClimbVelocity);
         playerData.PlayerCurrentClimbStamina -= playerData.ClimbStaminaDrainRate *Time.deltaTime ; 
        if(yinput != 1){
@@ -27,7 +39,6 @@ public class PlayerWallClimbState : PlayerTouchingWallState
                 Exit();
         }
        else if(player.CheckIfTouchingWall() &&!player.CheckIfTouchingLedge() && !player.CheckIfGrounded()){
-              Debug.Log("Enter");
               cornerPos = player.DetermineCornerPosition() ;
               stopPos.Set(cornerPos.x + (player.FacingDirection * playerData.StopOffset.x),cornerPos.y +(playerData.StopOffset.y));
               startPos.Set(cornerPos.x -(player.FacingDirection *playerData.StartOffset.x),cornerPos.y -(playerData.StartOffset.y));

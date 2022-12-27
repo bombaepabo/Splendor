@@ -58,6 +58,9 @@ public class Player : MonoBehaviour,IDataPersistent
     public float LastOnGroundTime { get; private set; }
     public GameObject obj ; 
     private bool disablemovement ; 
+    public bool isOnPlatform ;
+    public Rigidbody2D platformRb ;
+    public Vector3 PlatformsPos ;
         #endregion
    
     #region UnityCallBack Func
@@ -77,7 +80,6 @@ public class Player : MonoBehaviour,IDataPersistent
         CrouchIdleState = new PlayerCrouchIdleState(this,StateMachine,playerData,"crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
         DeathState = new PlayerDeathState(this,StateMachine,playerData,"Dead");
-        obj = GameObject.Find("Player");
     }
     private void Start(){
         //init State machine 
@@ -87,7 +89,6 @@ public class Player : MonoBehaviour,IDataPersistent
         StateMachine.Initialize(IdleState);
         FacingDirection = 1 ;
         MoveMentCollider = GetComponent<CapsuleCollider2D>();
-        playerData.CurrentHealth = playerData.MaxHealth ;
 
 
         
@@ -111,6 +112,13 @@ public class Player : MonoBehaviour,IDataPersistent
     private void FixedUpdate(){
         if(disablemovement){
             return ;
+        }
+        if(isOnPlatform)
+        {
+           // RB.velocity = new Vector2(playerData.movementVelocity + platformRb.velocity.x,RB.velocity.y);
+        }
+        else{
+            //RB.velocity = new Vector2(playerData.movementVelocity,RB.velocity.y);
         }
         StateMachine.CurrentState.PhysicsUpdate();
         

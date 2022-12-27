@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   CurrentHealth: 100
-  ClimbStaminaDrainRate: 15
+  ClimbStaminaDrainRate: 0.1
   PlayerCurrentClimbStamina: 100
   movementVelocity: 7
   jumpVelocity: 15
