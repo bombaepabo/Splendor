@@ -493,8 +493,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../audio-System-fmod-gameproject/Fmod-GameProject/Fmod-GameProject.fspro
-  sourceBankPath: ../../audio-System-fmod-gameproject/Fmod-GameProject/Build
+  sourceProjectPath: ../audio-System-fmod-gameproject/Fmod-GameProject/Fmod-GameProject.fspro
+  sourceBankPath: ../audio-System-fmod-gameproject/Fmod-GameProject/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
