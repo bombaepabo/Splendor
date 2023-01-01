@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using FMOD.Studio;
 public class Player : MonoBehaviour,IDataPersistent
 {
     #region State Variables
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour,IDataPersistent
     public Rigidbody2D RB {get; private set ;}
     public Animator Anim{get ;private set;}
     public Transform DashDirectionIndicator {get;private set;}
-    public BoxCollider2D MoveMentCollider{get;private set;}
+    public CapsuleCollider2D MoveMentCollider{get;private set;}
     #endregion
     #region Check Transform
     [SerializeField]
@@ -58,8 +59,10 @@ public class Player : MonoBehaviour,IDataPersistent
     public float LastOnGroundTime { get; private set; }
     public GameObject obj ; 
     private bool disablemovement ; 
-    private BoxCollider2D coll;
-
+    public bool isOnPlatform ;
+    public Rigidbody2D platformRb ;
+    public Vector3 PlatformsPos ;
+    private EventInstance playerFootsteps ;
         #endregion
    
     #region UnityCallBack Func
@@ -79,12 +82,6 @@ public class Player : MonoBehaviour,IDataPersistent
         CrouchIdleState = new PlayerCrouchIdleState(this,StateMachine,playerData,"crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
         DeathState = new PlayerDeathState(this,StateMachine,playerData,"Dead");
-        obj = GameObject.Find("Player");
-        GameManager.RegisterPlayer(this);
-
-        GameManager.RespawnPlayer();
-        coll = GetComponent<BoxCollider2D>();
-
     }
     private void Start(){
         //init State machine 
@@ -93,9 +90,8 @@ public class Player : MonoBehaviour,IDataPersistent
         RB = GetComponent<Rigidbody2D>();
         StateMachine.Initialize(IdleState);
         FacingDirection = 1 ;
-        MoveMentCollider = GetComponent<BoxCollider2D>();
-        playerData.CurrentHealth = playerData.MaxHealth ;
-
+        MoveMentCollider = GetComponent<CapsuleCollider2D>();
+        playerFootsteps = AudioManager.instance.CreateInstance(FModEvent.instance.playerFootsteps);
 
         
     }
@@ -103,18 +99,32 @@ public class Player : MonoBehaviour,IDataPersistent
         SpawnPoint = SpawnPointTemp;
         CurrentVelocity = RB.velocity; 
         LastOnGroundTime -= Time.deltaTime;
+        UpdateSound();
+
         if(DeathState.CheckIfisDead()){
             StartCoroutine("handledrespawn",0.3f);
             //GameManager.PlayerDied();
             //StartCoroutine("respawn",.5f);
 
             }
+        if(inputhandler.ExitInput == true ){
+            DataPersistentManager.instance.SaveGame();
+            SceneManager.LoadSceneAsync("MainMenu");
+        }
         StateMachine.CurrentState.LogicUpdate();
     }
     private void FixedUpdate(){
         if(disablemovement){
             return ;
         }
+        if(isOnPlatform)
+        {
+           // RB.velocity = new Vector2(playerData.movementVelocity + platformRb.velocity.x,RB.velocity.y);
+        }
+        else{
+            //RB.velocity = new Vector2(playerData.movementVelocity,RB.velocity.y);
+        }
+        UpdateSound();
         StateMachine.CurrentState.PhysicsUpdate();
         
     }
@@ -183,6 +193,11 @@ public class Player : MonoBehaviour,IDataPersistent
 		//Convert this to a vector and apply to rigidbody
         RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
     }
+    public void Jump(float velocityY){
+        Debug.Log(velocityY);
+        RB.AddForce(new Vector2(CurrentVelocity.x, velocityY), ForceMode2D.Impulse);
+
+    }
     #endregion
     
     #region CheckFunction
@@ -248,7 +263,6 @@ public class Player : MonoBehaviour,IDataPersistent
     private void OnTriggerEnter2D(Collider2D Collision){
         if(Collision.tag == "Respawn"){
             SpawnPointTemp = transform.position ;
-            GameManager.RegisterSpawnPoint(SpawnPointTemp);
         }
         else if(Collision.tag == "DashReset")
         {
@@ -259,10 +273,11 @@ public class Player : MonoBehaviour,IDataPersistent
     }
     public IEnumerator handledrespawn(float spawndelay){
             disablemovement = true ;
-            coll.enabled = false;
+            MoveMentCollider.enabled = false;
             GetComponent<SpriteRenderer>().enabled = false ;
             RB.gravityScale = 0;
             RB.velocity = Vector3.zero;
+            DashState.CanDash = false ;
             yield return new WaitForSeconds(spawndelay);
             respawn();
   }
@@ -271,15 +286,27 @@ public class Player : MonoBehaviour,IDataPersistent
         playerData.CurrentHealth = 100 ; 
         DeathState.isDead = false ;
         disablemovement = false ;
-        coll.enabled = true;
+        MoveMentCollider.enabled = true;
         transform.position = SpawnPoint + new Vector3 (1f,0,0);
         GetComponent<SpriteRenderer>().enabled = true ;
   }
   public void LoadData(GameData data){
         this.transform.position = data.playerPosition ;
   }
-  public void SaveData(ref GameData data){
+  public void SaveData(GameData data){
         data.playerPosition = SpawnPoint; 
+  }
+  private void UpdateSound(){
+    if(RB.velocity.x !=0 && CheckIfGrounded()){
+    PLAYBACK_STATE playbackState ; 
+    playerFootsteps.getPlaybackState(out playbackState);
+    if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
+        playerFootsteps.start();
+    }
+    }
+    else{
+        playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+    }
   }
     #endregion
 }
