@@ -10,7 +10,9 @@ public class HorizontalJumpPad : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right *bounce,ForceMode2D.Force);
+            Debug.Log("Enter");
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right*bounce,ForceMode2D.Impulse);
+
         }
     }
 }

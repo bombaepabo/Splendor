@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerJumpState : PlayerAbilityState
 {
 private int amountOfJumpsLeft ;
-private bool isJumping ; 
+public bool isJumping ; 
 public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName){
     amountOfJumpsLeft = playerData.amountOfJumps ; 
     

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
 public class Player : MonoBehaviour,IDataPersistent
 {
     #region State Variables
@@ -58,6 +59,10 @@ public class Player : MonoBehaviour,IDataPersistent
     public float LastOnGroundTime { get; private set; }
     public GameObject obj ; 
     private bool disablemovement ; 
+    public bool isOnPlatform ;
+    public Rigidbody2D platformRb ;
+    public Vector3 PlatformsPos ;
+    private EventInstance playerFootsteps ;
         #endregion
    
     #region UnityCallBack Func
@@ -77,7 +82,6 @@ public class Player : MonoBehaviour,IDataPersistent
         CrouchIdleState = new PlayerCrouchIdleState(this,StateMachine,playerData,"crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
         DeathState = new PlayerDeathState(this,StateMachine,playerData,"Dead");
-        obj = GameObject.Find("Player");
     }
     private void Start(){
         //init State machine 
@@ -87,8 +91,7 @@ public class Player : MonoBehaviour,IDataPersistent
         StateMachine.Initialize(IdleState);
         FacingDirection = 1 ;
         MoveMentCollider = GetComponent<CapsuleCollider2D>();
-        playerData.CurrentHealth = playerData.MaxHealth ;
-
+        playerFootsteps = AudioManager.instance.CreateInstance(FModEvent.instance.playerFootsteps);
 
         
     }
@@ -96,6 +99,8 @@ public class Player : MonoBehaviour,IDataPersistent
         SpawnPoint = SpawnPointTemp;
         CurrentVelocity = RB.velocity; 
         LastOnGroundTime -= Time.deltaTime;
+        UpdateSound();
+
         if(DeathState.CheckIfisDead()){
             StartCoroutine("handledrespawn",0.3f);
             //GameManager.PlayerDied();
@@ -112,6 +117,14 @@ public class Player : MonoBehaviour,IDataPersistent
         if(disablemovement){
             return ;
         }
+        if(isOnPlatform)
+        {
+           // RB.velocity = new Vector2(playerData.movementVelocity + platformRb.velocity.x,RB.velocity.y);
+        }
+        else{
+            //RB.velocity = new Vector2(playerData.movementVelocity,RB.velocity.y);
+        }
+        UpdateSound();
         StateMachine.CurrentState.PhysicsUpdate();
         
     }
@@ -282,6 +295,18 @@ public class Player : MonoBehaviour,IDataPersistent
   }
   public void SaveData(GameData data){
         data.playerPosition = SpawnPoint; 
+  }
+  private void UpdateSound(){
+    if(RB.velocity.x !=0 && CheckIfGrounded()){
+    PLAYBACK_STATE playbackState ; 
+    playerFootsteps.getPlaybackState(out playbackState);
+    if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
+        playerFootsteps.start();
+    }
+    }
+    else{
+        playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+    }
   }
     #endregion
 }

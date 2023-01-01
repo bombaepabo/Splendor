@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SaveSlotsMenu : Menu
 {
     [Header("Menu Navigation")]
-    [SerializeField] private MainMenu mainMenu ;
+    [SerializeField] private PlayGameMenu mainMenu ;
     [Header("Menu Button")]
     [SerializeField] private Button backButton ;
     [Header("Confirmation Popup")]
