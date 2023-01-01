@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMODUnity ; 
+[RequireComponent(typeof(StudioEventEmitter))]
 public class ItemCollect : MonoBehaviour,IDataPersistent
 {
     [SerializeField] private string id ;
@@ -14,7 +15,12 @@ public class ItemCollect : MonoBehaviour,IDataPersistent
     public Transform followTarget ;
     private SpriteRenderer visual;
     private bool collected = false;
+    private StudioEventEmitter emitter ;
 
+    private void Start(){
+        emitter = AudioManager.instance.InitializeEventEmitter(FModEvent.instance.CoinIdle,this.gameObject);
+        emitter.Play();
+    }
     public void Awake(){
         visual = this.GetComponentInChildren<SpriteRenderer>();
     }
@@ -60,7 +66,8 @@ public class ItemCollect : MonoBehaviour,IDataPersistent
     private void Collected(){
                 collected = true ;
                 visual.gameObject.SetActive(false);
-
+                emitter.Stop();
+                AudioManager.instance.PlayOneShot(FModEvent.instance.CoinCollected,this.transform.position);
                 GameEventsManager.instance.CoinCollected();
 
     }

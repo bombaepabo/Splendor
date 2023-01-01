@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMOD.Studio;
 public class Player : MonoBehaviour,IDataPersistent
 {
     #region State Variables
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour,IDataPersistent
     public bool isOnPlatform ;
     public Rigidbody2D platformRb ;
     public Vector3 PlatformsPos ;
+    private EventInstance playerFootsteps ;
         #endregion
    
     #region UnityCallBack Func
@@ -89,7 +91,7 @@ public class Player : MonoBehaviour,IDataPersistent
         StateMachine.Initialize(IdleState);
         FacingDirection = 1 ;
         MoveMentCollider = GetComponent<CapsuleCollider2D>();
-
+        playerFootsteps = AudioManager.instance.CreateInstance(FModEvent.instance.playerFootsteps);
 
         
     }
@@ -97,6 +99,8 @@ public class Player : MonoBehaviour,IDataPersistent
         SpawnPoint = SpawnPointTemp;
         CurrentVelocity = RB.velocity; 
         LastOnGroundTime -= Time.deltaTime;
+        UpdateSound();
+
         if(DeathState.CheckIfisDead()){
             StartCoroutine("handledrespawn",0.3f);
             //GameManager.PlayerDied();
@@ -120,6 +124,7 @@ public class Player : MonoBehaviour,IDataPersistent
         else{
             //RB.velocity = new Vector2(playerData.movementVelocity,RB.velocity.y);
         }
+        UpdateSound();
         StateMachine.CurrentState.PhysicsUpdate();
         
     }
@@ -290,6 +295,18 @@ public class Player : MonoBehaviour,IDataPersistent
   }
   public void SaveData(GameData data){
         data.playerPosition = SpawnPoint; 
+  }
+  private void UpdateSound(){
+    if(RB.velocity.x !=0 && CheckIfGrounded()){
+    PLAYBACK_STATE playbackState ; 
+    playerFootsteps.getPlaybackState(out playbackState);
+    if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
+        playerFootsteps.start();
+    }
+    }
+    else{
+        playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+    }
   }
     #endregion
 }
