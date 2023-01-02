@@ -264,12 +264,6 @@ public class Player : MonoBehaviour,IDataPersistent
         if(Collision.tag == "Respawn"){
             SpawnPointTemp = transform.position ;
         }
-        else if(Collision.tag == "DashReset")
-        {
-            DashState.ResetCanDash();
-            Destroy(Collision.gameObject);
-
-        }
     }
     public IEnumerator handledrespawn(float spawndelay){
             disablemovement = true ;

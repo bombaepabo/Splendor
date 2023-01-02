@@ -8,13 +8,11 @@ public class ElavatorPlatform : MonoBehaviour
     public float speed ;
     Vector3 targetPos; 
     Player player ; 
-    Rigidbody2D rb ; 
     Vector3 moveDirection;
     // Start is called before the first frame update
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        rb = GetComponent<Rigidbody2D>();
     }
     private void Start()
     {
@@ -49,7 +47,6 @@ public class ElavatorPlatform : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.name.Equals("Player")){
             player.isOnPlatform = true ;
-            player.platformRb = rb;
                 if(player.wallGrabState.IsWallGrab |player.wallClimbState.IsWallClimb|player.wallSlideState.IsWallSlide ){
                     collision.gameObject.transform.parent =this.transform ; 
                 }
@@ -59,12 +56,11 @@ public class ElavatorPlatform : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D collision){
         if(collision.gameObject.name.Equals("Player")){
-            if(player.JumpState.isJumping){
-                Debug.Log("is Jumping out movingplatforms");
-            }
+           
             player.isOnPlatform = false ;
             collision.transform.parent =null ; 
-            
+            player.RB.AddForce(new Vector2(1000.0f, 0));
+
         }
 
     }

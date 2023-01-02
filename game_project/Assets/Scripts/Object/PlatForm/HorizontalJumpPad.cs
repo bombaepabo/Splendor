@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class HorizontalJumpPad : MonoBehaviour
 {
-    public float bounce = 20f ;
-
-    private void  OnCollisionEnter2D(Collision2D collision)
+      public void OnTriggerEnter2D(Collider2D other)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        // Check that the player has collided with the jump pad
+        if (other.gameObject.tag == "Player")
         {
             Debug.Log("Enter");
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right*bounce,ForceMode2D.Impulse);
-
+            // Apply a horizontal force to the player
+            other.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(100000, 0));
         }
     }
 }

@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6055367300124968984
 Transform:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.030775428, y: 0.05105629}
@@ -223,7 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb6eee5c05ea71499930e16f9caba53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounce: 10000
 --- !u!212 &6055367300124968985
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1464,7 +1463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6055367301351482902
 Transform:
   m_ObjectHideFlags: 0
@@ -1495,7 +1494,6 @@ GameObject:
   - component: {fileID: 6055367301394444955}
   - component: {fileID: 6055367301394444954}
   - component: {fileID: 6055367301394444953}
-  - component: {fileID: 6055367301394444952}
   - component: {fileID: 6055367301394444956}
   m_Layer: 6
   m_Name: Moving Platform
@@ -1612,27 +1610,6 @@ MonoBehaviour:
   posA: {fileID: 6055367301349549933}
   posB: {fileID: 6055367300753564455}
   speed: 2
---- !u!50 &6055367301394444952
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6055367301394444950}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &6055367301394444956
 BoxCollider2D:
   m_ObjectHideFlags: 0
