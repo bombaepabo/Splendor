@@ -1398,7 +1398,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 226683305}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1906335510}
+        m_TargetAssemblyTypeName: VideoSetting, Assembly-CSharp
+        m_MethodName: ResRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &226683305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2376,7 +2388,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 331192881}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1906335510}
+        m_TargetAssemblyTypeName: VideoSetting, Assembly-CSharp
+        m_MethodName: ResLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &331192881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9817,6 +9841,16 @@ MonoBehaviour:
   optionsMenu: {fileID: 656077982}
   fullscreentog: {fileID: 329282000}
   VsyncTog: {fileID: 1177603043}
+  resolutionlist:
+  - horizontal: 1920
+    vertical: 1080
+  - horizontal: 1280
+    vertical: 720
+  - horizontal: 854
+    vertical: 480
+  - horizontal: 1366
+    vertical: 766
+  resolutionLabel: {fileID: 1692240249}
 --- !u!1 &1916177973
 GameObject:
   m_ObjectHideFlags: 0
