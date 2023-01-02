@@ -55,13 +55,9 @@ public class Player : MonoBehaviour,IDataPersistent
     public Vector2 CurrentVelocity {get;private set;}
     public int FacingDirection{get;private set ; }
     private Vector2 workspace;
-    public HealthBar healthbar ;
     public float LastOnGroundTime { get; private set; }
-    public GameObject obj ; 
     private bool disablemovement ; 
     public bool isOnPlatform ;
-    public Rigidbody2D platformRb ;
-    public Vector3 PlatformsPos ;
     private EventInstance playerFootsteps ;
         #endregion
    
@@ -92,7 +88,6 @@ public class Player : MonoBehaviour,IDataPersistent
         FacingDirection = 1 ;
         MoveMentCollider = GetComponent<CapsuleCollider2D>();
         playerFootsteps = AudioManager.instance.CreateInstance(FModEvent.instance.playerFootsteps);
-
         
     }
     private void Update(){
@@ -107,10 +102,10 @@ public class Player : MonoBehaviour,IDataPersistent
             //StartCoroutine("respawn",.5f);
 
             }
-        if(inputhandler.ExitInput == true ){
-            DataPersistentManager.instance.SaveGame();
-            SceneManager.LoadSceneAsync("MainMenu");
-        }
+         if(inputhandler.ExitInput == true && inputhandler.ExitInputStop == false ){
+            PauseMenu.IsPaused = true ;
+            }
+            
         StateMachine.CurrentState.LogicUpdate();
     }
     private void FixedUpdate(){
@@ -257,7 +252,6 @@ public class Player : MonoBehaviour,IDataPersistent
         if(Collision.gameObject.tag =="Damagable"){
             playerData.CurrentHealth -= 100 ;
             GameEventsManager.instance.PlayerDeath();
-
         }
     }
     private void OnTriggerEnter2D(Collider2D Collision){

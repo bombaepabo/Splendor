@@ -89,12 +89,10 @@ public class PlayerInputHandler : MonoBehaviour
           if(context.started){
             ExitInput = true ;
             ExitInputStop = false ;
-            Debug.Log("Pressed");
         }
         else if(context.canceled){
             ExitInputStop = true ; 
-            Debug.Log("UnPressed");
-
+            
         }
     }
     public void UseJumpInput(){
@@ -113,6 +111,10 @@ public class PlayerInputHandler : MonoBehaviour
             JumpInput = false ;
         }
     }
+    public void SwitchActionMap(string actionname){
+        playerInput.SwitchCurrentActionMap(actionname);
+    }
+
     
     
 }
