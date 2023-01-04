@@ -114,6 +114,16 @@ public class PlayerInputHandler : MonoBehaviour
     public void SwitchActionMap(string actionname){
         playerInput.SwitchCurrentActionMap(actionname);
     }
+    public void DisableInput(){
+       playerInput.actions.FindActionMap("Gameplay").Disable();
+       playerInput.actions.FindActionMap("UI").Enable();
+
+    }
+    public void EnableInput(){
+        playerInput.actions.FindActionMap("UI").Disable();
+        playerInput.actions.FindActionMap("Gameplay").Enable();
+
+    }
 
     
     

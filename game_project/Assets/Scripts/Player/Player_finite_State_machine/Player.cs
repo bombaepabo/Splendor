@@ -104,7 +104,11 @@ public class Player : MonoBehaviour,IDataPersistent
             }
          if(inputhandler.ExitInput == true && inputhandler.ExitInputStop == false ){
             PauseMenu.IsPaused = true ;
+            inputhandler.DisableInput();
             }
+        if(PauseMenu.IsPaused == false){
+            inputhandler.EnableInput();
+        }
             
         StateMachine.CurrentState.LogicUpdate();
     }
