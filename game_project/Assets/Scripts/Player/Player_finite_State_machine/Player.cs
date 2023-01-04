@@ -106,23 +106,18 @@ public class Player : MonoBehaviour,IDataPersistent
             PauseMenu.IsPaused = true ;
             inputhandler.DisableInput();
             }
-        if(PauseMenu.IsPaused == false){
+         else if(PauseMenu.IsPaused == false){
             inputhandler.EnableInput();
-        }
-            
+         }          
         StateMachine.CurrentState.LogicUpdate();
     }
     private void FixedUpdate(){
         if(disablemovement){
             return ;
         }
-        if(isOnPlatform)
-        {
-           // RB.velocity = new Vector2(playerData.movementVelocity + platformRb.velocity.x,RB.velocity.y);
-        }
-        else{
-            //RB.velocity = new Vector2(playerData.movementVelocity,RB.velocity.y);
-        }
+        if(inputhandler.PickItemInput == true && inputhandler.PickItemInputStop == false){
+            ReadNote.IsPressNoted = true  ;
+         }  
         UpdateSound();
         StateMachine.CurrentState.PhysicsUpdate();
         

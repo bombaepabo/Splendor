@@ -217,7 +217,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5343883115785123296}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.959, y: 0.515, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -404,6 +404,58 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4fef6a8e-7c67-47df-b875-76b61c9a6d50
     m_ActionName: Gameplay/Exit[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3e537ee1-f874-43e7-b058-1c0e7b91d79c
+    m_ActionName: UI/move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 430a1072-0e2c-4ca3-9943-54daf08cddb7
+    m_ActionName: UI/jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aa0f5ac7-bd1f-410a-bd08-7be1923450b4
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f5cfe875-0e44-46e9-b640-c639c73170b3
+    m_ActionName: UI/Submit[/Keyboard/space,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 74fca6c6-1116-4a36-b4cf-80580df20734
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69371bb8-ee2f-4417-8983-c237e1bc606b
+    m_ActionName: UI/Point[/Mouse/position,/Pen/position,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d235a3db-8691-41b6-b090-19d97d0986fb
+    m_ActionName: UI/Click[/Mouse/leftButton,/Pen/tip]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e860e739-8de4-4e8e-9b75-b8ae84f68c6c
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0e19ad8c-cacf-4130-bcba-456d6cb5ef59
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 380dc96f-5a6a-47a5-a674-35b8290a923b
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 115c841c-ee38-4575-8d07-ff3e6f603b26
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4a0ba3ac-a3be-4e33-802a-4642231dd2ff
+    m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78ef0b04-e49b-4006-a933-4c580421588d
+    m_ActionName: Gameplay/New action1
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -443,11 +495,7 @@ MonoBehaviour:
   ItemCollectorfollowpoint: {fileID: 5343883113961998772}
   SpawnPoint: {x: 0, y: 0, z: 0}
   SpawnPointTemp: {x: 0, y: 0, z: 0}
-  healthbar: {fileID: 0}
-  obj: {fileID: 0}
   isOnPlatform: 0
-  platformRb: {fileID: 0}
-  PlatformsPos: {x: 0, y: 0, z: 0}
 --- !u!95 &5343883115785123308
 Animator:
   serializedVersion: 4

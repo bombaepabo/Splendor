@@ -18,6 +18,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool DashInputStop{get;private set;}
     public bool ExitInput{get;private set;}
     public bool ExitInputStop{get;private set;}
+    public bool PickItemInput{get;private set;}
+    public bool PickItemInputStop{get;private set;}
     [SerializeField]
     private float inputHoldTime = 0.2f ; 
     private float JumpInputStartTime ;
@@ -93,6 +95,16 @@ public class PlayerInputHandler : MonoBehaviour
         else if(context.canceled){
             ExitInputStop = true ; 
             
+        }
+    }
+    public void OnPickItemInput(InputAction.CallbackContext context){
+        if(context.started){
+            PickItemInput = true ;
+            PickItemInputStop = false ; 
+        }
+        else if(context.canceled){
+            PickItemInput = false ;
+            PickItemInputStop = true ; 
         }
     }
     public void UseJumpInput(){
