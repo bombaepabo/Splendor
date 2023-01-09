@@ -20,8 +20,11 @@ public class ReadNote : MonoBehaviour
     {
         if(IsPressNoted && IsTouchingNoted){
                 NoteUI.SetActive(true); 
+                player.inputhandler.DisableInput();
+
             }
         else{
+                player.inputhandler.EnableInput();
                 NoteUI.SetActive(false);
             }
         //Debug.Log(" IsPressNoted: "+ IsPressNoted+" IsTouchingNoted: " + IsTouchingNoted);
