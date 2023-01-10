@@ -88,7 +88,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
     public void OnExitInput(InputAction.CallbackContext context){
-          if(context.started){
+          if(context.performed){
             ExitInput = true ;
             ExitInputStop = false ;
         }
@@ -98,7 +98,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
     public void OnPickItemInput(InputAction.CallbackContext context){
-        if(context.started){
+        if(context.performed){
             PickItemInput = true ;
             PickItemInputStop = false ; 
         }
@@ -106,6 +106,11 @@ public class PlayerInputHandler : MonoBehaviour
             PickItemInput = false ;
             PickItemInputStop = true ; 
         }
+    }
+    public bool GetPickItemPressed(){
+        bool result = PickItemInput ; 
+        PickItemInput = false ;
+        return  result ; 
     }
     public void UseJumpInput(){
         JumpInput = false;

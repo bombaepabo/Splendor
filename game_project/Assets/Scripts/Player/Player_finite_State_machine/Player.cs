@@ -115,6 +115,20 @@ public class Player : MonoBehaviour,IDataPersistent
         if(disablemovement){
             return ;
         }
+        if(DialogueManager.GetInstance().dialogueIsPlaying){
+            MoveState.isDisabled = true ;
+            JumpState.isDisabled = true ; 
+            IdleState.isDisabled = true ; 
+
+
+        }
+        else{
+            MoveState.isDisabled = false ;
+            JumpState.isDisabled = false ;
+            IdleState.isDisabled = false ; 
+
+        }
+       
         if(inputhandler.PickItemInput == true && inputhandler.PickItemInputStop == false){
             ReadNote.IsPressNoted = true  ;
          }  

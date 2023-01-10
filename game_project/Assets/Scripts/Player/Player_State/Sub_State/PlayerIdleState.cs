@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerGroundedState
 {
+    public bool isDisabled = false;
+
    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -22,10 +24,10 @@ public class PlayerIdleState : PlayerGroundedState
         base.LogicUpdate();
         if(!isExitingState)
         {
-        if(xinput!=0){
+        if(xinput!=0 && !isDisabled){
             stateMachine.ChangeState(player.MoveState);
         }
-        else if(yinput == -1){
+        else if(yinput == -1 &&!isDisabled){
             stateMachine.ChangeState(player.CrouchIdleState);
         }
 

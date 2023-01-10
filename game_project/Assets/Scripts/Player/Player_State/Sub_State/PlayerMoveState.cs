@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerGroundedState
 {
+    public bool isDisabled = false;
+
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -19,8 +21,13 @@ public class PlayerMoveState : PlayerGroundedState
     }
     public override void LogicUpdate(){
         base.LogicUpdate();
-        player.CheckIfShouldFlip(xinput);
-        player.run(playerData.movementVelocity*xinput,1);
+    if(isDisabled){
+        return ;
+    }
+    else{
+    player.CheckIfShouldFlip(xinput);
+    player.run(playerData.movementVelocity*xinput,1);
+    }
         
         if(!isExitingState){
             if(!player.DeathState.CheckIfisDead()){

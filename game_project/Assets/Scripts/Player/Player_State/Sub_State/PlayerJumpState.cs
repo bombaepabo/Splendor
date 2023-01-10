@@ -6,6 +6,7 @@ public class PlayerJumpState : PlayerAbilityState
 {
 private int amountOfJumpsLeft ;
 public bool isJumping ; 
+public bool isDisabled = false;
 public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName){
     amountOfJumpsLeft = playerData.amountOfJumps ; 
     
@@ -16,8 +17,12 @@ public override void Enter(){
     player.inputhandler.UseJumpInput();
     if(!player.DeathState.CheckIfisDead()){
     //player.Jump(playerData.jumpVelocity);
+    if(isDisabled){
+        return ;
+    }
+    else{
     player.SetVelocityY(playerData.jumpVelocity);
-
+    }
     }
     isAbilityDone = true; 
     amountOfJumpsLeft--;
