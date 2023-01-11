@@ -7,10 +7,15 @@ using UnityEngine.EventSystems;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Params")]
+    [SerializeField] private float typingSpeed = 0.04f ; 
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI displayNameText ;
+    [SerializeField] private GameObject continueIcon ; 
+    private Animator layoutAnimator;
 
     [Header("Choices UI")]
     [SerializeField] private GameObject[] choices;
@@ -18,8 +23,13 @@ public class DialogueManager : MonoBehaviour
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
-
+    private const string SPEAKER_TAG = "speaker";
+    private const string PORTRAIT_TAG = "portrait";
+    private const string LAYOUT_TAG = "layout";
+    private Player player ; 
     private static DialogueManager instance;
+    private Coroutine displayLineCoroutine ;
+    private bool canContinueToNextLine = false  ;
 
     private void Awake() 
     {
@@ -37,9 +47,11 @@ public class DialogueManager : MonoBehaviour
 
     private void Start() 
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
-
+        layoutAnimator = dialoguePanel.GetComponent<Animator>();
         // get all of the choices text 
         choicesText = new TextMeshProUGUI[choices.Length];
         int index = 0;
@@ -60,7 +72,7 @@ public class DialogueManager : MonoBehaviour
 
         // handle continuing to the next line in the dialogue when submit is pressed
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
-        if (currentStory.currentChoices.Count == 0)
+        if (canContinueToNextLine && currentStory.currentChoices.Count == 0 && player.inputhandler.GetSubmitPressed())
         {
             ContinueStory();
         }
@@ -77,7 +89,7 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator ExitDialogueMode() 
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.01f);
 
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
@@ -88,14 +100,79 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue) 
         {
+            if(displayLineCoroutine !=null){
+                StopCoroutine(displayLineCoroutine);
+            }
             // set text for the current dialogue line
-            dialogueText.text = currentStory.Continue();
+            displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
             // display choices, if any, for this dialogue line
-            DisplayChoices();
+            HandleTags(currentStory.currentTags);
         }
         else 
         {
             StartCoroutine(ExitDialogueMode());
+        }
+    }
+    private IEnumerator DisplayLine(string line){
+        dialogueText.text = ""; 
+        continueIcon.SetActive(false);
+        HideChoices();
+        canContinueToNextLine = false ;
+        bool isAddingRichTextTag = false ;
+
+        foreach(char letter in line.ToCharArray()){
+            if(player.inputhandler.GetSubmitPressed()){
+                dialogueText.text = line ; 
+                break ; 
+            }
+            if( letter =='<' ||isAddingRichTextTag){
+                isAddingRichTextTag = true ; 
+                dialogueText.text += letter ;
+                if(letter == '>'){
+                    isAddingRichTextTag = false ;
+                }
+            }
+            else{
+            dialogueText.text += letter ;
+            yield return new WaitForSeconds(typingSpeed);
+            }
+            
+        }
+        continueIcon.SetActive(true);
+        DisplayChoices();
+
+        canContinueToNextLine = true ; 
+
+    }
+    private void HideChoices(){
+        foreach (GameObject choiceButton in choices){
+            choiceButton.SetActive(false);
+        }
+    }
+    private void HandleTags(List<string> currentTags){
+        foreach(string tag in currentTags){
+            string[] splitTag = tag.Split(':');
+
+            if(splitTag.Length !=2){
+                Debug.LogError("Tag cound not be appropriately parsed: " + tag);
+            }
+            string tagKey = splitTag[0].Trim() ;
+            string tagValue = splitTag[1].Trim();
+
+            switch(tagKey){
+                case SPEAKER_TAG:
+                    displayNameText.text = tagValue ; 
+                    break ; 
+                case PORTRAIT_TAG :
+                    Debug.Log("PORTRAIT = "+ tagValue);
+                    break ;
+                case LAYOUT_TAG :
+                    layoutAnimator.Play(tagValue);
+                    break ; 
+                default : 
+                    Debug.LogWarning("Tag came in but is not currently being handled : " + tag);
+                    break ;
+            } 
         }
     }
 
@@ -138,9 +215,12 @@ public class DialogueManager : MonoBehaviour
 
     public void MakeChoice(int choiceIndex)
     {
+        if(canContinueToNextLine){
         currentStory.ChooseChoiceIndex(choiceIndex);
         // NOTE: The below two lines were added to fix a bug after the Youtube video was made
+        player.inputhandler.registerSubmitPressed() ;
         ContinueStory();
+        }
     }
 
 }

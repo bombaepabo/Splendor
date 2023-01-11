@@ -270,6 +270,8 @@ public class Player : MonoBehaviour,IDataPersistent
     private void OnTriggerEnter2D(Collider2D Collision){
         if(Collision.tag == "Respawn"){
             SpawnPointTemp = transform.position ;
+            Debug.Log("Save Respawn in position"+SpawnPointTemp);
+
         }
     }
     public IEnumerator handledrespawn(float spawndelay){

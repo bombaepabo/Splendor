@@ -112,6 +112,14 @@ public class PlayerInputHandler : MonoBehaviour
         PickItemInput = false ;
         return  result ; 
     }
+    public bool GetSubmitPressed(){
+        bool result = JumpInput ; 
+        JumpInput = false ;
+        return result ; 
+    }
+    public void registerSubmitPressed(){
+        JumpInput = false ;
+    }
     public void UseJumpInput(){
         JumpInput = false;
     }
@@ -141,6 +149,7 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput.actions.FindActionMap("Gameplay").Enable();
 
     }
+    
 
     
     
