@@ -479,7 +479,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -534,6 +534,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: 4
@@ -3489,10 +3501,10 @@ TextureImporter:
       TX Village Props_44: -300361785
       TX Village Props_73: 591688376
       TX Village Props_118: 1291177634
-      TX Village Props_109: 1972786084
-      TX Village Props_79: 835363652
       TX Village Props_64: 934676278
+      TX Village Props_79: 835363652
       TX Village Props_13: -1412813114
+      TX Village Props_109: 1972786084
       TX Village Props_131: -570792878
       TX Village Props_14: -1830433364
       TX Village Props_94: -702611848
