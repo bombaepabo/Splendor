@@ -22,11 +22,13 @@ public override void Enter(){
     }
     else{
     player.SetVelocityY(playerData.jumpVelocity);
-    }
-    }
     isAbilityDone = true; 
     amountOfJumpsLeft--;
     player.InAirState.SetIsJumping();
+    player.CreateDust();
+    }
+    }
+   
    
 
 

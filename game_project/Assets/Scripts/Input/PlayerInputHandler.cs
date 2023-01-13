@@ -93,6 +93,7 @@ public class PlayerInputHandler : MonoBehaviour
             ExitInputStop = false ;
         }
         else if(context.canceled){
+            ExitInput = false  ;
             ExitInputStop = true ; 
             
         }
@@ -119,6 +120,14 @@ public class PlayerInputHandler : MonoBehaviour
     }
     public void registerSubmitPressed(){
         JumpInput = false ;
+    }
+    public void registerpcikitemPressed(){
+        PickItemInput = false ;
+    }
+    public bool GetExitPressed(){
+        bool result = ExitInput ; 
+        ExitInput = false ;
+        return  result ; 
     }
     public void UseJumpInput(){
         JumpInput = false;

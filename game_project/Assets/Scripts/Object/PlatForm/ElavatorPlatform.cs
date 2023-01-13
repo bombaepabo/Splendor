@@ -6,6 +6,7 @@ public class ElavatorPlatform : MonoBehaviour
 {
     public Transform posA,posB ;
     public float speed ;
+    public float ForceBoost = 1000.0f; 
     Vector3 targetPos; 
     Player player ; 
     Vector3 moveDirection;
@@ -59,7 +60,7 @@ public class ElavatorPlatform : MonoBehaviour
            
             player.isOnPlatform = false ;
             collision.transform.parent =null ; 
-            player.RB.AddForce(new Vector2(1000.0f, 0));
+            player.RB.AddForce(new Vector2(ForceBoost, 0));
 
         }
 

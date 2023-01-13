@@ -59,6 +59,7 @@ public class Player : MonoBehaviour,IDataPersistent
     private bool disablemovement ; 
     public bool isOnPlatform ;
     private EventInstance playerFootsteps ;
+    public ParticleSystem dust ; 
         #endregion
    
     #region UnityCallBack Func
@@ -104,10 +105,14 @@ public class Player : MonoBehaviour,IDataPersistent
             }
          if(inputhandler.ExitInput == true && inputhandler.ExitInputStop == false ){
             PauseMenu.IsPaused = true ;
-            inputhandler.DisableInput();
+            MoveState.isDisabled = true ;
+            JumpState.isDisabled = true ; 
+            IdleState.isDisabled = true ; 
+            InAirState.isDisabled = true ;
+            //inputhandler.DisableInput();
             }
          else if(PauseMenu.IsPaused == false){
-            inputhandler.EnableInput();
+            //inputhandler.EnableInput();
          }          
         StateMachine.CurrentState.LogicUpdate();
     }
@@ -116,6 +121,7 @@ public class Player : MonoBehaviour,IDataPersistent
             return ;
         }
         if(DialogueManager.GetInstance().dialogueIsPlaying){
+            
             MoveState.isDisabled = true ;
             JumpState.isDisabled = true ; 
             IdleState.isDisabled = true ; 
@@ -200,6 +206,7 @@ public class Player : MonoBehaviour,IDataPersistent
 		float movement = speedDif * accelRate;
 		//Convert this to a vector and apply to rigidbody
         RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
+        CreateDust();
     }
     public void Jump(float velocityY){
         Debug.Log(velocityY);
@@ -216,7 +223,7 @@ public class Player : MonoBehaviour,IDataPersistent
         return Physics2D.OverlapCircle(GroundCheck.position,playerData.GroundCheckRadius,playerData.whatisGround);
     }
     public void CheckIfShouldFlip(int xinput){
-        if(xinput !=0 && xinput !=FacingDirection){
+        if(xinput !=0 && xinput !=FacingDirection&&!IdleState.isDisabled){
             flip();
         }
     }
@@ -258,8 +265,10 @@ public class Player : MonoBehaviour,IDataPersistent
         StateMachine.CurrentState.AnimationFinishTrigger();
     }
     private void flip(){
+        
         FacingDirection *= -1 ;
         transform.Rotate(0.0f,180f,0.0f);
+        CreateDust();
     }
     private void OnCollisionEnter2D(Collision2D Collision){
         if(Collision.gameObject.tag =="Damagable"){
@@ -310,6 +319,9 @@ public class Player : MonoBehaviour,IDataPersistent
     else{
         playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
     }
+  }
+  public void CreateDust(){
+    dust.Play();
   }
     #endregion
 }
