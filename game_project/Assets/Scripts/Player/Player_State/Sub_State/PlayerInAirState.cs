@@ -59,7 +59,7 @@ public override void LogicUpdate(){
   GrabInput = player.inputhandler.GrabInput;
   DashInput = player.inputhandler.DashInput;
   CheckJumpMultiplier();
-  if(IsGrounded && player.CurrentVelocity.y < 0.01f&&!isDisabled){
+  if(IsGrounded && player.CurrentVelocity.y < 0.01f){
     stateMachine.ChangeState(player.LandState);
   }
   //else if(isTouchingWall &&!isTouchingLedge && !IsGrounded){
@@ -72,11 +72,11 @@ public override void LogicUpdate(){
     player.wallJumpState.DetermineWallJumpDirection(isTouchingWall);
     stateMachine.ChangeState(player.wallJumpState);
   }
-  else if(JumpInput && player.JumpState.CanJump()&&!isDisabled){
+  else if(JumpInput && player.JumpState.CanJump()){
     player.inputhandler.UseJumpInput();
     stateMachine.ChangeState(player.JumpState);
   }
-  else if(isTouchingWall && GrabInput&& isTouchingLedge&&!isDisabled){
+  else if(isTouchingWall && GrabInput&& isTouchingLedge){
     stateMachine.ChangeState(player.wallGrabState);
 
     
@@ -84,10 +84,10 @@ public override void LogicUpdate(){
   else if(isTouchingWall && xinput == player.FacingDirection&&player.CurrentVelocity.y <=0 &&!isDisabled){
     stateMachine.ChangeState(player.wallSlideState);
   }
-  else if(DashInput && player.DashState.CheckIfCanDash() &&!isDisabled){
+  else if(DashInput && player.DashState.CheckIfCanDash() ){
     stateMachine.ChangeState(player.DashState);
   }
-  else if(player.DeathState.CheckIfisDead()&&!isDisabled){
+  else if(player.DeathState.CheckIfisDead()){
     stateMachine.ChangeState(player.DeathState);
   }
   

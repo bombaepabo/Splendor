@@ -108,7 +108,6 @@ public class Player : MonoBehaviour,IDataPersistent
             MoveState.isDisabled = true ;
             JumpState.isDisabled = true ; 
             IdleState.isDisabled = true ; 
-            InAirState.isDisabled = true ;
             //inputhandler.DisableInput();
             }
          else if(PauseMenu.IsPaused == false){
@@ -298,7 +297,7 @@ public class Player : MonoBehaviour,IDataPersistent
         DeathState.isDead = false ;
         disablemovement = false ;
         MoveMentCollider.enabled = true;
-        transform.position = SpawnPoint + new Vector3 (1f,0,0);
+        transform.position = SpawnPointTemp ;
         GetComponent<SpriteRenderer>().enabled = true ;
   }
   public void LoadData(GameData data){

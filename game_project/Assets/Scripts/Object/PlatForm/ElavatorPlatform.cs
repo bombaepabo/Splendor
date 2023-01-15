@@ -48,7 +48,7 @@ public class ElavatorPlatform : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.name.Equals("Player")){
             player.isOnPlatform = true ;
-                if(player.wallGrabState.IsWallGrab |player.wallClimbState.IsWallClimb|player.wallSlideState.IsWallSlide ){
+                if(player.wallGrabState.IsWallGrab |player.wallClimbState.IsWallClimb|player.wallSlideState.IsWallSlide&&player.isOnPlatform ){
                     collision.gameObject.transform.parent =this.transform ; 
                 }
             
