@@ -7,6 +7,7 @@ public class PlayerDashState : PlayerAbilityState
     public bool CanDash{get; set; }
     private float LastDashTime; 
     private bool isHolding ; 
+    public bool isDisabled = false ;
     private Vector2 dashDirection;
     private Vector2 dashDirectionInput ;
     private bool dashInputStop ;
@@ -18,6 +19,9 @@ public class PlayerDashState : PlayerAbilityState
     }
     public override void Enter(){
     base.Enter();
+    if(isDisabled ==true){
+        
+    }
     CanDash = false ;
     player.inputhandler.UseDashInput();
 
@@ -36,6 +40,7 @@ public class PlayerDashState : PlayerAbilityState
     }
     public override void LogicUpdate(){
     base.LogicUpdate();
+    if(isDisabled == false){
     if(!isExitingState){
         player.Anim.SetFloat("yVelocity",player.CurrentVelocity.y);
         player.Anim.SetFloat("xVelocity",Mathf.Abs(player.CurrentVelocity.x));
@@ -76,6 +81,7 @@ public class PlayerDashState : PlayerAbilityState
                     }
             } 
         }
+    }
     }
     public bool CheckIfCanDash(){
         return CanDash && Time.time >= LastDashTime + playerData.dashCooldown;

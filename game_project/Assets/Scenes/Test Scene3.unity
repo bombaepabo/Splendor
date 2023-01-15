@@ -2122,7 +2122,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.62
+  orthographic size: 5.625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -53456,6 +53456,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3014370206144902194, guid: 32e05db2d021af94cbd0d42cf11c4fc0, type: 3}
   m_PrefabInstance: {fileID: 1109408847}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1927503526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3014370206144902193, guid: 32e05db2d021af94cbd0d42cf11c4fc0, type: 3}
+  m_PrefabInstance: {fileID: 1109408847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110a919fd5bf36546aefa3a55e1d05f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1932736029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3430529404469796200, guid: 9115563faa622fd41b8a3c9afcc612c5, type: 3}
@@ -54205,14 +54216,26 @@ PrefabInstance:
     - target: {fileID: 4610794778939326721, guid: aee65ad7e189f8f4a9aa6102e25e1688, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1927503526}
+    - target: {fileID: 4610794778939326721, guid: aee65ad7e189f8f4a9aa6102e25e1688, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MakeChoice
       objectReference: {fileID: 0}
     - target: {fileID: 4610794779004586215, guid: aee65ad7e189f8f4a9aa6102e25e1688, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1927503526}
+    - target: {fileID: 4610794779004586215, guid: aee65ad7e189f8f4a9aa6102e25e1688, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MakeChoice
       objectReference: {fileID: 0}
     - target: {fileID: 4610794779054239621, guid: aee65ad7e189f8f4a9aa6102e25e1688, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1927503526}
+    - target: {fileID: 4610794779054239621, guid: aee65ad7e189f8f4a9aa6102e25e1688, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MakeChoice
       objectReference: {fileID: 0}
     - target: {fileID: 4610794780318233696, guid: aee65ad7e189f8f4a9aa6102e25e1688, type: 3}
       propertyPath: m_Pivot.x

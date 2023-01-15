@@ -124,6 +124,9 @@ public class PlayerInputHandler : MonoBehaviour
     public void registerpcikitemPressed(){
         PickItemInput = false ;
     }
+    public string GetControlType(){
+        return playerInput.currentControlScheme ; 
+    }
     public bool GetExitPressed(){
         bool result = ExitInput ; 
         ExitInput = false ;

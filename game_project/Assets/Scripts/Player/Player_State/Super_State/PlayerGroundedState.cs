@@ -52,7 +52,7 @@ public class PlayerGroundedState : PlayerState
         else if(isTouchingWall && GrabInput&&isTouchingLedge){
             stateMachine.ChangeState(player.wallGrabState);
         }
-        else if(DashInput && player.DashState.CheckIfCanDash()&&!isTouchingCeiling){
+        else if(DashInput && player.DashState.CheckIfCanDash()&&!isTouchingCeiling&&!player.DashState.isDisabled){
         stateMachine.ChangeState(player.DashState);}
   
     }

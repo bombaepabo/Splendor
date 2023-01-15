@@ -108,6 +108,8 @@ public class Player : MonoBehaviour,IDataPersistent
             MoveState.isDisabled = true ;
             JumpState.isDisabled = true ; 
             IdleState.isDisabled = true ; 
+            DashState.isDisabled = true ; 
+
             //inputhandler.DisableInput();
             }
          else if(PauseMenu.IsPaused == false){
@@ -124,13 +126,14 @@ public class Player : MonoBehaviour,IDataPersistent
             MoveState.isDisabled = true ;
             JumpState.isDisabled = true ; 
             IdleState.isDisabled = true ; 
-
+            DashState.isDisabled = true ; 
 
         }
         else{
             MoveState.isDisabled = false ;
             JumpState.isDisabled = false ;
             IdleState.isDisabled = false ; 
+            DashState.isDisabled = false ; 
 
         }
        

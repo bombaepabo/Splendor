@@ -84,7 +84,7 @@ public override void LogicUpdate(){
   else if(isTouchingWall && xinput == player.FacingDirection&&player.CurrentVelocity.y <=0 &&!isDisabled){
     stateMachine.ChangeState(player.wallSlideState);
   }
-  else if(DashInput && player.DashState.CheckIfCanDash() ){
+  else if(DashInput && player.DashState.CheckIfCanDash()&&!player.DashState.isDisabled){
     stateMachine.ChangeState(player.DashState);
   }
   else if(player.DeathState.CheckIfisDead()){
