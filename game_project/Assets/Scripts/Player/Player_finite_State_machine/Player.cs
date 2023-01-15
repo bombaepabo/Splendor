@@ -206,7 +206,6 @@ public class Player : MonoBehaviour,IDataPersistent
 		float movement = speedDif * accelRate;
 		//Convert this to a vector and apply to rigidbody
         RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
-        CreateDust();
     }
     public void Jump(float velocityY){
         Debug.Log(velocityY);
