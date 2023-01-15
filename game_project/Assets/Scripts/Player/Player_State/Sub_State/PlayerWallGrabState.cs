@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerWallGrabState : PlayerTouchingWallState
 {
     private Vector2 holdPosition;
+    public bool IsWallGrab = false  ;
 
     public PlayerWallGrabState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName){
      
@@ -25,11 +26,14 @@ public class PlayerWallGrabState : PlayerTouchingWallState
     }
     public override void Exit(){
         base.Exit();
+        IsWallGrab = false ;
+
 
     }
     public override void LogicUpdate(){
         base.LogicUpdate();
-        
+        holdPosition.x = player.transform.position.x; 
+
         if(!isExitingState){
         HoldPosition();
         playerData.PlayerCurrentClimbStamina -= playerData.ClimbStaminaDrainRate *Time.deltaTime ; 
@@ -47,14 +51,23 @@ public class PlayerWallGrabState : PlayerTouchingWallState
                 Exit();
         }
        
-      //  Debug.Log("stamina" + playerData.PlayerCurrentClimbStamina);
 
         }
     }
     private void HoldPosition(){
+        if(player.isOnPlatform){
+
+            IsWallGrab = true ;
+            player.transform.position = holdPosition;
+            player.SetVelocityX(0f);
+            player.SetVelocityY(0f);
+        }
+        else {
+
         player.transform.position = holdPosition;
         player.SetVelocityX(0f);
         player.SetVelocityY(0f);
+        }
     }
     public override void PhysicsUpdate(){
         base.PhysicsUpdate();

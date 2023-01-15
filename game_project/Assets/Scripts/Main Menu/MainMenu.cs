@@ -3,47 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 public class MainMenu : Menu
 {
     [Header("Menu Navigation")]
-    [SerializeField] private SaveSlotsMenu saveSlotsMenu ; 
+    [SerializeField] private PlayGameMenu PlayGameMenu  ;
+    [SerializeField] private OptionsMenu OptionsMenu ; 
     [Header("Menu Buttoms")]
-    [SerializeField] private Button newGameButton ; 
-    [SerializeField] private Button continueGameButton;
-    [SerializeField] private Button loadGameButton ;
+    [SerializeField] private Button PlayGameButton ; 
+    [SerializeField] private Button OptionsButton ;
+    [SerializeField] private Button ExitButton ;
   public void Start(){
-    DisableButtonDependingOnData();
+    
   }
-  private void DisableButtonDependingOnData(){
-    if(!DataPersistentManager.instance.HasGameData()){
-        continueGameButton.interactable = false ;
-        loadGameButton.interactable = false ;
-    }
-  }
-  public void OnNewGameClicked()
+  public void OnPlayGameClicked()
   {
-   saveSlotsMenu.ActivateMenu(false);
+   PlayGameMenu.ActivateMenu();
    this.DeactivateMenu();
   }
-  public void OnLoadGameClicked()
+  public void OnOptionsClicked()
   {
-    saveSlotsMenu.ActivateMenu(true);
+    OptionsMenu.ActivateMenu(true);
     this.DeactivateMenu();
   }
-  public void OnContinueGameClicked()
+  public void OnExitGameClicked()
   {
-    DisableMenuButtons();
-    DataPersistentManager.instance.SaveGame();
-    SceneManager.LoadSceneAsync("Test Scene3");
+    Application.Quit();
   }
   private void DisableMenuButtons(){
-    newGameButton.interactable = false ;
-    continueGameButton.interactable = false ;
   }
   public void ActivateMenu(){
     this.gameObject.SetActive(true);
-    DisableButtonDependingOnData();
+    //DisableButtonDependingOnData();
 
   }
   public void DeactivateMenu(){

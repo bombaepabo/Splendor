@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerAbilityState
 {
-    public bool CanDash{get; private set; }
+    public bool CanDash{get; set; }
     private float LastDashTime; 
     private bool isHolding ; 
     private Vector2 dashDirection;
