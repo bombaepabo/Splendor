@@ -49,7 +49,7 @@ public class SaveSlotsMenu : Menu
   private void SaveGameAndLoadScene(){
     DataPersistentManager.instance.SaveGame();
 
-    SceneManager.LoadSceneAsync("Test Scene3");
+    SceneManager.LoadSceneAsync("introduction");
   }
    public void ActivateMenu(bool isLoadingGame){
     this.gameObject.SetActive(true);

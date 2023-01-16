@@ -37,7 +37,7 @@ public class PlayGameMenu : Menu
   {
     DisableMenuButtons();
     DataPersistentManager.instance.SaveGame();
-    SceneManager.LoadSceneAsync("Test Scene3");
+    SceneManager.LoadSceneAsync("Introduction");
   }
   private void DisableMenuButtons(){
     newGameButton.interactable = false ;
