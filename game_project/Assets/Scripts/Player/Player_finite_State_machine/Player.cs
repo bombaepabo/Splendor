@@ -122,7 +122,8 @@ public class Player : MonoBehaviour,IDataPersistent
             return ;
         }
         if(DialogueManager.GetInstance().dialogueIsPlaying){
-            
+            SetVelocityZero();
+            StateMachine.ChangeState(IdleState);
             MoveState.isDisabled = true ;
             JumpState.isDisabled = true ; 
             IdleState.isDisabled = true ; 

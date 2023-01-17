@@ -10,6 +10,8 @@ public class DialogueTrigger : MonoBehaviour
 
     [Header("Ink Json")]
     [SerializeField] private TextAsset inkJson ; 
+    [SerializeField] private TextAsset AfterTalkInkJson ; 
+    public bool isFinished = false ;
 
     private bool playerInRange ; 
 
@@ -22,10 +24,20 @@ public class DialogueTrigger : MonoBehaviour
     }
     private void Update(){
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
-            visualCue.SetActive(true);
-            if(player.inputhandler.GetPickItemPressed()){
+
+            if(playerInRange && !isFinished){
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);
+                
             }
+            if(isFinished){
+                visualCue.SetActive(true);
+                if(player.inputhandler.GetPickItemPressed()){
+                    DialogueManager.GetInstance().EnterDialogueMode(AfterTalkInkJson);
+
+                }
+
+            }
+            isFinished = true ;
         }
         else{
             visualCue.SetActive(false);

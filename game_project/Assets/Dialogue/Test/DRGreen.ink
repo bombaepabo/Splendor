@@ -1,4 +1,4 @@
-Hello there ! #speaker:Dr. Green #portrait:dr_green_neutral #layout:left
+สวัสดี ! #speaker:Dr. Green #portrait:dr_green_neutral #layout:left
 -> main
 
 === main ===
