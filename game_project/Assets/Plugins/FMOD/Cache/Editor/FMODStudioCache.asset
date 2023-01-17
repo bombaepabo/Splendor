@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8327052794005676682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: "C:/Users/xyozx/Desktop/65/\u0E40\u0E17\u0E2D\u0E21 2/Project/Game_project/game_project_merge/game_project/audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/SFX.bank"
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638081129240000000
+  FileSizes:
+  - Name: Desktop
+    Value: 25888
+  Exists: 1
 --- !u!114 &-5541745154182631178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19,7 +39,7 @@ MonoBehaviour:
     Data3: -1159080830
     Data4: 1590178142
   Banks:
-  - {fileID: -5478597671349375813}
+  - {fileID: -8327052794005676682}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -27,7 +47,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 963
---- !u!114 &-5478597671349375813
+--- !u!114 &-4598176421938736470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,15 +57,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
+  m_Name: bank:/Level.bank
   m_EditorClassIdentifier: 
-  Path: ../../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638081129229876023
+  Path: "C:/Users/xyozx/Desktop/65/\u0E40\u0E17\u0E2D\u0E21 2/Project/Game_project/game_project_merge/game_project/audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Level.bank"
+  Name: Level
+  StudioPath: bank:/Level
+  lastModified: 638081129240000000
   FileSizes:
   - Name: Desktop
-    Value: 25888
+    Value: 1657216
   Exists: 1
 --- !u!114 &-1081246931356878570
 MonoBehaviour:
@@ -66,7 +86,7 @@ MonoBehaviour:
     Data3: 1567717254
     Data4: 2087579055
   Banks:
-  - {fileID: 3235788333496527983}
+  - {fileID: -4598176421938736470}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -75,26 +95,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-504050153777548696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ../../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638081129229671554
-  FileSizes:
-  - Name: Desktop
-    Value: 1282
-  Exists: 1
 --- !u!114 &-234643922634231656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
     Data3: -117985887
     Data4: 2067197294
   Banks:
-  - {fileID: -5478597671349375813}
+  - {fileID: -8327052794005676682}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -135,10 +135,10 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -504050153777548696}
-  - {fileID: 8314963740622641234}
-  - {fileID: -5478597671349375813}
-  - {fileID: 3235788333496527983}
+  - {fileID: 5930903154796538914}
+  - {fileID: -4598176421938736470}
+  - {fileID: 7317993120969877899}
+  - {fileID: -8327052794005676682}
   EditorEvents:
   - {fileID: -5541745154182631178}
   - {fileID: 8450879428040151262}
@@ -147,31 +147,11 @@ MonoBehaviour:
   - {fileID: -1081246931356878570}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 8314963740622641234}
+  - {fileID: 7317993120969877899}
   StringsBanks:
-  - {fileID: -504050153777548696}
-  cacheTime: 638081129230112620
+  - {fileID: 5930903154796538914}
+  cacheTime: 638081129240000000
   cacheVersion: 131601
---- !u!114 &3235788333496527983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Level.bank
-  m_EditorClassIdentifier: 
-  Path: ../../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Level.bank
-  Name: Level
-  StudioPath: bank:/Level
-  lastModified: 638081129230112620
-  FileSizes:
-  - Name: Desktop
-    Value: 1657216
-  Exists: 1
 --- !u!114 &5501934179110250531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +175,46 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 0
   Labels: []
+  Exists: 1
+--- !u!114 &5930903154796538914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: "C:/Users/xyozx/Desktop/65/\u0E40\u0E17\u0E2D\u0E21 2/Project/Game_project/game_project_merge/game_project/audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.strings.bank"
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638081129240000000
+  FileSizes:
+  - Name: Desktop
+    Value: 1282
+  Exists: 1
+--- !u!114 &7317993120969877899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: "C:/Users/xyozx/Desktop/65/\u0E40\u0E17\u0E2D\u0E21 2/Project/Game_project/game_project_merge/game_project/audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.bank"
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638081129240000000
+  FileSizes:
+  - Name: Desktop
+    Value: 1486
   Exists: 1
 --- !u!114 &8271447886133320292
 MonoBehaviour:
@@ -222,26 +242,6 @@ MonoBehaviour:
   - GreyArea
   - BlueArea
   Exists: 1
---- !u!114 &8314963740622641234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: ../../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638081129229661642
-  FileSizes:
-  - Name: Desktop
-    Value: 1486
-  Exists: 1
 --- !u!114 &8365390000854171325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +261,7 @@ MonoBehaviour:
     Data3: 33799312
     Data4: 87705426
   Banks:
-  - {fileID: 3235788333496527983}
+  - {fileID: -4598176421938736470}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
     Data3: -2048235624
     Data4: -704595005
   Banks:
-  - {fileID: -5478597671349375813}
+  - {fileID: -8327052794005676682}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
