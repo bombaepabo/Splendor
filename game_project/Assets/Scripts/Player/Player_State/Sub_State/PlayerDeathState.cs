@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerDeathState : PlayerAbilityState
 {
     public bool isDead ;
-    
+    public float currentTime = 0f; 
+    public float DeathTime = 2.5f; 
     public PlayerDeathState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
 {    
         playerData.CurrentHealth = 100 ; 
@@ -13,19 +14,19 @@ public class PlayerDeathState : PlayerAbilityState
 }
   public override void Enter(){
     isDead = true;
-
+    player.DisableMovement();
+    player.MoveMentCollider.enabled = false;
+    player.GetComponent<SpriteRenderer>().enabled = false ;
+    player.scenefader.FadeSceneOut();
   }
   public override void LogicUpdate(){
         base.LogicUpdate();
-        if(isDead == true){
-           //player.JumpState.DecreaseAmountofJumpLeft();
-           //player.RB.bodyType = RigidbodyType2D.Static ;
-           //player.RB.velocity = new Vector2(0,0);
-           //player.GetComponent<SpriteRenderer>().enabled = false ;
-            //player.obj.SetActive(false);
-
+        currentTime += Time.fixedDeltaTime;       
+        if(currentTime >= DeathTime){
+          player.respawn();
+          currentTime = 0;
         }
-        stateMachine.ChangeState(player.IdleState);
+
 
         }
  

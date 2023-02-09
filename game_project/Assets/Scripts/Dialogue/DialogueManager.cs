@@ -21,6 +21,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
 
+    [Header("Load Globals JSON")]
+    [SerializeField] private TextAsset loadGlobalsJSON;
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
     private const string SPEAKER_TAG = "speaker";
@@ -30,6 +32,8 @@ public class DialogueManager : MonoBehaviour
     private static DialogueManager instance;
     private Coroutine displayLineCoroutine ;
     private bool canContinueToNextLine = false  ;
+    private DialogueVariables dialogueVariables ; 
+    
 
     private void Awake() 
     {
@@ -38,6 +42,8 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
         }
         instance = this;
+        dialogueVariables = new DialogueVariables(loadGlobalsJSON); 
+
     }
 
     public static DialogueManager GetInstance() 
@@ -83,13 +89,14 @@ public class DialogueManager : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-
+        dialogueVariables.StartListening(currentStory);
         ContinueStory();
     }
 
     private IEnumerator ExitDialogueMode() 
     {
         yield return new WaitForSeconds(0.01f);
+        dialogueVariables.StopListening(currentStory);
 
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
@@ -114,7 +121,9 @@ public class DialogueManager : MonoBehaviour
         }
     }
     private IEnumerator DisplayLine(string line){
-        dialogueText.text = ""; 
+
+        dialogueText.text = line; 
+        dialogueText.maxVisibleCharacters = 0;
         continueIcon.SetActive(false);
         HideChoices();
         canContinueToNextLine = false ;
@@ -122,18 +131,18 @@ public class DialogueManager : MonoBehaviour
 
         foreach(char letter in line.ToCharArray()){
             if(player.inputhandler.GetSubmitPressed()){
-                dialogueText.text = line ; 
+                dialogueText.maxVisibleCharacters = line.Length ; 
                 break ; 
             }
             if( letter =='<' ||isAddingRichTextTag){
                 isAddingRichTextTag = true ; 
-                dialogueText.text += letter ;
+                //dialogueText.text += letter ;
                 if(letter == '>'){
                     isAddingRichTextTag = false ;
                 }
             }
             else{
-            dialogueText.text += letter ;
+            dialogueText.maxVisibleCharacters++;
             yield return new WaitForSeconds(typingSpeed);
             }
             
@@ -221,6 +230,14 @@ public class DialogueManager : MonoBehaviour
         player.inputhandler.registerSubmitPressed() ;
         ContinueStory();
         }
+    }
+    public Ink.Runtime.Object GetVariableState(string variableName){
+        Ink.Runtime.Object variableValue = null ; 
+        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
+        if(variableValue ==null){
+            Debug.LogWarning("Ink variable was found to be null : " + variableName);
+        }
+        return variableValue ; 
     }
 
 }

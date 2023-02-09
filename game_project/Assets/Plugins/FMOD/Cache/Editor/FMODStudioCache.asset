@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638081129229661642
+  lastModified: 638114691399546704
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -35,7 +35,7 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638081129229671554
+  lastModified: 638114691399566830
   FileSizes:
   - Name: Desktop
     Value: 1282
@@ -82,10 +82,10 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Level.bank
   Name: Level
   StudioPath: bank:/Level
-  lastModified: 638081129230112620
+  lastModified: 638114691399516710
   FileSizes:
   - Name: Desktop
-    Value: 1657216
+    Value: 2564512
   Exists: 1
 --- !u!114 &-1081246931356878570
 MonoBehaviour:
@@ -170,7 +170,7 @@ MonoBehaviour:
   - {fileID: -7323221244674497316}
   StringsBanks:
   - {fileID: -6007205501147562358}
-  cacheTime: 638081129230112620
+  cacheTime: 638114691400104868
   cacheVersion: 131601
 --- !u!114 &1585563879108450473
 MonoBehaviour:
@@ -187,7 +187,7 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638081129229876023
+  lastModified: 638114691400104868
   FileSizes:
   - Name: Desktop
     Value: 25888

@@ -32,6 +32,12 @@ public class Player : MonoBehaviour,IDataPersistent
     public Animator Anim{get ;private set;}
     public Transform DashDirectionIndicator {get;private set;}
     public CapsuleCollider2D MoveMentCollider{get;private set;}
+    public SpriteRenderer sprite{get; private set;}
+    public ParticleSystem dust ; 
+    public ParticleSystem deathEffect ;
+    public Key FollowingKey ; 
+    private EventInstance playerFootsteps ;
+    [SerializeField] public SceneFader scenefader ;
     #endregion
     #region Check Transform
     [SerializeField]
@@ -56,10 +62,9 @@ public class Player : MonoBehaviour,IDataPersistent
     public int FacingDirection{get;private set ; }
     private Vector2 workspace;
     public float LastOnGroundTime { get; private set; }
-    private bool disablemovement ; 
     public bool isOnPlatform ;
-    private EventInstance playerFootsteps ;
-    public ParticleSystem dust ; 
+    public Color flashColor = new Color(1, 1, 1, 0.5f);
+    public float flashDuration = 0.5f;
         #endregion
    
     #region UnityCallBack Func
@@ -75,13 +80,14 @@ public class Player : MonoBehaviour,IDataPersistent
         wallGrabState  = new PlayerWallGrabState(this,StateMachine,playerData,"wallGrab");
         wallJumpState = new PlayerWallJumpState(this,StateMachine,playerData,"inAir");
        // LedgeClimbState = new PlayerLedgeClimbState(this,StateMachine,playerData,"ledgeClimbState");
-        DashState = new PlayerDashState(this,StateMachine,playerData,"Dash");
+        DashState = new PlayerDashState(this,StateMachine,playerData,"inAir");
         CrouchIdleState = new PlayerCrouchIdleState(this,StateMachine,playerData,"crouchIdle");
         CrouchMoveState = new PlayerCrouchMoveState(this,StateMachine,playerData,"crouchMove");
         DeathState = new PlayerDeathState(this,StateMachine,playerData,"Dead");
     }
     private void Start(){
         //init State machine 
+        sprite = GetComponent<SpriteRenderer>();
         Anim = GetComponent<Animator>();
         inputhandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
@@ -97,50 +103,41 @@ public class Player : MonoBehaviour,IDataPersistent
         LastOnGroundTime -= Time.deltaTime;
         UpdateSound();
 
-        if(DeathState.CheckIfisDead()){
-            StartCoroutine("handledrespawn",0.3f);
-            //GameManager.PlayerDied();
-            //StartCoroutine("respawn",.5f);
+        if(playerData.PlayerCurrentClimbStamina <= 30){
+                FlashStamina();
+            
+        }
+        else{
+            StopAllCoroutines();
+            sprite.color = new Color(1, 1, 1, 1f);
+        }
 
+        if(playerData.CurrentHealth <=0){
+            StateMachine.ChangeState(DeathState);
             }
          if(inputhandler.ExitInput == true && inputhandler.ExitInputStop == false ){
             PauseMenu.IsPaused = true ;
-            MoveState.isDisabled = true ;
-            JumpState.isDisabled = true ; 
-            IdleState.isDisabled = true ; 
-            DashState.isDisabled = true ; 
+            DisableMovement();
 
             //inputhandler.DisableInput();
             }
          else if(PauseMenu.IsPaused == false){
             //inputhandler.EnableInput();
+         }
+         else if(RB.velocity.y <0){
+            RB.velocity = new Vector2(RB.velocity.x,Mathf.Max(RB.velocity.y,-50));
          }          
         StateMachine.CurrentState.LogicUpdate();
     }
     private void FixedUpdate(){
-        if(disablemovement){
-            return ;
-        }
         if(DialogueManager.GetInstance().dialogueIsPlaying){
-            SetVelocityZero();
             StateMachine.ChangeState(IdleState);
-            MoveState.isDisabled = true ;
-            JumpState.isDisabled = true ; 
-            IdleState.isDisabled = true ; 
-            DashState.isDisabled = true ; 
+            DisableMovement();
 
         }
         else{
-            MoveState.isDisabled = false ;
-            JumpState.isDisabled = false ;
-            IdleState.isDisabled = false ; 
-            DashState.isDisabled = false ; 
-
+            EnableMovement();
         }
-       
-        if(inputhandler.PickItemInput == true && inputhandler.PickItemInputStop == false){
-            ReadNote.IsPressNoted = true  ;
-         }  
         UpdateSound();
         StateMachine.CurrentState.PhysicsUpdate();
         
@@ -278,31 +275,38 @@ public class Player : MonoBehaviour,IDataPersistent
             GameEventsManager.instance.PlayerDeath();
         }
     }
-    private void OnTriggerEnter2D(Collider2D Collision){
-        if(Collision.tag == "Respawn"){
-            SpawnPointTemp = transform.position ;
-            Debug.Log("Save Respawn in position"+SpawnPointTemp);
+    private void OnTriggerEnter2D(Collider2D collider){
+        if(collider.tag == "Respawn"){
+            //get the extents
+            var yHalfExtents = collider.bounds.extents.y;
+            //get the center
+            var yCenter = collider.bounds.center.y;
+            //get the up border
+            float yUpper = transform.position.y + (yCenter + yHalfExtents);
+            //get the lower border
+            float yLower = transform.position.y + (yCenter - yHalfExtents);
+            var Ypos = (yLower/2)+0.1f ;
+            SpawnPointTemp = new Vector3(transform.position.x,Ypos)  ;
+
+            //Debug.Log("Save Respawn in position"+SpawnPointTemp);
 
         }
     }
-    public IEnumerator handledrespawn(float spawndelay){
-            disablemovement = true ;
-            MoveMentCollider.enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false ;
-            RB.gravityScale = 0;
-            RB.velocity = Vector3.zero;
-            DashState.CanDash = false ;
-            yield return new WaitForSeconds(spawndelay);
-            respawn();
+  public void HandleRespawn(float spawndelay){
+    MoveMentCollider.enabled = false;
+    GetComponent<SpriteRenderer>().enabled = false ;
+    Invoke("respawn",spawndelay);
   }
   public void respawn(){
-        RB.gravityScale = 5;
         playerData.CurrentHealth = 100 ; 
         DeathState.isDead = false ;
-        disablemovement = false ;
         MoveMentCollider.enabled = true;
-        transform.position = SpawnPointTemp ;
         GetComponent<SpriteRenderer>().enabled = true ;
+        EnableMovement();
+        StateMachine.ChangeState(IdleState);
+        transform.position = SpawnPointTemp ;
+        scenefader.FadeSceneIn();
+
   }
   public void LoadData(GameData data){
         this.transform.position = data.playerPosition ;
@@ -325,5 +329,40 @@ public class Player : MonoBehaviour,IDataPersistent
   public void CreateDust(){
     dust.Play();
   }
+  public void DeathEffect(){
+    deathEffect.Play();
+  }
+  public void DisableMovement(){
+            MoveState.isDisabled = true ;
+            JumpState.isDisabled = true ; 
+            IdleState.isDisabled = true ; 
+            DashState.isDisabled = true ; 
+  }
+   public void EnableMovement(){
+            MoveState.isDisabled = false ;
+            JumpState.isDisabled = false ; 
+            IdleState.isDisabled = false ; 
+            DashState.isDisabled = false ; 
+  }
+  public void FlashStamina(){
+    StopAllCoroutines();
+    StartCoroutine(Flash());
+
+  }
+  private IEnumerator Flash()
+    {
+        float elapsedTime = 0f;
+        Color originalColor = sprite.color;
+
+        while (elapsedTime < flashDuration)
+        {
+            sprite.color = flashColor;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        sprite.color = originalColor;
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(Flash());
     #endregion
+}
 }

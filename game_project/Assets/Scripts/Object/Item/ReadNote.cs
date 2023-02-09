@@ -2,15 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 public class ReadNote : MonoBehaviour
 {
     private Player player ;
     [SerializeField] private Button ExitButton ;
     [SerializeField] private GameObject NoteUI ;
+    [SerializeField] private string context ; 
+    [SerializeField] private TextMeshProUGUI text ;
+    [SerializeField] private GameObject visualCue ; 
     public static bool IsPressNoted = false ; 
     public bool IsTouchingNoted = false ;
+    public bool isinuse = false ;
     void Start()
     {
+        visualCue.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
     }
@@ -18,35 +25,51 @@ public class ReadNote : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsPressNoted && IsTouchingNoted){
-                NoteUI.SetActive(true); 
-                player.inputhandler.DisableInput();
-
-            }
-        else{
-                player.inputhandler.EnableInput();
-                NoteUI.SetActive(false);
-            }
+       
         //Debug.Log(" IsPressNoted: "+ IsPressNoted+" IsTouchingNoted: " + IsTouchingNoted);
     }
     void FixedUpdate(){
-        
-    }
-     void OnTriggerEnter2D(Collider2D collision){
-        
-        if(collision.gameObject.name.Equals("Player")){
-            IsTouchingNoted = true ;
+         text.text = context;
+        if(IsTouchingNoted){
+            visualCue.SetActive(true);
+
+        if(player.inputhandler.GetPickItemPressed()&&!isinuse){
+                isinuse = true ;
+                NoteUI.SetActive(true);
+                if(isinuse){
+                //Debug.Log("in use "+isinuse);
+                //player.StateMachine.ChangeState(player.IdleState);
+                //player.EnableMovement();
+                player.inputhandler.DisableInput();
+                } 
+                
+            }
+        }
+        else{
+
+            visualCue.SetActive(false);
         }
     }
-    void OnTriggerExit2D(Collider2D collision){
-            IsPressNoted = false ;
+    private void OnTriggerEnter2D(Collider2D collider){
+        
+        if(collider.gameObject.tag == "Player"){
+            IsTouchingNoted = true ;
+            
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collider){
+           if(collider.gameObject.tag == "Player"){
             IsTouchingNoted = false ;
-            NoteUI.SetActive(false);
+            
+        }
     }
     public void OnExitButton(){
+        isinuse = false ;
         NoteUI.SetActive(false); 
         Debug.Log("PressExit");
-        IsPressNoted = false ; 
+        //player.EnableMovement();
+        player.inputhandler.EnableInput();
+
 
     }
 }

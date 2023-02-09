@@ -81,6 +81,11 @@ public override void LogicUpdate(){
 
     
   }
+ else if(isTouchingWall && GrabInput&& isTouchingLedge&&player.inputhandler.NormInputY>0){
+    stateMachine.ChangeState(player.wallGrabState);
+
+    
+  }
   else if(isTouchingWall && xinput == player.FacingDirection&&player.CurrentVelocity.y <=0 &&!isDisabled){
     stateMachine.ChangeState(player.wallSlideState);
   }

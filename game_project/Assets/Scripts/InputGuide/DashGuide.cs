@@ -56,7 +56,6 @@ public class DashGuide : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.gameObject.name.Equals("Player")){
             inArea = true ; 
-             Debug.Log(ControllerType);
              
         }
     }
@@ -64,7 +63,6 @@ public class DashGuide : MonoBehaviour
         if(collider.gameObject.name.Equals("Player")){
             inArea = false ; 
 
-            Debug.Log(ControllerType);
         }
     }
     IEnumerator Delay(float DelayTime){

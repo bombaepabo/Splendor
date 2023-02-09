@@ -1,0 +1,1 @@
+ไม่เบานี่ #speaker:Norman #portrait:Norman_neutral #layout:right

@@ -18,18 +18,19 @@ public class DashReset : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
     void OnTriggerEnter2D(Collider2D Collider){
         if(Collider.gameObject.name.Equals("Player"))
         {
             player.DashState.ResetCanDash();
-            visual.gameObject.SetActive(false);
-            Invoke("GetDashResetBack",5f);
+            this.visual.gameObject.SetActive(false);
+            Invoke("GetDashResetBack",3f);
+ 
         }
     }
 
     void GetDashResetBack(){
-        visual.gameObject.SetActive(true);
+        this.visual.gameObject.SetActive(true);
+
     }
 }

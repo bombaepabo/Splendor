@@ -12,6 +12,8 @@ public class PlayerLandState :PlayerGroundedState{
         base.LogicUpdate();
 
         if(!isExitingState){
+            player.CreateDust();
+
         if(xinput != 0 ){
             stateMachine.ChangeState(player.MoveState);
 

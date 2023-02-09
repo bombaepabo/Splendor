@@ -1,0 +1,1 @@
+VAR NormanQuiz1 = "" 

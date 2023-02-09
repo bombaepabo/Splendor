@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour,IDataPersistent
 {
     [Header("Volume")]
     [Range(0,1)]
@@ -91,4 +91,16 @@ public class AudioManager : MonoBehaviour
    private void OnDestroy(){
     CleanUp();
    }
+   public void LoadData(GameData data){
+    masterVolume =data.masterVolume ;
+    musicVolume = data.musicVolume;
+    ambienceVolume = data.ambienceVolume;
+    SFXVolume =data.SFXVolume ;
+  }
+  public void SaveData(GameData data){
+   data.masterVolume =masterVolume ;
+    data.musicVolume = musicVolume;
+    data.ambienceVolume = ambienceVolume;
+    data.SFXVolume =SFXVolume ;
+  }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueTrigger : MonoBehaviour,IDataPersistent
 {
     private Player player ;
     [Header("Visual Cue")]
@@ -55,4 +55,10 @@ public class DialogueTrigger : MonoBehaviour
             playerInRange = false ; 
         }
     }
+     public void LoadData(GameData data){
+        isFinished = data.isFinishedAbelintro;
+  }
+  public void SaveData(GameData data){
+    data.isFinishedAbelintro = isFinished ; 
+  }
 }

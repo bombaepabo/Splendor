@@ -113,6 +113,11 @@ public class PlayerInputHandler : MonoBehaviour
         PickItemInput = false ;
         return  result ; 
     }
+    public bool GetDashInput(){
+        bool result = DashInput ; 
+        DashInput = false ;
+        return  result ; 
+    }
     public bool GetSubmitPressed(){
         bool result = JumpInput ; 
         JumpInput = false ;

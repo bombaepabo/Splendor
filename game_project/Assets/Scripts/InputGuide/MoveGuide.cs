@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveGuide : MonoBehaviour
+public class MoveGuide : MonoBehaviour,IDataPersistent
 {
     private Animator GuideAnimator;
     private Player player ;
     private string ControllerType = "";  
     private bool inArea = false ;
-
+    [SerializeField] private GameObject Abel ; 
+    private bool isDestroy;
     void Start()
     {
         GuideAnimator = GetComponent<Animator>();
@@ -34,12 +35,17 @@ public class MoveGuide : MonoBehaviour
 
 
        }
+       if(isDestroy){
+           Destroy(Abel);
+       }
        
     }
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.gameObject.name.Equals("Player")){
             inArea = true ; 
-             Debug.Log(ControllerType);
+             Destroy(Abel);
+             isDestroy = true ; 
+             
              
         }
     }
@@ -47,11 +53,16 @@ public class MoveGuide : MonoBehaviour
         if(collider.gameObject.name.Equals("Player")){
             inArea = false ; 
 
-            Debug.Log(ControllerType);
         }
     }
     IEnumerator Delay(float DelayTime){
         yield return new WaitForSeconds(DelayTime);
     }
+    public void LoadData(GameData data){
+        isDestroy = data.isDestroyintroAbel;
+  }
+  public void SaveData(GameData data){
+    data.isDestroyintroAbel = isDestroy ; 
+  }
     
 }

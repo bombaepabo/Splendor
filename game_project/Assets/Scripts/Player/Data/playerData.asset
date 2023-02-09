@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   CurrentHealth: 100
-  ClimbStaminaDrainRate: 0.1
+  ClimbStaminaDrainRate: 15
   PlayerCurrentClimbStamina: 100
   movementVelocity: 7
   jumpVelocity: 15
@@ -44,10 +44,10 @@ MonoBehaviour:
   CrouchMovementVelocity: 3
   CrouchColliderHeight: 0.2
   standColliderHeight: 0.45
-  runMaxSpeed: 5
-  runAcceleration: 2.5
+  runMaxSpeed: 7
+  runAcceleration: 1
   runAccelAmount: 25
-  runDecceleration: 5
+  runDecceleration: 7
   runDeccelAmount: 50
   accelInAir: 0.65
   deccelInAir: 0.65

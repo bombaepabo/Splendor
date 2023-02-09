@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{5ed7c8c9-a905-4162-822d-84a6bd74a6c4}">
+		<property name="assetPath">
+			<value>Lost in the Dessert.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>170.66666666666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a18b9254-f73a-4e35-972f-04130d5cc0e3}</destination>
+		</relationship>
+	</object>
+</objects>
