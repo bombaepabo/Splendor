@@ -63,7 +63,7 @@ public class Player : MonoBehaviour,IDataPersistent
     private Vector2 workspace;
     public float LastOnGroundTime { get; private set; }
     public bool isOnPlatform ;
-    public Color flashColor = new Color(1, 1, 1, 0.5f);
+    public Color flashColor = new Color(1, 0, 0, 0.5f);
     public float flashDuration = 0.5f;
         #endregion
    
@@ -102,6 +102,8 @@ public class Player : MonoBehaviour,IDataPersistent
         CurrentVelocity = RB.velocity; 
         LastOnGroundTime -= Time.deltaTime;
         UpdateSound();
+        bool isGrounded = CheckIfGrounded();
+
 
         if(playerData.PlayerCurrentClimbStamina <= 30){
                 FlashStamina();

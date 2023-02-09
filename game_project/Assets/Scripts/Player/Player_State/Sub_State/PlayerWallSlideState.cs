@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerWallSlideState : PlayerTouchingWallState
 {
    public bool IsWallSlide = false ;
+   private bool isGrounded ;
     public PlayerWallSlideState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName){
-     
+
  }
   public override void Enter(){
         base.Enter();
@@ -21,13 +22,16 @@ public class PlayerWallSlideState : PlayerTouchingWallState
     }
  public override void LogicUpdate(){
     base.LogicUpdate();
+   isGrounded = player.CheckIfGrounded();
     if(!isExitingState){
-
        player.SetVelocityY(playerData.WallSlideVelocity);
-
         if(GrabInput && yinput ==0&& playerData.PlayerCurrentClimbStamina >30){
             stateMachine.ChangeState(player.wallGrabState);
-    } 
+    }
+     if(isGrounded){
+      Debug.Log("Enter");
+      Exit();
+    }
     }
    
  }
