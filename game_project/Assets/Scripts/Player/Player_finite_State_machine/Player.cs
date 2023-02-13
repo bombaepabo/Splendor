@@ -63,7 +63,7 @@ public class Player : MonoBehaviour,IDataPersistent
     private Vector2 workspace;
     public float LastOnGroundTime { get; private set; }
     public bool isOnPlatform ;
-    public Color flashColor = new Color(1, 0, 0, 0.5f);
+    public Color flashColor = new Color(1, 1, 1, 0.5f);
     public float flashDuration = 0.5f;
         #endregion
    
@@ -95,7 +95,6 @@ public class Player : MonoBehaviour,IDataPersistent
         FacingDirection = 1 ;
         MoveMentCollider = GetComponent<CapsuleCollider2D>();
         playerFootsteps = AudioManager.instance.CreateInstance(FModEvent.instance.playerFootsteps);
-        
     }
     private void Update(){
         SpawnPoint = SpawnPointTemp;
@@ -111,7 +110,7 @@ public class Player : MonoBehaviour,IDataPersistent
         }
         else{
             StopAllCoroutines();
-            sprite.color = new Color(1, 1, 1, 1f);
+            sprite.color =new Color(1,1,1,1f);
         }
 
         if(playerData.CurrentHealth <=0){
@@ -304,10 +303,10 @@ public class Player : MonoBehaviour,IDataPersistent
         DeathState.isDead = false ;
         MoveMentCollider.enabled = true;
         GetComponent<SpriteRenderer>().enabled = true ;
-        EnableMovement();
-        StateMachine.ChangeState(IdleState);
         transform.position = SpawnPointTemp ;
+        StateMachine.ChangeState(IdleState);
         scenefader.FadeSceneIn();
+        EnableMovement();
 
   }
   public void LoadData(GameData data){

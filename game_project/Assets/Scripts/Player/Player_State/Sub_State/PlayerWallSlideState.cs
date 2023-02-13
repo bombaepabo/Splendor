@@ -16,8 +16,9 @@ public class PlayerWallSlideState : PlayerTouchingWallState
         }
     }
     public override void Exit(){
-        base.Exit();
-        IsWallSlide = false ;
+      player.sprite.color = new Color(1, 1, 1, 1f);
+      base.Exit();
+      IsWallSlide = false ;
 
     }
  public override void LogicUpdate(){
@@ -25,7 +26,7 @@ public class PlayerWallSlideState : PlayerTouchingWallState
    isGrounded = player.CheckIfGrounded();
     if(!isExitingState){
        player.SetVelocityY(playerData.WallSlideVelocity);
-        if(GrabInput && yinput ==0&& playerData.PlayerCurrentClimbStamina >30){
+        if(GrabInput && yinput ==0&& playerData.PlayerCurrentClimbStamina>30){
             stateMachine.ChangeState(player.wallGrabState);
     }
      if(isGrounded){

@@ -10,6 +10,7 @@ public class ElavatorPlatform : MonoBehaviour
     Vector3 targetPos; 
     Player player ; 
     Vector3 moveDirection;
+    float time ; 
     // Start is called before the first frame update
     private void Awake()
     {
@@ -24,18 +25,32 @@ public class ElavatorPlatform : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        
         if(player.isOnPlatform){
-            if(player.wallGrabState.IsWallGrab |player.wallClimbState.IsWallClimb|player.wallSlideState.IsWallSlide)
+            time += Time.fixedDeltaTime ;
+            if(player.wallGrabState.IsWallGrab |player.wallClimbState.IsWallClimb|player.wallSlideState.IsWallSlide && time<2f)
                 {
                 transform.position = Vector2.MoveTowards (transform.position,posB.transform.position , 15f * Time.deltaTime);
-                StartCoroutine("DelayAction",2f);
+                if(time >2f){
+                    transform.position = Vector2.MoveTowards (transform.position,posA.transform.position , 2f * Time.deltaTime);
+                    time = 0 ;
+                }
+                 if(player.JumpState.isJumping && this.transform.position == posB.transform.position){
+                player.RB.AddForce(new Vector2(ForceBoost, 0));
+                Debug.Log("Enter");
+            }
+                
                 }    
             else{
                 transform.position = Vector2.MoveTowards (transform.position,posA.transform.position , 2f * Time.deltaTime);
+                time = 0 ;
+
                 }
         }
         else{
             transform.position = Vector2.MoveTowards (transform.position,posA.transform.position , 2f * Time.deltaTime);
+            time = 0 ;
+
         }
     }
     
@@ -60,7 +75,6 @@ public class ElavatorPlatform : MonoBehaviour
            
             player.isOnPlatform = false ;
             collision.transform.parent =null ; 
-            player.RB.AddForce(new Vector2(ForceBoost, 0));
 
         }
 
