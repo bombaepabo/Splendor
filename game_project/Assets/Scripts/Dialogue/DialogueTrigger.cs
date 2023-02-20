@@ -23,11 +23,10 @@ public class DialogueTrigger : MonoBehaviour,IDataPersistent
 
     }
     private void Update(){
+        
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
-
             if(playerInRange && !isFinished){
-                DialogueManager.GetInstance().EnterDialogueMode(inkJson);
-                
+                DialogueManager.GetInstance().EnterDialogueMode(inkJson);                
             }
             if(isFinished){
                 visualCue.SetActive(true);

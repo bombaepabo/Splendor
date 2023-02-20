@@ -97,6 +97,7 @@ public class Player : MonoBehaviour,IDataPersistent
         playerFootsteps = AudioManager.instance.CreateInstance(FModEvent.instance.playerFootsteps);
     }
     private void Update(){
+        Debug.Log(FacingDirection);
         SpawnPoint = SpawnPointTemp;
         CurrentVelocity = RB.velocity; 
         LastOnGroundTime -= Time.deltaTime;
