@@ -12,10 +12,14 @@ public class FModEvent : MonoBehaviour
 
     [field: Header("Music")]
     [field: SerializeField] public EventReference Music {get ; private set ;}
+    [field: SerializeField] public EventReference MenuMusic {get ; private set ;}
 
     [field: Header("Coin SFX")]
     [field: SerializeField] public EventReference CoinCollected{get;private set;}
     [field: SerializeField] public EventReference CoinIdle{get;private set;}
+
+    [field: Header("Dialogue")]
+    [field: SerializeField] public EventReference dialogueTyping{get;private set;}
 
     public static FModEvent instance{get ;private set;}
 

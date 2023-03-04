@@ -8,6 +8,7 @@ public class EnemyFollowPlayer : MonoBehaviour
     Player player ; 
     public float lineofsight;
     Vector3 initialposition;
+    public float currentTime = 0f ; 
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,11 @@ public class EnemyFollowPlayer : MonoBehaviour
 
         }
         if(player.playerData.CurrentHealth <=0 ){
+            currentTime += Time.fixedDeltaTime;       
+            if(currentTime >=4.5f){
             transform.position = initialposition;
+
+            }
         }
     }
 

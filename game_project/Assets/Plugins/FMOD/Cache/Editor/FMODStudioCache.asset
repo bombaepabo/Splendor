@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638114691399546704
+  lastModified: 638132891127945933
   FileSizes:
   - Name: Desktop
-    Value: 1486
+    Value: 624704
   Exists: 1
 --- !u!114 &-6007205501147562358
 MonoBehaviour:
@@ -35,11 +35,38 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638114691399566830
+  lastModified: 638132891127965919
   FileSizes:
   - Name: Desktop
-    Value: 1282
+    Value: 1372
   Exists: 1
+--- !u!114 &-5545044915539165004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/BGMusicMenu
+  m_EditorClassIdentifier: 
+  Path: event:/Music/BGMusicMenu
+  Guid:
+    Data1: -592934868
+    Data2: 1171842170
+    Data3: 794043550
+    Data4: 1817158016
+  Banks:
+  - {fileID: -7323221244674497316}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 42666
 --- !u!114 &-5541745154182631178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +94,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 963
+--- !u!114 &-2967846463484804275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/TypingSound/typing
+  m_EditorClassIdentifier: 
+  Name: typing
+  StudioPath: 
+  Min: 0
+  Max: 3
+  Default: 0
+  ID:
+    data1: 3699531052
+    data2: 2042148675
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-1935519977696713804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,10 +133,10 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Level.bank
   Name: Level
   StudioPath: bank:/Level
-  lastModified: 638114691399516710
+  lastModified: 638132891127735918
   FileSizes:
   - Name: Desktop
-    Value: 2564512
+    Value: 1816640
   Exists: 1
 --- !u!114 &-1081246931356878570
 MonoBehaviour:
@@ -109,12 +160,11 @@ MonoBehaviour:
   - {fileID: -1935519977696713804}
   IsStream: 1
   Is3D: 0
-  IsOneShot: 1
-  Parameters:
-  - {fileID: 8271447886133320292}
+  IsOneShot: 0
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 170666
 --- !u!114 &-234643922634231656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,12 +215,14 @@ MonoBehaviour:
   - {fileID: -234643922634231656}
   - {fileID: 8365390000854171325}
   - {fileID: -1081246931356878570}
+  - {fileID: 7475082060206910979}
+  - {fileID: -5545044915539165004}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7323221244674497316}
   StringsBanks:
   - {fileID: -6007205501147562358}
-  cacheTime: 638114691400104868
+  cacheTime: 638132891128465917
   cacheVersion: 131601
 --- !u!114 &1585563879108450473
 MonoBehaviour:
@@ -187,10 +239,10 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638114691400104868
+  lastModified: 638132891128465917
   FileSizes:
   - Name: Desktop
-    Value: 25888
+    Value: 31360
   Exists: 1
 --- !u!114 &5501934179110250531
 MonoBehaviour:
@@ -216,7 +268,7 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &8271447886133320292
+--- !u!114 &7475082060206910979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,23 +277,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/BGMusic/Area
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/TypingSound
   m_EditorClassIdentifier: 
-  Name: Area
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3449713555
-    data2: 2189329040
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - GreyArea
-  - BlueArea
-  Exists: 1
+  Path: event:/SFX/TypingSound
+  Guid:
+    Data1: 1408049391
+    Data2: 1283300595
+    Data3: -1832874597
+    Data4: -1474116244
+  Banks:
+  - {fileID: 1585563879108450473}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -2967846463484804275}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3000
 --- !u!114 &8365390000854171325
 MonoBehaviour:
   m_ObjectHideFlags: 0
