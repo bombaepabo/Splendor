@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NonNPCDialogueTrigger : MonoBehaviour
+public class NonNPCDialogueTrigger : MonoBehaviour,IDataPersistent
 {
    private Player player ;
     [Header("Ink Json")]
@@ -39,4 +39,11 @@ public class NonNPCDialogueTrigger : MonoBehaviour
             playerInRange = false ; 
         }
     }
+    public void LoadData(GameData data){
+        isFinished = data.isFinished2;
+  }
+  public void SaveData(GameData data){
+    data.isFinished2 = isFinished ; 
+  }
+    
 }

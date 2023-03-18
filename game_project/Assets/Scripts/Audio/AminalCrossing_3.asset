@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad0f3cb8f560704395bde657888355a, type: 3}
   m_Name: AminalCrossing_3
   m_EditorClassIdentifier: 
-  id: animal_crossing_low
+  id: animal_crossing_mid
   dialogueTypingSoundClip:
   - {fileID: 8300000, guid: f7507f9aebfa98b409b02c2ca8c463f2, type: 3}
   - {fileID: 8300000, guid: 2ec4cccb92c9b9e41b200604b7369c26, type: 3}
@@ -22,5 +22,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bb619f478c51c9a4d9d0250b61f71e0e, type: 3}
   stopAudioSource: 1
   frequencyLevel: 2
-  minPitch: 0.4
-  maxPitch: 0.45
+  minPitch: 1
+  maxPitch: 1.2

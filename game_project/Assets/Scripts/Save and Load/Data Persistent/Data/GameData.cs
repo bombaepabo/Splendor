@@ -15,9 +15,11 @@ public class GameData
     public float ambienceVolume ;
     public float SFXVolume ;
     public bool isFinishedAbelintro ; 
+    public bool isFinished2 ;
     public bool isDestroyintroAbel ; 
     public GameData(){
         isDestroyintroAbel = false ;
+        isFinished2 = false;
         isFinishedAbelintro = false; 
         this.deathCount  = 0;
         masterVolume = 1 ;

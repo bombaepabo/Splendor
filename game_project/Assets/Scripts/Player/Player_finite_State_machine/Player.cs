@@ -297,6 +297,9 @@ public class Player : MonoBehaviour,IDataPersistent
   public void HandleRespawn(float spawndelay){
     MoveMentCollider.enabled = false;
     GetComponent<SpriteRenderer>().enabled = false ;
+    RB.constraints = RigidbodyConstraints2D.FreezePositionX ;
+    RB.constraints = RigidbodyConstraints2D.FreezePositionY ;
+
     Invoke("respawn",spawndelay);
   }
   public void respawn(){
@@ -305,6 +308,9 @@ public class Player : MonoBehaviour,IDataPersistent
         MoveMentCollider.enabled = true;
         GetComponent<SpriteRenderer>().enabled = true ;
         transform.position = SpawnPointTemp ;
+        RB.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+        RB.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+
         StateMachine.ChangeState(IdleState);
         scenefader.FadeSceneIn();
         EnableMovement();

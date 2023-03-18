@@ -313,5 +313,8 @@ public class DialogueManager : MonoBehaviour
         }
         return variableValue ; 
     }
+    public void OnApplicationQuit(){
+        dialogueVariables.SaveVariables();
+    }
 
 }

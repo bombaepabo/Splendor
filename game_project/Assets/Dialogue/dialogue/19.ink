@@ -1,0 +1,1 @@
+ฉันจะเเยกทางกันตรงนี้ละ ถ้าโชคดีเราคงได้เจอกันอีก #speaker:Reeve #portrait:Reeve_neutral #layout:right
