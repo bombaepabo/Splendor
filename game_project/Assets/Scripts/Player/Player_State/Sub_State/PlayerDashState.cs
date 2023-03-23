@@ -19,15 +19,10 @@ public class PlayerDashState : PlayerAbilityState
     }
     public override void Enter(){
     base.Enter();
-    if(isDisabled ==true){
-        
-    }
     CanDash = false ;
     player.inputhandler.UseDashInput();
-
     isHolding = true ;
     dashDirection = Vector2.right * player.FacingDirection; 
-
     //Time.timeScale = playerData.holdTimeScale ; 
     //startTime = Time.unscaledTime ;
     //player.DashDirectionIndicator.gameObject.SetActive(true);

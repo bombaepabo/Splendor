@@ -13,6 +13,7 @@ public class PlayerDeathState : PlayerAbilityState
 
 }
   public override void Enter(){
+    player.isrespawn = false ;
     isDead = true;
     player.DisableMovement();
     player.MoveMentCollider.enabled = false;

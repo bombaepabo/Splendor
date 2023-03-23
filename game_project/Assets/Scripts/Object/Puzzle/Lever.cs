@@ -8,10 +8,14 @@ public class Lever : MonoBehaviour
     [SerializeField] private GameObject visualCue ; 
     public bool isFinished = false ;
     private bool playerInRange ; 
+    private Animator _anim ; 
+    [SerializeField] private Cage cage ; 
+    public static bool isOpen = false ;
 
     // Start is called before the first frame update
     void Start()
     {
+        _anim = GetComponentInChildren<Animator>();
          playerInRange = false ;
         visualCue.SetActive(false);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -21,16 +25,19 @@ public class Lever : MonoBehaviour
     void Update()
     {
          if(playerInRange && !isFinished){
-             if(!isFinished){
                 visualCue.SetActive(true);
                 if(player.inputhandler.GetPickItemPressed()){
+                    Open();
+                    cage.Cage_Open();
+                    isOpen =true ; 
                     // open a cage 
-                }
-         isFinished = true ;
-         }  else{
+         //isFinished = true ;
+         }
+        }
+        else{
             visualCue.SetActive(false);
         }
-    }
+    
 }
  private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -43,5 +50,8 @@ public class Lever : MonoBehaviour
         if(collider.gameObject.tag == "Player"){
             playerInRange = false ; 
         }
+    }
+     public void Open(){
+        _anim.SetTrigger("Open");
     }
 }

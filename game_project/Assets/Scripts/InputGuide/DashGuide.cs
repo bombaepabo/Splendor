@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashGuide : MonoBehaviour
+public class DashGuide : MonoBehaviour,IDataPersistent
 { private Animator GuideAnimator;
     private Animator GuideAnimator2;
-
+    [SerializeField] public static bool EnableDash = true ; 
     private Player player ;
     private string ControllerType = "";  
     private bool inArea = false ;
@@ -39,7 +39,7 @@ public class DashGuide : MonoBehaviour
                 GuideAnimator.Play(ControllerType);
                 GuideAnimator2.Play(ControllerType);
                 Text.SetActive(true);
-
+            
              }
        }
        else{
@@ -55,6 +55,7 @@ public class DashGuide : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.gameObject.name.Equals("Player")){
+            EnableDash = true ;
             inArea = true ; 
              
         }
@@ -68,5 +69,11 @@ public class DashGuide : MonoBehaviour
     IEnumerator Delay(float DelayTime){
         yield return new WaitForSeconds(DelayTime);
     }
+      public void LoadData(GameData data){
+        EnableDash = data.enableDash;
+  }
+  public void SaveData(GameData data){
+    data.enableDash = EnableDash ; 
+}
     
 }

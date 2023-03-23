@@ -9,16 +9,18 @@ public class EnemyAi : MonoBehaviour
     public float nextWaypointDistance = 3f ;
     public Transform enemyGFX ; 
     Path path ;
+    Player player ; 
     int currentWaypoint = 0 ;
     bool reachedEndOfPath = false ;
     Seeker seeker ; 
     Rigidbody2D rb ; 
+    private Vector2 initspawnEnemy ; 
 
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         InvokeRepeating("UpdatePath",0f,.1f);
         
     }
@@ -33,7 +35,6 @@ public class EnemyAi : MonoBehaviour
             currentWaypoint = 0 ; 
         }
     }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -63,4 +64,11 @@ public class EnemyAi : MonoBehaviour
             enemyGFX.localScale = new Vector3(1f,1f,1f);
         }
     }
-}
+    private void OnCollisionEnter2D(Collision2D Collision){
+        if(Collision.gameObject.tag =="Player"){
+            player.playerData.CurrentHealth -= 100 ;
+            GameEventsManager.instance.PlayerDeath();
+        }
+    }
+        
+        }

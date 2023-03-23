@@ -7,7 +7,7 @@ INCLUDE globals.ink
 
 === main === 
 + [11]
-   -> chose1("11")
+   -> chose1("1")
    
 + [10]
    -> chosewrong("2")
@@ -16,14 +16,14 @@ INCLUDE globals.ink
 
 
 === chose1(choice) === 
-~NormanQuiz1 = choice
+~NormanQuiz2 = choice
  ถูกต้อง!! ฉลาดไม่เบานี่ #speaker:Norman #portrait:Norman_neutral #layout:right
    ถูกต้องพ่อค้าก็จะขนกล่องใหญ่8 กล่อง ไป 7 รอบ เเละ ขนกล่องเล็ก 10 กล่อง
 4 รอบ ก็จะเท่ากับ 11 รอบ ไม่เบานี่เจ้าหนู #speaker:Norman #portrait:Norman_neutral #layout:right
 
 ->END
 === chosewrong(choice) ===
-~NormanQuiz1 = choice
+~NormanQuiz2 = choice
  เจ้าตอบผิดซะเเล้วละ  #speaker:Norman #portrait:Norman_neutral #layout:right
  ->END
  

@@ -2,16 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour
+public class Key : MonoBehaviour,IDataPersistent
 {
     private bool isFollowing ; 
     public float followSpeed; 
     public Transform followTarget ;
     private Player player ; 
     private Vector3 initialpoint ; 
+    public bool collected = false ;
+    private SpriteRenderer visual;
 
+    [SerializeField] private string id ;
+    [ContextMenu("Generate guid for id")]
+    private void GenerateGuid(){
+        id = System.Guid.NewGuid().ToString();
+    }
     // Start is called before the first frame update
     void Awake(){
+        visual = this.GetComponentInChildren<SpriteRenderer>();
+
         initialpoint  = transform.position; 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
@@ -37,5 +46,19 @@ public class Key : MonoBehaviour
                 player.FollowingKey = this ; 
             }
         }
+    }
+    public void LoadData(GameData data){
+        data.Keycollected.TryGetValue(id,out collected);
+        Debug.Log(data.Keycollected.TryGetValue(id,out collected));
+        if(collected){
+            visual.gameObject.SetActive(false);
+
+        }
+    }
+    public void SaveData(GameData data){
+        if(data.Keycollected.ContainsKey(id)){
+            data.Keycollected.Remove(id);
+        }
+        data.Keycollected.Add(id,collected);
     }
 }

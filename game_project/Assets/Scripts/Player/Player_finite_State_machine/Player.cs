@@ -55,6 +55,8 @@ public class Player : MonoBehaviour,IDataPersistent
     [SerializeField]
     public Vector3 SpawnPoint ; 
     public Vector3 SpawnPointTemp;
+    public Vector3 SpawnPointEnemy;
+
 
     #endregion
     #region OtherVariable
@@ -65,6 +67,7 @@ public class Player : MonoBehaviour,IDataPersistent
     public bool isOnPlatform ;
     public Color flashColor = new Color(1, 1, 1, 0.5f);
     public float flashDuration = 0.5f;
+    public bool isrespawn = false ;
         #endregion
    
     #region UnityCallBack Func
@@ -97,7 +100,13 @@ public class Player : MonoBehaviour,IDataPersistent
         playerFootsteps = AudioManager.instance.CreateInstance(FModEvent.instance.playerFootsteps);
     }
     private void Update(){
-        Debug.Log(FacingDirection);
+
+        if(DashGuide.EnableDash == false){
+        DashState.isDisabled = true ;
+        }
+        else {
+        DashState.isDisabled = false  ; 
+        }
         SpawnPoint = SpawnPointTemp;
         CurrentVelocity = RB.velocity; 
         LastOnGroundTime -= Time.deltaTime;
@@ -293,15 +302,23 @@ public class Player : MonoBehaviour,IDataPersistent
             //Debug.Log("Save Respawn in position"+SpawnPointTemp);
 
         }
-    }
-  public void HandleRespawn(float spawndelay){
-    MoveMentCollider.enabled = false;
-    GetComponent<SpriteRenderer>().enabled = false ;
-    RB.constraints = RigidbodyConstraints2D.FreezePositionX ;
-    RB.constraints = RigidbodyConstraints2D.FreezePositionY ;
+         if(collider.tag == "SpawnEnemy"){
+            Debug.Log("Enter");
+            //get the extents
+            var yHalfExtents = collider.bounds.extents.y;
+            //get the center
+            var yCenter = collider.bounds.center.y;
+            //get the up border
+            float yUpper = transform.position.y + (yCenter + yHalfExtents);
+            //get the lower border
+            float yLower = transform.position.y + (yCenter - yHalfExtents);
+            var Ypos = (yLower/2)+0.1f ;
+            SpawnPointEnemy = new Vector3(transform.position.x,Ypos)  ;
 
-    Invoke("respawn",spawndelay);
-  }
+            //Debug.Log("Save Respawn in position"+SpawnPointTemp);
+
+        }
+    }
   public void respawn(){
         playerData.CurrentHealth = 100 ; 
         DeathState.isDead = false ;
@@ -314,12 +331,16 @@ public class Player : MonoBehaviour,IDataPersistent
         StateMachine.ChangeState(IdleState);
         scenefader.FadeSceneIn();
         EnableMovement();
+        isrespawn = true ;
 
   }
   public void LoadData(GameData data){
+        
         this.transform.position = data.playerPosition ;
+        SpawnPointEnemy = data.EnemySpawnPosition;
   }
   public void SaveData(GameData data){
+        data.EnemySpawnPosition = SpawnPointEnemy ; 
         data.playerPosition = SpawnPoint; 
   }
   private void UpdateSound(){

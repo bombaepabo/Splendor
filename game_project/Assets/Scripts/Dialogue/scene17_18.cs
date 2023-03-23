@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scene17_18 : MonoBehaviour
+public class scene17_18 : MonoBehaviour,IDataPersistent
 {
     private Player player ;
     [Header("Ink Json")]
@@ -11,6 +11,7 @@ public class scene17_18 : MonoBehaviour
     [SerializeField]private GameObject Enemy ; 
     private Vector2 initspawnEnemy ; 
     private SpriteRenderer visual;
+    [SerializeField] GameObject Apath;
 
     private bool playerInRange ; 
 
@@ -31,7 +32,7 @@ public class scene17_18 : MonoBehaviour
      if(isFinished && !DialogueManager.GetInstance().dialogueIsPlaying){
             Enemy.SetActive(false);
             Enemy.transform.position = initspawnEnemy ;
-
+            Apath.SetActive(false);
             }
     }
     private void OnTriggerEnter2D(Collider2D collider)
@@ -47,4 +48,10 @@ public class scene17_18 : MonoBehaviour
             playerInRange = false ; 
         }
     }
+       public void LoadData(GameData data){
+        isFinished = data.scene17isFinished;
+  }
+  public void SaveData(GameData data){
+    data.scene17isFinished = isFinished ; 
+}
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NonNPCenemyfollow : MonoBehaviour
+public class scene16 : MonoBehaviour
 {
    private Player player ;
     [Header("Ink Json")]
@@ -31,6 +31,7 @@ public class NonNPCenemyfollow : MonoBehaviour
             Enemy.SetActive(true);
             }
         if(player.DeathState.CheckIfisDead()){
+            Enemy.SetActive(false);
             Enemy.transform.position = initspawnEnemy ;
         }
     }

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpGuide : MonoBehaviour
+public class JumpGuide : MonoBehaviour,IDataPersistent
 {
     private Animator GuideAnimator;
     private Player player ;
     private string ControllerType = "";  
     private bool inArea = false ;
+    private bool isDestroy;
+    [SerializeField] private GameObject Abel ; 
 
     void Start()
     {
@@ -34,10 +36,16 @@ public class JumpGuide : MonoBehaviour
 
 
        }
+       if(isDestroy){
+           Destroy(Abel);
+       }
+         }
        
-    }
+    
     void OnTriggerEnter2D(Collider2D collider){
         if(collider.gameObject.name.Equals("Player")){
+            Destroy(Abel);
+            isDestroy = true ; 
             inArea = true ;              
         }
     }
@@ -49,5 +57,11 @@ public class JumpGuide : MonoBehaviour
     IEnumerator Delay(float DelayTime){
         yield return new WaitForSeconds(DelayTime);
     }
+      public void LoadData(GameData data){
+        isDestroy = data.isDestroyintroAbel;
+  }
+  public void SaveData(GameData data){
+    data.isDestroyintroAbel = isDestroy ; 
+  }
     
 }
