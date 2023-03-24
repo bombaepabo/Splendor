@@ -5,7 +5,7 @@ using UnityEngine;
 public class DashGuide : MonoBehaviour,IDataPersistent
 { private Animator GuideAnimator;
     private Animator GuideAnimator2;
-    [SerializeField] public static bool EnableDash = true ; 
+    [SerializeField] public static bool EnableDash = false ; 
     private Player player ;
     private string ControllerType = "";  
     private bool inArea = false ;
