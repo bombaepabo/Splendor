@@ -76,7 +76,7 @@ public class SaveSlotsMenu : Menu
         }
     }
     Button firstSelectedButton = firstSelected.GetComponent<Button>();
-    this.SetFirstSelected(firstSelectedButton);
+    //this.SetFirstSelected(firstSelectedButton);
    }
    public void OnDeleteClicked(SaveSlot saveSlot){
     DisableMenuButtons();

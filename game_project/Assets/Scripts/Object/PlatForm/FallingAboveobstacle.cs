@@ -6,12 +6,16 @@ public class FallingAboveobstacle : MonoBehaviour
 {
     	Rigidbody2D rb;
 		Vector2 initialPosition;
+		private Player player ;
+
 		bool platformMovingBack;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		initialPosition = transform.position;
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
 	}
 	void Update()
 	{
@@ -20,7 +24,9 @@ public class FallingAboveobstacle : MonoBehaviour
 		
 		if (transform.position.y == initialPosition.y)
 			platformMovingBack = false;
-		
+		if(player.DeathState.CheckIfisDead()){
+			GetPlatformBack();
+		}
 	}
 	
 	void OnTriggerEnter2D (Collider2D col)

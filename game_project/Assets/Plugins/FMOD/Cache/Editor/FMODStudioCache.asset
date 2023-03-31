@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638132891127945933
+  lastModified: 638156496790966997
   FileSizes:
   - Name: Desktop
     Value: 624704
@@ -35,10 +35,10 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638132891127965919
+  lastModified: 638156496790987009
   FileSizes:
   - Name: Desktop
-    Value: 1372
+    Value: 1422
   Exists: 1
 --- !u!114 &-5545044915539165004
 MonoBehaviour:
@@ -133,7 +133,7 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/Level.bank
   Name: Level
   StudioPath: bank:/Level
-  lastModified: 638132891127735918
+  lastModified: 638156496790757013
   FileSizes:
   - Name: Desktop
     Value: 1816640
@@ -217,12 +217,13 @@ MonoBehaviour:
   - {fileID: -1081246931356878570}
   - {fileID: 7475082060206910979}
   - {fileID: -5545044915539165004}
+  - {fileID: 6935849612796171392}
   EditorParameters: []
   MasterBanks:
   - {fileID: -7323221244674497316}
   StringsBanks:
   - {fileID: -6007205501147562358}
-  cacheTime: 638132891128465917
+  cacheTime: 638156496791922130
   cacheVersion: 131601
 --- !u!114 &1585563879108450473
 MonoBehaviour:
@@ -239,10 +240,10 @@ MonoBehaviour:
   Path: ../audio-System-fmod-gameproject/Fmod-GameProject/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638132891128465917
+  lastModified: 638156496791922130
   FileSizes:
   - Name: Desktop
-    Value: 31360
+    Value: 102848
   Exists: 1
 --- !u!114 &5501934179110250531
 MonoBehaviour:
@@ -268,6 +269,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &6935849612796171392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Player/Jumping
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Player/Jumping
+  Guid:
+    Data1: -1533731140
+    Data2: 1238066130
+    Data3: -544494927
+    Data4: -2052891243
+  Banks:
+  - {fileID: 1585563879108450473}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1175
 --- !u!114 &7475082060206910979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,8 +374,8 @@ MonoBehaviour:
   - {fileID: 1585563879108450473}
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 700

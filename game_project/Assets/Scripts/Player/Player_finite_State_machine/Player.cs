@@ -37,6 +37,8 @@ public class Player : MonoBehaviour,IDataPersistent
     public ParticleSystem deathEffect ;
     public Key FollowingKey ; 
     private EventInstance playerFootsteps ;
+    private EventInstance JumpingSound ;
+
     [SerializeField] public SceneFader scenefader ;
     #endregion
     #region Check Transform
@@ -98,6 +100,7 @@ public class Player : MonoBehaviour,IDataPersistent
         FacingDirection = 1 ;
         MoveMentCollider = GetComponent<CapsuleCollider2D>();
         playerFootsteps = AudioManager.instance.CreateInstance(FModEvent.instance.playerFootsteps);
+        JumpingSound = AudioManager.instance.CreateInstance(FModEvent.instance.playerJump);
     }
     private void Update(){
 
@@ -219,9 +222,7 @@ public class Player : MonoBehaviour,IDataPersistent
         RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
     }
     public void Jump(float velocityY){
-        Debug.Log(velocityY);
         RB.AddForce(new Vector2(CurrentVelocity.x, velocityY), ForceMode2D.Impulse);
-
     }
     #endregion
     
@@ -313,7 +314,7 @@ public class Player : MonoBehaviour,IDataPersistent
             //get the lower border
             float yLower = transform.position.y + (yCenter - yHalfExtents);
             var Ypos = (yLower/2)+0.1f ;
-            SpawnPointEnemy = new Vector3(transform.position.x,Ypos)  ;
+            SpawnPointEnemy = new Vector3(transform.position.x,yCenter)  ;
 
             //Debug.Log("Save Respawn in position"+SpawnPointTemp);
 
@@ -353,6 +354,13 @@ public class Player : MonoBehaviour,IDataPersistent
     }
     else{
         playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+    if(JumpState.isJumping && !CheckIfGrounded()){
+        PLAYBACK_STATE playbackState ; 
+    JumpingSound.getPlaybackState(out playbackState);
+    if(playbackState.Equals(PLAYBACK_STATE.STOPPED)){
+       // JumpingSound.start();
+    }
     }
   }
   public void CreateDust(){

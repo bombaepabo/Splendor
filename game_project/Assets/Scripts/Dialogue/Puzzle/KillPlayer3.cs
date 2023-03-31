@@ -38,6 +38,12 @@ public class KillPlayer3 : MonoBehaviour
                 Choices = "";
 
                 break ; 
+            case "4" :
+                //player.playerData.CurrentHealth -=100 ;
+                Debug.Log("player got killed");
+                Choices = "";
+
+                break ; 
             default:
                 Debug.LogWarning("Choices name not handled by switch statement: " + Choices);
                 break;

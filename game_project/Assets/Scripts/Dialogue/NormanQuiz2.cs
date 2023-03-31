@@ -12,7 +12,7 @@ public class NormanQuiz2 : MonoBehaviour,IDataPersistent
     [SerializeField] private TextAsset inkJson ; 
     [SerializeField] private TextAsset AfterTalkInkJson ; 
     public bool isFinished = false ;
-
+    
     private bool playerInRange ; 
 
     private void Awake(){
@@ -23,17 +23,22 @@ public class NormanQuiz2 : MonoBehaviour,IDataPersistent
 
     }
     private void Update(){
+        string Choices = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("NormanQuiz2")).value ; 
+
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
 
             if(!isFinished){
                 visualCue.SetActive(true);
                 if(player.inputhandler.GetPickItemPressed()){
                     DialogueManager.GetInstance().EnterDialogueMode(inkJson);
-                    isFinished = true ;
 
                 }
-
+                if(Choices == "1"){
+                    isFinished = true ;
+                   
+                }
         }
+
             }
         else{
             visualCue.SetActive(false);

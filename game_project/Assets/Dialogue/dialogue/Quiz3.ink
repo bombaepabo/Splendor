@@ -1,19 +1,19 @@
 INCLUDE globals.ink
 เจอกันอีกเเล้วสินะ ดูสิว่าเธอจะตอบคำถามของฉันได้ไหม #speaker:Norman #portrait:Norman_neutral #layout:right
 เอาหละจงฟังให้ดี #speaker:Norman #portrait:Norman_neutral #layout:right
-เอาหละสมมติว่ามีเลข 9999 = 4 8888 = 8 1816 = 3 เเล้วเจ้าคิดว่า เลข 1919
-เท่ากับเท่าไหรสุด #speaker:Norman #portrait:Norman_neutral #layout:right
+เอาหละเจ้าหนูฉันมีลำดับตัวเลขมาให้ 7 5 8 4 9 3  เเกคิดว่าตัวเลขต่อไปคืออะไร? #speaker:Norman #portrait:Norman_neutral #layout:right
 -> main
 
 === main === 
-+ [4]
++ [10]
    -> chose1("1")
    
-+ [5]
++ [2]
    -> chosewrong("2")
-+ [1]
++ [11]
    -> chosewrong("3")
-
++ [1]
+   -> chosewrong("4")
 
 === chose1(choice) === 
 ~NormanQuiz3 = choice

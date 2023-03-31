@@ -20,8 +20,8 @@ INCLUDE globals.ink
 === chose1(choice) === 
 ~NormanQuiz4 = choice
  ถูกต้อง!! ฉลาดไม่เบานี่ #speaker:Norman #portrait:Norman_neutral #layout:right
-   ถูกต้องพ่อค้าก็จะขนกล่องใหญ่8 กล่อง ไป 7 รอบ เเละ ขนกล่องเล็ก 10 กล่อง
-4 รอบ ก็จะเท่ากับ 11 รอบ ไม่เบานี่เจ้าหนู #speaker:Norman #portrait:Norman_neutral #layout:right
+  จะพบว่าตัวทดลอง E สูงกว่าตัวทดลอง C แต่เตี้ยกว่าตัวทดลอง F เรียงเป็น FEC และต่อมาตัวทดลอง A สูงกว่าตัวทดลอง B แต่เตี้ยกว่าตัวทดลอง C และตัวทดลอง E เรียงเป็น FECAB และ ตัวทดลอง B ไม่ได้เตียที่สุด #speaker:Norman #portrait:Norman_neutral #layout:right
+  แสดงว่าเหลือเพียงตัวเดี่ยวคือตัวทดลอง D  ที่ไม่ได้บอกว่าเตี้ยหรือสูงกว่าตัวทดลองตัวอื่นๆยังไงละี่เจ้าหนู #speaker:Norman #portrait:Norman_neutral #layout:right
 
 ->END
 === chosewrong(choice) ===

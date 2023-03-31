@@ -8,7 +8,9 @@ public class scene39 : MonoBehaviour,IDataPersistent
     [Header("Ink Json")]
     [SerializeField] private TextAsset inkJson ; 
     public bool isFinished = false ;
-
+    [SerializeField]private GameObject Enemy ; 
+    [SerializeField] private GameObject APathold ;
+    public bool isDestroyEnemyscene39  =false ; 
     private bool playerInRange ; 
 
     private void Awake(){
@@ -21,7 +23,14 @@ public class scene39 : MonoBehaviour,IDataPersistent
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
 
             if(playerInRange && !isFinished){
+                Enemy.SetActive(false);
                 DialogueManager.GetInstance().EnterDialogueMode(inkJson);   
+                APathold.SetActive(false);
+                isDestroyEnemyscene39 = true ; 
+            }
+            if(isDestroyEnemyscene39){
+                Enemy.SetActive(false);
+
             }
             isFinished = true ;
         }
@@ -41,8 +50,10 @@ public class scene39 : MonoBehaviour,IDataPersistent
     }
     public void LoadData(GameData data){
         isFinished = data.scene36_isFinished;
+        isDestroyEnemyscene39 = data.scene39isDestroy;
   }
   public void SaveData(GameData data){
+    data.scene39isDestroy =  isDestroyEnemyscene39;
     data.scene36_isFinished = isFinished ; 
   }
 }

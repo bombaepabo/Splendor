@@ -35,6 +35,7 @@ public class DataPersistentManager : MonoBehaviour
     }
     DontDestroyOnLoad(this.gameObject);
     this.dataHandler = new FileDataHandler(Application.persistentDataPath,filename,useEncryption);
+    Debug.Log(Application.persistentDataPath);
     InitializeSelectedProfileId();
     }
     private void OnEnable(){

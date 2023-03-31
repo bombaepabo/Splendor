@@ -20,8 +20,10 @@ public class GameData
     public bool isDestroyintroAbel ; 
     public bool HanCampisFinished ; 
     public bool FinHelpingFinished ; 
+    public bool FinHelpingFinished2 ;
     public bool chapter2puzzleFinished ;
     public bool sceneChapter2_4isFinished ; 
+    public bool NormanQuiz1isFinished ; 
     public bool NormanQuiz2isFinished ; 
     public bool NormanQuiz3isFinished ;
     public bool NormanQuiz4isFinished ;
@@ -40,10 +42,22 @@ public class GameData
     public bool scene41isFinished;
     public bool enableDash ;
     public bool collectedDoor ; 
+    public bool scene17_18_isDestroy; 
+    public bool Chapter2_4isDestroy ; 
+    public bool scene39isDestroy ; 
+    public bool isDoorOpenFin ; 
+    public bool isFinishedsceneb4_41; 
     public SerializableDictionary<string,bool> Keycollected;
     public SerializableDictionary<string,bool> DoorOpen;
 
     public GameData(){
+        NormanQuiz1isFinished = false ;
+        isFinishedsceneb4_41 = false ;
+        FinHelpingFinished2 = false ;
+        isDoorOpenFin = false ;
+        scene39isDestroy  = false ; 
+        Chapter2_4isDestroy  = false ; 
+        scene17_18_isDestroy =  false ; 
         NormanQuiz4isFinished = false ;
         NormanQuiz3isFinished = false;
         collectedDoor = false;

@@ -23,7 +23,7 @@ INCLUDE globals.ink
 ->END
 === chosewrong(choice) ===
 ~NormanQuiz1 = choice
- เจ้าตอบผิด เพราะฉะนั้นข้าขอบรับชีวิตของเจ้าไปละ ฮ่าๆๆ #speaker:Norman #portrait:Norman_neutral #layout:right
+ เจ้าตอบผิดซะเเล้วละ ฮ่าๆๆ #speaker:Norman #portrait:Norman_neutral #layout:right
  ->END
  
 

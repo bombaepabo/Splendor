@@ -11,8 +11,10 @@ public class DialogueFin : MonoBehaviour,IDataPersistent
     [Header("Ink Json")]
     [SerializeField] private TextAsset inkJson ; 
     public bool isFinished = false ;
+    public bool isFinished2 = false ;
     private bool playerInRange ; 
-    
+    [SerializeField] private Door door ; 
+    public bool isDoorOpen = false ; 
     private void Awake(){
         playerInRange = false ;
         visualCue.SetActive(false);
@@ -27,10 +29,19 @@ public class DialogueFin : MonoBehaviour,IDataPersistent
                 visualCue.SetActive(true);
                 if(player.inputhandler.GetPickItemPressed()){
                     DialogueManager.GetInstance().EnterDialogueMode(inkJson);
-                    // isFinished = true ;  
+                    isFinished2 = true ;  
+                }
+                if(isFinished2){
+                    door.Open();
+                    isDoorOpen = true ; 
+                    isFinished = true ; 
                 }
             }
+        
         }
+       if(isDoorOpen == true)
+            door.Open();
+
         }
         else{
             visualCue.SetActive(false);
@@ -49,10 +60,14 @@ public class DialogueFin : MonoBehaviour,IDataPersistent
         }
     }
      public void LoadData(GameData data){
+        isDoorOpen = data.isDoorOpenFin ;
         isFinished = data.FinHelpingFinished;
+        isFinished2 = data.FinHelpingFinished2 ; 
   }
   public void SaveData(GameData data){
+    data.isDoorOpenFin  = isDoorOpen ;
     data.FinHelpingFinished = isFinished ; 
+    data.FinHelpingFinished2 = isFinished2;
   }
   
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{eab7eab0-3f8e-4049-9953-946244ebcabb}">
+		<property name="assetPath">
+			<value>X2Download.app - Jump sound effect (128 kbps).mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.9853061224489796</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a18b9254-f73a-4e35-972f-04130d5cc0e3}</destination>
+		</relationship>
+	</object>
+</objects>

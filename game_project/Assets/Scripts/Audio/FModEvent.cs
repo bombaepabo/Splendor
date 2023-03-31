@@ -8,6 +8,7 @@ public class FModEvent : MonoBehaviour
     [field: SerializeField] public EventReference Ambience {get ; private set ;}
 
     [field: Header("Player SFX")]
+    [field: SerializeField] public EventReference playerJump {get ; private set ;}
     [field: SerializeField] public EventReference playerFootsteps {get ; private set ;}
 
     [field: Header("Music")]

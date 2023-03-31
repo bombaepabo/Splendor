@@ -9,7 +9,7 @@ public class scne41 : MonoBehaviour
     [Header("Visual Cue")]
 
     [SerializeField] private GameObject visualCue ; 
-
+    [SerializeField] private GameObject AbelVisual ; 
     [Header("Ink Json")]
     [SerializeField] private TextAsset inkJson ; 
     public bool isFinished = false ;
@@ -37,6 +37,7 @@ public class scne41 : MonoBehaviour
                 }
             }
             if(isFinished && !DialogueManager.GetInstance().dialogueIsPlaying){
+            AbelVisual.SetActive(false);
             APathold.SetActive(false);
             APathnew.SetActive(true);
             Enemy.SetActive(true);            

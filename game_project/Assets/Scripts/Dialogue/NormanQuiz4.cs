@@ -22,16 +22,20 @@ public class NormanQuiz4 : MonoBehaviour
 
     }
     private void Update(){
+                 string Choices = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("NormanQuiz4")).value ; 
+
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
 
             if(!isFinished){
                 visualCue.SetActive(true);
                 if(player.inputhandler.GetPickItemPressed()){
                     DialogueManager.GetInstance().EnterDialogueMode(inkJson);
-
+                }
+                if(Choices == "1"){
+                    isFinished = true ;
+                   
                 }
 
-            isFinished = true ;
         }
             }
         else{

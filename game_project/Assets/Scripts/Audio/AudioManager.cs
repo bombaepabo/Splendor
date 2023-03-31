@@ -41,7 +41,6 @@ public class AudioManager : MonoBehaviour,IDataPersistent
    }
    private void Start(){
     
-   // InitializeAmbience(FModEvent.instance.Ambience);
    Scene scene = SceneManager.GetActiveScene();
    if(scene.name == "MainMenu"){
     Debug.Log("mainmenu");
@@ -51,7 +50,7 @@ public class AudioManager : MonoBehaviour,IDataPersistent
    if(scene.name == "Introduction"){
     Debug.Log("Gameplay");
     InitializeMusic(FModEvent.instance.Music);
-
+    InitializeAmbience(FModEvent.instance.Ambience);
    }
    InitializedialogueTyping(FModEvent.instance.dialogueTyping);
    }

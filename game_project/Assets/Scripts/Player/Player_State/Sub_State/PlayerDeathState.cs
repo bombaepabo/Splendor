@@ -6,7 +6,7 @@ public class PlayerDeathState : PlayerAbilityState
 {
     public bool isDead ;
     public float currentTime = 0f; 
-    public float DeathTime = 2.5f; 
+    public float DeathTime = 3.5f; 
     public PlayerDeathState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
 {    
         playerData.CurrentHealth = 100 ; 

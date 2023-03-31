@@ -34,7 +34,7 @@ public class scene32 : MonoBehaviour,IDataPersistent
             APathnew.SetActive(true);
             Enemy.SetActive(true);
             }
-        if(player.playerData.CurrentHealth <= 0 ){
+        if(player.DeathState.CheckIfisDead()){
             Enemy.SetActive(false);
             Enemy.transform.position = player.SpawnPointEnemy  ;
             

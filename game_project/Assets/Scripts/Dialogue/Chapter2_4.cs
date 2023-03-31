@@ -8,8 +8,11 @@ public class Chapter2_4 : MonoBehaviour,IDataPersistent
     [Header("Ink Json")]
     [SerializeField] private TextAsset inkJson ; 
     public bool isFinished = false ;
+    [SerializeField] private GameObject Enemy ; 
+    private bool playerInRange ;
+    [SerializeField] GameObject Apath;
 
-    private bool playerInRange ; 
+    public bool isDestroyEnemyChapter2_4 = false ;  
 
     private void Awake(){
         playerInRange = false ;
@@ -21,9 +24,18 @@ public class Chapter2_4 : MonoBehaviour,IDataPersistent
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
 
             if(playerInRange && !isFinished){
-                DialogueManager.GetInstance().EnterDialogueMode(inkJson);   
+                DialogueManager.GetInstance().EnterDialogueMode(inkJson);
+                Enemy.SetActive(false);
+                Apath.SetActive(false);
+                isDestroyEnemyChapter2_4 = true ;
             }
             isFinished = true ;
+
+        }
+        if(isDestroyEnemyChapter2_4){
+            Enemy.SetActive(false);
+            Apath.SetActive(false);
+
         }
     }
     private void OnTriggerEnter2D(Collider2D collider)
@@ -41,8 +53,10 @@ public class Chapter2_4 : MonoBehaviour,IDataPersistent
     }
     public void LoadData(GameData data){
         isFinished = data.sceneChapter2_4isFinished;
+        isDestroyEnemyChapter2_4 = data.Chapter2_4isDestroy ;
   }
   public void SaveData(GameData data){
+    data.Chapter2_4isDestroy = isDestroyEnemyChapter2_4 ;
     data.sceneChapter2_4isFinished = isFinished ; 
   }
 }

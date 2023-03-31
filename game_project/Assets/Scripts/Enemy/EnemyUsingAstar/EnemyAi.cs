@@ -15,7 +15,7 @@ public class EnemyAi : MonoBehaviour
     Seeker seeker ; 
     Rigidbody2D rb ; 
     private Vector2 initspawnEnemy ; 
-
+    private float timer = 0 ; 
     void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -49,6 +49,10 @@ public class EnemyAi : MonoBehaviour
         else {
             reachedEndOfPath = false ;
         }
+        if(player.DeathState.isDead){
+            timer += Time.fixedDeltaTime;
+        }
+        
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized ;
         Vector2 force = direction * speed * Time.deltaTime ;
         rb.AddForce(force);
@@ -62,13 +66,14 @@ public class EnemyAi : MonoBehaviour
         else if(force.x <= -0.01f)
         {
             enemyGFX.localScale = new Vector3(1f,1f,1f);
-        }
+        }        
     }
-    private void OnCollisionEnter2D(Collision2D Collision){
-        if(Collision.gameObject.tag =="Player"){
-            player.playerData.CurrentHealth -= 100 ;
+      private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.tag == "Player"){
+              player.playerData.CurrentHealth -= 100 ;
             GameEventsManager.instance.PlayerDeath();
         }
     }
         
-        }
+    }

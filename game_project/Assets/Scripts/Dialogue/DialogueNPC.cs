@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueNPC : MonoBehaviour
+public class DialogueNPC : MonoBehaviour,IDataPersistent
 {
      private Player player ;
     [Header("Visual Cue")]
@@ -23,17 +23,21 @@ public class DialogueNPC : MonoBehaviour
 
     }
     private void Update(){
+        string Choices = ((Ink.Runtime.StringValue) DialogueManager.GetInstance().GetVariableState("NormanQuiz1")).value ; 
         if(playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying){
-
+            
             if(!isFinished){
                 visualCue.SetActive(true);
                 if(player.inputhandler.GetPickItemPressed()){
                     DialogueManager.GetInstance().EnterDialogueMode(inkJson);
 
                 }
+                if(Choices == "1"){
+                    isFinished = true ;
+                   
+                }
 
             }
-            //isFinished = true ;
         }
         else{
             visualCue.SetActive(false);
@@ -51,4 +55,10 @@ public class DialogueNPC : MonoBehaviour
             playerInRange = false ; 
         }
     }
+      public void LoadData(GameData data){
+        isFinished = data.NormanQuiz1isFinished;
+  }
+  public void SaveData(GameData data){
+    data.NormanQuiz1isFinished = isFinished ; 
+}
 }

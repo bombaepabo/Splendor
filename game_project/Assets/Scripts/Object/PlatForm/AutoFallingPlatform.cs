@@ -7,11 +7,14 @@ public class AutoFallingPlatform : MonoBehaviour
     Rigidbody2D rb;
 	Vector2 initialPosition;
 	bool platformMovingBack;
+		private Player player ;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		initialPosition = transform.position;
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
 	}
 
 	void Update()
@@ -21,6 +24,9 @@ public class AutoFallingPlatform : MonoBehaviour
 		
 		if (transform.position.y == initialPosition.y)
 			platformMovingBack = false;
+		if(player.DeathState.CheckIfisDead()){
+			GetPlatformBack();
+		}
 	}
 
 	void OnCollisionEnter2D (Collision2D col)
